@@ -1,0 +1,89 @@
+.details-container {
+  padding: 50px;
+  min-height: 100vh;
+  background: var(--color-light);
+  font-family: var(--font);
+}
+
+.details-loading {
+  text-align: center;
+  font-size: 1.4rem;
+  color: var(--text-color);
+  margin-top: 60px;
+}
+
+.details-card {
+  display: flex;
+  gap: 40px;
+  background: var(--color-surface);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.image-section img {
+  width: 300px;
+  height: 420px;
+  object-fit: contain;
+}
+
+.info-section h1 {
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.author {
+  color: var(--secondary-color);
+  margin-bottom: 15px;
+}
+
+.price {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.isbn {
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+.stock {
+  margin: 15px 0;
+  font-weight: bold;
+  color: var(--success-color);
+}
+
+.stock.out {
+  color: var(--color-error);
+}
+
+.actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 12px 22px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font);
+}
+
+.btn.primary {
+  background: var(--primary-color);
+  color: var(--text-light);
+}
+
+.btn.secondary {
+  background: var(--secondary-color);
+  color: var(--text-light);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

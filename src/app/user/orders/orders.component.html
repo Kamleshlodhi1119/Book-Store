@@ -1,0 +1,38 @@
+<section class="orders-container">
+
+  <h2 class="orders-title">My Orders</h2>
+
+  <div *ngIf="loading" class="orders-loading">
+    Loading orders...
+  </div>
+
+  <div *ngIf="!loading && orders.length === 0" class="empty-orders">
+    You have not placed any orders yet
+  </div>
+
+  <div *ngIf="!loading && orders.length">
+
+    <div class="order-card" *ngFor="let o of orders">
+
+      <div class="order-header">
+        <span>Order #{{ o.id }}</span>
+        <span class="status">{{ o.status }}</span>
+      </div>
+
+      <div class="order-items">
+        <div class="order-item" *ngFor="let i of o.items">
+          <span>{{ i.book.title }}</span>
+          <span>x{{ i.quantity }}</span>
+          <span>₹ {{ i.price }}</span>
+        </div>
+      </div>
+
+      <div class="order-footer">
+        <span class="total">Total: ₹ {{ o.totalAmount }}</span>
+        <span class="date">{{ o.createdAt }}</span>
+      </div>
+
+    </div>
+
+  </div>
+</section>

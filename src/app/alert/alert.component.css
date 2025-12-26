@@ -1,0 +1,87 @@
+.alert-popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1050;
+  min-width: 280px;
+  max-width: 320px;
+  padding: 15px 20px;
+  border-radius: 6px;
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.16),
+    0 3px 6px rgba(0, 0, 0, 0.23);
+  color: #fff;
+  font-weight: 600;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  opacity: 0;
+  animation: slideInRight 0.5s forwards, fadeOut 0.5s 2.5s forwards;
+}
+
+/* Colors */
+.success {
+  background-color: #51a351; /* bootstrap green */
+}
+
+.error {
+  background-color: #bd362f; /* bootstrap red */
+}
+
+.warning {
+  background-color: #f89406; /* bootstrap orange */
+}
+
+.info {
+  background-color: #2f96b4; /* bootstrap blue */
+}
+
+/* Optional icons for types */
+.alert-popup::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.success::before {
+  background-image: url('data:image/svg+xml;utf8,<svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5 1.4-1.4L9 13.4l7.1-7.1 1.4 1.4z"/></svg>');
+}
+
+.error::before {
+  background-image: url('data:image/svg+xml;utf8,<svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 10.586l4.95-4.95 1.414 1.414L13.414 12l4.95 4.95-1.414 1.414L12 13.414l-4.95 4.95-1.414-1.414L10.586 12 5.636 7.05l1.414-1.414z"/></svg>');
+}
+
+.warning::before {
+  background-image: url('data:image/svg+xml;utf8,<svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zM12 16v2h0v-2h0zm0-6v4h0v-4h0z"/></svg>');
+}
+
+.info::before {
+  background-image: url('data:image/svg+xml;utf8,<svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="none" fill="white" /><text x="12" y="16" font-size="12" fill="#2196f3" text-anchor="middle" font-family="Arial" font-weight="bold">i</text></svg>');
+}
+
+/* Animations */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

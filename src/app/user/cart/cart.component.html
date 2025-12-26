@@ -1,0 +1,40 @@
+<app-user-header></app-user-header>
+
+<section class="cart-container">
+
+  <h2 class="cart-title">My Cart</h2>
+
+  <div *ngIf="loading" class="cart-loading">
+    Loading your cart...
+  </div>
+
+  <div *ngIf="!loading && (!cart || cart.items?.length === 0)" class="empty-cart">
+    Your cart is empty
+  </div>
+
+  <div *ngIf="cart && cart.items?.length">
+
+    <div class="cart-item" *ngFor="let i of cart.items">
+      <div class="item-info">
+        <h3>{{ i.book.title }}</h3>
+        <p class="price">₹ {{ i.book.price }}</p>
+        <p class="qty">Quantity: {{ i.quantity }}</p>
+      </div>
+
+      <button class="remove-btn" (click)="remove(i.book.id)">
+        Remove
+      </button>
+    </div>
+
+    <div class="cart-footer">
+      <div class="total">
+        Total: ₹ {{ cart.totalAmount }}
+      </div>
+
+      <button class="clear-btn" (click)="clearCart()">
+        Clear Cart
+      </button>
+    </div>
+
+  </div>
+</section>

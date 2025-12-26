@@ -1,0 +1,9 @@
+<app-admin-header></app-admin-header>
+
+<h2>Manage Users</h2>
+
+<div *ngFor="let u of users">
+  {{u.username}} - {{u.email}} - {{u.roles}}
+  <button (click)="makeAdmin(u.id)">Make Admin</button>
+  <button (click)="deleteUser(u.id)">Delete</button>
+</div>

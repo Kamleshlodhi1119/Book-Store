@@ -1,0 +1,10 @@
+<app-admin-header></app-admin-header>
+
+<h2>Manage Books</h2>
+
+<div *ngFor="let b of books">
+  {{b.title}} - Active: {{b.active}}
+  <button (click)="toggleStatus(b.id, b.active)">
+    {{ b.active ? 'Disable' : 'Enable' }}
+  </button>
+</div>

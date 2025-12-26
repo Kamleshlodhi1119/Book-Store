@@ -1,0 +1,31 @@
+<app-user-header></app-user-header>
+
+<section class="wishlist-container">
+
+  <h2 class="wishlist-title">My Wishlist</h2>
+
+  <div *ngIf="loading" class="wishlist-loading">
+    Loading wishlist...
+  </div>
+
+  <div *ngIf="!loading && list.length === 0" class="empty-wishlist">
+    Your wishlist is empty
+  </div>
+
+  <div class="wishlist-grid" *ngIf="!loading && list.length">
+
+    <div class="wishlist-card" *ngFor="let w of list">
+
+      <div class="info">
+        <h3>{{ w.book.title }}</h3>
+        <p class="price">₹ {{ w.book.price }}</p>
+      </div>
+
+      <button class="remove-btn" (click)="remove(w.book.id)">
+        Remove
+      </button>
+
+    </div>
+
+  </div>
+</section>

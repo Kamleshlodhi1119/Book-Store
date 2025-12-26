@@ -1,0 +1,259 @@
+<app-user-header></app-user-header>
+<!-- <app-header></app-header> -->
+
+<!-- ======================================================
+                     HERO SECTION
+====================================================== -->
+
+<section class="hero">
+  <div class="container hero-center">
+    <span class="hero-tag">IT’S AVAILABLE ON KINDLE PUBLISHING</span>
+    <h1 class="hero-title">
+      The Man In The<br />Glass House
+    </h1>
+    <p class="hero-sub">
+      A guide to inspiring your self-belief
+    </p>
+    <p class="hero-sub">Explore thousands of books across genres — curated, reviewed, and loved by readers worldwide.
+    </p>
+
+    <button class="btn btn--primary">Buy Now</button>
+
+    <p class="hero-note">* Available in PDF, EPUB & Kindle</p>
+  </div>
+</section>
+
+
+
+<!-- ======================================================
+                  SHOP BY CATEGORY
+====================================================== -->
+<section class="category-section">
+  <h2 class="section-title">Shop by Category</h2>
+  <span class="hero-tag">IT’S AVAILABLE ON KINDLE PUBLISHING</span>
+
+
+  <div class="category-grid">
+    <div class="category-card">
+      <img src="../../../assets/images/icon/the_artist_way.png">
+      <h3>Fiction</h3>
+    </div>
+
+    <div class="category-card">
+      <img src="../../../assets/images/icon/the_artist_way.png">
+      <h3>Science Fiction</h3>
+    </div>
+
+    <div class="category-card">
+      <img src="../../../assets/images/icon/the_artist_way.png">
+      <h3>Self Help</h3>
+    </div>
+
+    <div class="category-card">
+      <img src="../../../assets/images/icon/the_artist_way.png">
+      <h3>Business</h3>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ======================================================
+                  FEATURED BOOKS (GRID)
+====================================================== -->
+<div class="book-grid-section">
+  <h2 class="section-title">Featured Books</h2>
+  <!-- <span class="hero-tag">Top picks loved by thousands of readers</span> -->
+  <p class="hero-tag">Top picks loved by thousands of readers</p>
+
+  <div class="product-grid">
+    <!-- <app-product-card *ngFor="let p of products | slice:0:8" [product]="p" (addToCart)="handleAddToCart($event)"> -->
+    <!-- </app-product-card> -->
+  </div>
+</div>
+
+<hr>
+<hr>
+<section class="cta-section">
+  <div class="Book-product-placeholder">
+    
+  </div>
+  <div class="book-right">
+    <p class="hero-tag">Famouse Book</p>
+    <h2 class="Famouse-book-title">The Artist’s Way</h2>
+    <p class="hero-sub">
+      A classic guide to unlocking creativity and overcoming artistic blocks.<br />
+      This book helps you reconnect with your inner artist and build a
+      sustainable creative practice.
+    </p>
+    <button class="btn">Read More</button>
+  </div>
+</section>
+
+<div class="product-grid">
+  <div class="book-card" *ngFor="let product of books">
+
+    <div class="image-container">
+      <!-- fallback image if backend image not present -->
+      <img
+        [src]="product.imageUrl || 'assets/book-placeholder.png'"
+        alt="{{ product.title }}"
+      />
+
+      <div class="overlay">
+        <abbr title="View Book">
+          <button class="icon-btn" (click)="viewBook(product.id)">
+            <i class="fa fa-search"></i>
+          </button>
+        </abbr>
+
+        <abbr title="Add To Cart">
+          <button class="icon-btn" (click)="addToCart(product.id)">
+            <i class="fa fa-shopping-cart"></i>
+          </button>
+        </abbr>
+
+        <abbr title="Add To Wishlist">
+          <button class="icon-btn" (click)="addToWishlist(product.id)">
+            <i class="fa fa-heart"></i>
+          </button>
+        </abbr>
+      </div>
+    </div>
+
+    <h3>{{ product.title }}</h3>
+    <p class="price">₹ {{ product.price }}</p>
+
+  </div>
+</div>
+
+
+<section class="book-section">
+  <div class="Book-product-placeholder">
+    <div class="book-left">
+      <img src="../../../assets/images/icon/the_artist_way.png" alt="The Artist’s Way Book" class="top-book">
+    </div>
+  </div>
+  <div class="book-right">
+    <p class="hero-tag">Famouse Book</p>
+    <h2 class="Famouse-book-title">The Artist’s Way</h2>
+    <p class="hero-sub">
+      A classic guide to unlocking creativity and overcoming artistic blocks.<br />
+      This book helps you reconnect with your inner artist and build a
+      sustainable creative practice.
+    </p>
+    <button class="btn">Read More</button>
+  </div>
+</section>
+
+
+
+<!-- ======================================================
+                STATIC ANNOUNCEMENT BAR
+====================================================== -->
+<div class="announcement-bar">
+  <span class="highlight">Free Shipping</span>
+  <span class="divider">|</span>
+  On orders above ₹999
+  <span class="divider">|</span>
+  <span class="highlight2">New Releases Every Week</span>
+  <span class="divider">|</span>
+  <span class="highlight">Free Shipping</span>
+  <span class="divider">|</span>
+  <span class="highlight2">Best & Premium Stocks</span>
+</div>
+
+
+<section class="book-section">
+  <div class="book-left">
+    <p class="hero-tag">Famouse Book</p>
+    <h2 class="Famouse-book-title">The Artist’s Way</h2>
+    <p class="hero-sub">
+      A classic guide to unlocking creativity and overcoming artistic blocks.<br />
+      This book helps you reconnect with your inner artist and build a
+      sustainable creative practice.
+    </p>
+    <button class="btn">Read More</button>
+  </div>
+  
+  <div class="book-secondary-section ">
+    <div class="feature-quotes">
+         <span>Julia Cameron :</span>
+      <span class="hero-sub">
+        <p class="quotes-section">
+      When we move out on faith into the act of creation, the universe is able to advance.</p>
+    </span>
+    </div>
+  </div>
+  
+</section>
+
+
+<!-- ======================================================
+                STATIC ANNOUNCEMENT BAR
+====================================================== -->
+<div class="announcement-bar">
+  <span class="highlight">Free Shipping</span>
+  <span class="divider">|</span>
+  On orders above ₹999
+  <span class="divider">|</span>
+  <span class="highlight2">New Releases Every Week</span>
+  <span class="divider">|</span>
+  <span class="highlight">Free Shipping</span>
+  <span class="divider">|</span>
+  <span class="highlight2">Best & Premium Stocks</span>
+</div>
+
+
+
+
+<!-- ======================================================
+                  TRENDING BOOK SLIDER
+====================================================== -->
+<section class="book-slider-section">
+  <h2 class="section-title">Trending Books</h2>
+  <span class="hero-tag">IT’S AVAILABLE ON KINDLE PUBLISHING</span>
+
+  <div class="book-slider">
+    <div class="book-slider-track">
+      
+     
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+<!-- ======================================================
+                     BLOG SECTION
+====================================================== -->
+<section class="blog-section">
+
+  <h2 class="section-title">From The Blog</h2>
+  <p class="Famouse-book">Famouse Book</p>
+
+  <div class="blog-grid">
+    <div class="blog-card">
+      <img src="../../../assets/images/icon/the_artist_way.png">
+      <h3>Top 10 Books to Read in 2025</h3>
+      <p>Dive into the best titles releasing this year.</p>
+    </div>
+
+    <div class="blog-card">
+      <img src="../../../assets/images/icon/the_artist_way.png">
+      <h3>How to Build a Reading Habit</h3>
+      <p>Start small and transform your life with daily reading.</p>
+    </div>
+  </div>
+</section>
+
+<!-- <app-footer></app-footer> -->
+<h2>Books</h2>
+
+<div *ngFor="let b of books">
+  {{ b.title }} - ₹{{ b.price }}
+</div>

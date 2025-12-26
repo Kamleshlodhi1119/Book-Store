@@ -1,0 +1,46 @@
+<!-- <app-user-header></app-user-header> -->
+
+<section class="details-container">
+
+  <div *ngIf="loading" class="details-loading">
+    Loading book details...
+  </div>
+
+  <div *ngIf="!loading && book" class="details-card">
+
+    <div class="image-section">
+      <img
+        [src]="book.imageUrl || 'assets/book-placeholder.png'"
+        alt="{{ book.title }}"
+      />
+    </div>
+
+    <div class="info-section">
+      <h1>{{ book.title }}</h1>
+      <p class="author">by {{ book.author }}</p>
+
+      <p class="price">₹ {{ book.price }}</p>
+
+      <p class="isbn">ISBN: {{ book.isbn }}</p>
+
+      <p class="stock" *ngIf="book.stock > 0">
+        In Stock ({{ book.stock }} available)
+      </p>
+
+      <p class="stock out" *ngIf="book.stock === 0">
+        Out of Stock
+      </p>
+
+      <div class="actions">
+        <button class="btn primary" (click)="addToCart()" [disabled]="book.stock === 0">
+          Add to Cart
+        </button>
+
+        <button class="btn secondary" (click)="addToWishlist()">
+          Add to Wishlist
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>

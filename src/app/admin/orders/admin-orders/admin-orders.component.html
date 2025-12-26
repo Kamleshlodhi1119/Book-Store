@@ -1,0 +1,9 @@
+<app-admin-header></app-admin-header>
+
+<h2>All Orders</h2>
+
+<div *ngFor="let o of orders">
+  Order #{{o.id}} - {{o.status}} - ₹{{o.totalAmount}}
+  <button (click)="updateStatus(o.id, 'SHIPPED')">Ship</button>
+  <button (click)="updateStatus(o.id, 'DELIVERED')">Deliver</button>
+</div>
