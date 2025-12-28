@@ -1,89 +1,134 @@
 .details-container {
-  padding: 50px;
-  min-height: 100vh;
-  background: var(--color-light);
-  font-family: var(--font);
+  padding: 40px 20px;
+  max-width: 1100px;
+  margin: auto;
 }
 
 .details-loading {
   text-align: center;
-  font-size: 1.4rem;
-  color: var(--text-color);
-  margin-top: 60px;
+  font-size: 18px;
 }
 
 .details-card {
-  display: flex;
-  gap: 40px;
-  background: var(--color-surface);
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: var(--shadow);
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
 }
 
 .image-section img {
-  width: 300px;
-  height: 420px;
-  object-fit: contain;
+  width: 100%;
+  border-radius: 10px;
 }
 
 .info-section h1 {
-  color: var(--primary-color);
-  margin-bottom: 10px;
+  font-size: 28px;
+  margin-bottom: 5px;
 }
 
 .author {
-  color: var(--secondary-color);
-  margin-bottom: 15px;
-}
-
-.price {
-  font-size: 1.6rem;
-  font-weight: bold;
-  color: var(--primary-color);
+  color: #666;
   margin-bottom: 10px;
 }
 
-.isbn {
-  font-size: 14px;
-  color: var(--text-color);
+.price {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 10px 0;
 }
 
 .stock {
-  margin: 15px 0;
-  font-weight: bold;
-  color: var(--success-color);
+  color: #2e7d32;
+  font-weight: 600;
 }
 
 .stock.out {
-  color: var(--color-error);
+  color: #c62828;
+}
+
+.description {
+  margin: 15px 0;
+  color: #444;
 }
 
 .actions {
   display: flex;
   gap: 15px;
-  margin-top: 20px;
+  margin: 20px 0;
 }
 
 .btn {
-  padding: 12px 22px;
+  padding: 12px 18px;
   border-radius: 8px;
   border: none;
   cursor: pointer;
-  font-family: var(--font);
+  font-weight: 600;
 }
 
 .btn.primary {
-  background: var(--primary-color);
-  color: var(--text-light);
+  background: #4caf50;
+  color: #fff;
 }
 
 .btn.secondary {
-  background: var(--secondary-color);
-  color: var(--text-light);
+  background: #2196f3;
+  color: #fff;
 }
 
 .btn:disabled {
-  opacity: 0.6;
+  background: #ccc;
   cursor: not-allowed;
+}
+
+.average-rating {
+  font-size: 18px;
+  margin: 15px 0;
+}
+
+.rating-box {
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.rating-box label {
+  display: block;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.rating-box select,
+.rating-box textarea {
+  width: 100%;
+  margin-top: 5px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.rating-box textarea {
+  resize: none;
+  height: 80px;
+}
+
+.disabled-note {
+  color: #999;
+  font-style: italic;
+}
+
+.reviews {
+  margin-top: 30px;
+}
+
+.review {
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.review span {
+  margin-left: 10px;
+  color: #ff9800;
 }

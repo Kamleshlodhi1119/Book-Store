@@ -15,8 +15,7 @@ export interface Book {
 
 @Injectable({ providedIn: 'root' })
 export class BookService {
-
-  private api = `${environment.apiBaseUrl}/books`;
+private api = 'http://localhost:8082/api/books';
 
   constructor(private http: HttpClient) {}
 
@@ -38,5 +37,21 @@ export class BookService {
 
   topRated(): Observable<Book[]> {
     return this.http.get<Book[]>(`${this.api}/top-rated`);
+  }
+
+
+
+
+  addRating(
+    bookId: number,
+    rating: number,
+    comment: string,
+    username: string
+  ) {
+    return this.http.post(
+      `${this.api}/${bookId}/rating` +
+      `?rating=${rating}&comment=${encodeURIComponent(comment)}&username=${username}`,
+      {}
+    );
   }
 }

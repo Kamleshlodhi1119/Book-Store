@@ -34,14 +34,11 @@ export class WishlistComponent implements OnInit {
       }
     });
   }
+remove(bookId: number) {
+  this.wishlist.remove(bookId).subscribe({
+    next: () => this.loadWishlist(),
+    error: () => this.loadWishlist() // 👈 IMPORTANT
+  });
+}
 
-  remove(bookId: number) {
-    this.wishlist.remove(bookId).subscribe({
-      next: msg => {
-        this.alertService.show('Removed from wishlist', 'success');
-        this.list = this.list.filter(w => w.book.id !== bookId);
-      },
-      error: () => this.alertService.show('Remove failed', 'error')
-    });
-  }
 }

@@ -1,9 +1,28 @@
 <app-admin-header></app-admin-header>
 
-<h2>All Orders</h2>
+<div class="admin-page">
+  <div class="admin-container">
 
-<div *ngFor="let o of orders">
-  Order #{{o.id}} - {{o.status}} - ₹{{o.totalAmount}}
-  <button (click)="updateStatus(o.id, 'SHIPPED')">Ship</button>
-  <button (click)="updateStatus(o.id, 'DELIVERED')">Deliver</button>
+    <h2>Manage Orders</h2>
+
+    <div class="admin-list">
+      <div class="admin-item" *ngFor="let o of orders">
+        <div>
+          <strong>Order #{{ o.id }}</strong><br />
+          User: {{ o.userEmail }}<br />
+          Status: {{ o.status }}
+        </div>
+
+        <div class="admin-actions">
+          <button class="btn-secondary" (click)="updateStatus(o.id, 'SHIPPED')">
+            Ship
+          </button>
+          <button class="btn-secondary" (click)="updateStatus(o.id, 'DELIVERED')">
+            Deliver
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>

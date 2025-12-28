@@ -4,11 +4,13 @@ import { RouterModule } from '@angular/router';
 
 import { AdminHeaderComponent } from './header/admin-header/admin-header.component';
 import { UserHeaderComponent } from './header/user-header/user-header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AdminHeaderComponent,
-    UserHeaderComponent
+    UserHeaderComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -16,7 +18,8 @@ import { UserHeaderComponent } from './header/user-header/user-header.component'
   ],
   exports: [
     AdminHeaderComponent,
-    UserHeaderComponent
+    UserHeaderComponent,
+    FooterComponent
   ]
 })
 export class LayoutModule {}

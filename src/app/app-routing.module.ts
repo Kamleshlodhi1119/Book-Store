@@ -14,6 +14,9 @@ import { AdminOrdersComponent } from './admin/orders/admin-orders/admin-orders.c
 
 import { AuthGuard } from './core/guards/auth.guard';
 import { AdminGuard } from './core/guards/admin.guard';
+import { ShopComponent } from './user/shop/shop.component';
+import { OrdersComponent } from './user/orders/orders.component';
+import { BookDetailsComponent } from './user/book-details/book-details.component';
 
 const routes: Routes = [
 
@@ -24,6 +27,9 @@ const routes: Routes = [
   { path: 'home', component: UserHomeComponent, canActivate: [AuthGuard] },
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
   { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] },
+  { path: 'shop', component: ShopComponent, canActivate: [AuthGuard] },
+  { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
+  { path: 'book-details/:id', component: BookDetailsComponent, canActivate: [AuthGuard] },
 
   // ADMIN
   {

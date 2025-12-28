@@ -1,9 +1,30 @@
 <app-admin-header></app-admin-header>
 
-<h2>Manage Users</h2>
+<div class="admin-page">
+  <div class="admin-container">
+    <h2>Manage Users</h2>
 
-<div *ngFor="let u of users">
-  {{u.username}} - {{u.email}} - {{u.roles}}
-  <button (click)="makeAdmin(u.id)">Make Admin</button>
-  <button (click)="deleteUser(u.id)">Delete</button>
+    <div class="admin-list">
+      <div class="admin-item" *ngFor="let u of users">
+        <div>
+          <strong>{{ u.username }}</strong><br />
+          {{ u.email }}<br />
+          Roles: {{ u.roles.join(', ') }}
+        </div>
+
+        <div class="admin-actions">
+          <button class="btn-secondary" (click)="makeAdmin(u.id)">
+            Make Admin
+          </button>
+          <button class="btn-secondary" (click)="makeUser(u.id)">
+            Remove Admin
+          </button>
+          <button class="btn-danger" (click)="deleteUser(u.id)">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+<app-footer></app-footer>

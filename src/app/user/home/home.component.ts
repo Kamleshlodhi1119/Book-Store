@@ -43,7 +43,8 @@ export class UserHomeComponent implements OnInit {
     });
   }
 
-  viewBook(bookId: number) {
-    this.router.navigate(['/books', bookId]);
-  }
+ viewBook(id: number) {
+  this.router.navigate(['/book-details', id]);
+}
+
 }

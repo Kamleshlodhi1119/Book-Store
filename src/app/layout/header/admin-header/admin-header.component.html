@@ -1,9 +1,31 @@
-<nav>
-<a routerLink="/admin/dashboard">Dashboard</a>
-<a routerLink="/admin/users">Users</a>
-<a routerLink="/admin/books">Books</a>
-<a routerLink="/admin/orders">Orders</a>
+<!-- Top Bar -->
+<div class="top-bar">
+  <div class="top-left">
+    <span>Admin Panel</span>
+  </div>
 
-  <button (click)="logout()">Logout</button>
-</nav>
-<hr>
+  <div class="social-icons">
+    <i class="fab fa-facebook"></i>
+    <i class="fab fa-google"></i>
+    <i class="fab fa-twitter"></i>
+    <i class="fab fa-github"></i>
+  </div>
+</div>
+
+<!-- Main Header -->
+<header class="main-header">
+  <div class="logo">
+    <!-- optional logo -->
+    <!-- <img src="../../../assets/images/icon/logo.png" alt="Logo" /> -->
+  </div>
+
+  <nav class="main-nav">
+    <ul class="menu">
+      <li><a routerLink="/admin/dashboard">Dashboard</a></li>
+      <li><a routerLink="/admin/users">Users</a></li>
+      <li><a routerLink="/admin/books">Books</a></li>
+      <li><a routerLink="/admin/orders">Orders</a></li>
+      <li><a (click)="logout()">Logout</a></li>
+    </ul>
+  </nav>
+</header>

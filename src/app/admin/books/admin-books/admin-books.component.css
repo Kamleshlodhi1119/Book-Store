@@ -1,0 +1,166 @@
+/* PAGE */
+.admin-page {
+  padding: 30px;
+  background: #f5f6fa;
+  min-height: 100vh;
+}
+
+.admin-container {
+  max-width: 900px;
+  margin: auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LIST */
+.admin-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.book-info span {
+  display: block;
+  font-size: 13px;
+  color: #666;
+}
+
+/* BUTTONS */
+.btn-primary {
+  background: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background: #ff9800;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+}
+
+.btn-edit {
+  background: #2196f3;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  margin-right: 8px;
+  border-radius: 6px;
+}
+
+.btn-cancel {
+  background: #9e9e9e;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+}
+
+/* MODAL */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-box {
+  background: #fff;
+  width: 420px;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.modal-box h3 {
+  margin-bottom: 15px;
+}
+
+.modal-box input,
+.modal-box textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.modal-box textarea {
+  resize: none;
+  height: 80px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+/* FORM STRUCTURE */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.form-group textarea {
+  resize: none;
+  height: 80px;
+}
+
+/* TWO COLUMN ROW */
+/* .form-row {
+  display: flex;
+  gap: 12px;
+} */
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.modal-box h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* ACTIONS */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}

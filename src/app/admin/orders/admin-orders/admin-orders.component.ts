@@ -14,12 +14,17 @@ export class AdminOrdersComponent implements OnInit {
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit() {
-    this.http.get<any[]>(this.api).subscribe(res => this.orders = res);
+  ngOnInit(): void {
+    this.load();
+  }
+
+  load() {
+    this.http.get<any[]>(this.api)
+      .subscribe(res => this.orders = res);
   }
 
   updateStatus(id: number, status: string) {
     this.http.put(`${this.api}/${id}/status?status=${status}`, {})
-      .subscribe();
+      .subscribe(() => this.load());
   }
 }

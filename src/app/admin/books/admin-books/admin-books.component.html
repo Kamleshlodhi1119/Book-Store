@@ -1,10 +1,75 @@
 <app-admin-header></app-admin-header>
 
-<h2>Manage Books</h2>
+<div class="admin-page">
+  <div class="admin-container">
 
-<div *ngFor="let b of books">
-  {{b.title}} - Active: {{b.active}}
-  <button (click)="toggleStatus(b.id, b.active)">
-    {{ b.active ? 'Disable' : 'Enable' }}
-  </button>
+    <div class="page-header">
+      <h2>Manage Books</h2>
+      <button class="btn-primary" (click)="openAdd()">+ Add Book</button>
+    </div>
+
+    <!-- BOOK LIST -->
+    <div class="admin-list">
+      <div class="admin-item" *ngFor="let b of books">
+        <div class="book-info">
+          <strong>{{ b.title }}</strong>
+          <span>Author: {{ b.authorName }}</span>
+          <span>Status: {{ b.active ? 'Active' : 'Disabled' }}</span>
+        </div>
+
+        <div class="admin-actions">
+          <button class="btn-edit" (click)="openEdit(b)">Edit</button>
+          <button
+            class="btn-secondary"
+            (click)="toggleStatus(b.id, b.active)">
+            {{ b.active ? 'Disable' : 'Enable' }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-backdrop" *ngIf="showModal">
+  <div class="modal-box">
+
+    <h3>{{ isEdit ? 'Update Book' : 'Add New Book' }}</h3>
+
+    <div class="form-group">
+      <label>Book Title</label>
+      <input type="text" [(ngModel)]="book.title" />
+    </div>
+
+    <div class="form-group">
+      <label>Author Name</label>
+      <input type="text" [(ngModel)]="book.authorName" />
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Price</label>
+        <input type="number" [(ngModel)]="book.price" />
+      </div>
+
+      <div class="form-group">
+        <label>Stock Quantity</label>
+        <input type="number" [(ngModel)]="book.stockQuantity" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea [(ngModel)]="book.description"></textarea>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-primary" (click)="save()">
+        {{ isEdit ? 'Update Book' : 'Add Book' }}
+      </button>
+      <button class="btn-cancel" (click)="closeModal()">Cancel</button>
+    </div>
+
+  </div>
 </div>

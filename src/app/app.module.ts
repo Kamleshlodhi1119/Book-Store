@@ -28,7 +28,7 @@ import { BookDetailsComponent } from './user/book-details/book-details.component
     AlertComponent,
     OrdersComponent,
     ShopComponent,
-    BookDetailsComponent
+    BookDetailsComponent,
   ],
   imports: [
     BrowserModule,

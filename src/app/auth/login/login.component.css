@@ -1,0 +1,34 @@
+.login-container {
+  max-width: 400px;
+  margin: 40px auto;
+  /* padding: 30px; */
+  /* border-radius: 12px;
+  background-color: var(--card-bg, #fff);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); */
+  text-align: center;
+}
+
+.login-container h2 {
+  margin-bottom: 25px;
+  color: var(--primary-color);
+}
+
+.login-container input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px; /* ✅ spacing here */
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: var(--primary-color);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}

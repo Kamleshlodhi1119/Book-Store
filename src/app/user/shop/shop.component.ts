@@ -67,6 +67,7 @@ export class ShopComponent implements OnInit {
   }
 
   viewBook(id: number) {
-    this.router.navigate(['/books', id]);
-  }
+  this.router.navigate(['/book-details', id]);
+}
+
 }

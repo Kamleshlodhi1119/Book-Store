@@ -10,9 +10,10 @@ export class WishlistService {
 
   constructor(private http: HttpClient) {}
 
-  get(): Observable<any[]> {
-    return this.http.get<any[]>(this.api);
-  }
+get() {
+  return this.http.get<any[]>(this.api);
+}
+
 
   add(bookId: number): Observable<string> {
     return this.http.post<string>(`${this.api}/add/${bookId}`, {});

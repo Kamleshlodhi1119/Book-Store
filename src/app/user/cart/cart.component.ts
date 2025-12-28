@@ -23,13 +23,20 @@ export class CartComponent implements OnInit {
 
   loadCart() {
     this.loading = true;
+
     this.cartService.getCart().subscribe({
-      next: res => {
-        this.cart = this.parseCart(res);
+      next: (res: any) => {
+        this.cart = {
+          items: res?.items ?? []
+        };
         this.loading = false;
       },
-      error: () => {
-        this.alertService.show('Failed to load cart', 'error');
+      error: err => {
+        if (err.status === 401) {
+          this.cart = null;
+        } else {
+          this.alertService.show('Failed to load cart', 'error');
+        }
         this.loading = false;
       }
     });
@@ -53,19 +60,5 @@ export class CartComponent implements OnInit {
       },
       error: () => this.alertService.show('Clear cart failed', 'error')
     });
-  }
-
-  // 🔐 SAFE PARSER (TEXT → OBJECT)
-  private parseCart(res: any): any {
-    if (!res) return null;
-
-    if (typeof res === 'string') {
-      try {
-        return JSON.parse(res);
-      } catch {
-        return null;
-      }
-    }
-    return res;
   }
 }
