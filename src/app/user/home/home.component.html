@@ -32,7 +32,10 @@
   <h2 class="section-title">Shop by Category</h2>
   <span class="hero-tag">IT’S AVAILABLE ON KINDLE PUBLISHING</span>
 
+<pre>
 
+
+</pre>
   <div class="category-grid">
     <div class="category-card">
       <img src="../../../assets/images/icon/the_artist_way.png">
@@ -59,37 +62,36 @@
 
 
 <!-- ======================================================
-                  FEATURED BOOKS (GRID)
+                STATIC ANNOUNCEMENT BAR
 ====================================================== -->
-<div class="book-grid-section">
-  <h2 class="section-title">Featured Books</h2>
-  <!-- <span class="hero-tag">Top picks loved by thousands of readers</span> -->
-  <p class="hero-tag">Top picks loved by thousands of readers</p>
-
-  <div class="product-grid">
-    <!-- <app-product-card *ngFor="let p of products | slice:0:8" [product]="p" (addToCart)="handleAddToCart($event)"> -->
-    <!-- </app-product-card> -->
-  </div>
+<div class="announcement-bar">
+  <span class="highlight">Free Shipping</span>
+  <span class="divider">|</span>
+  On orders above ₹999
+  <span class="divider">|</span>
+  <span class="highlight2">New Releases Every Week</span>
+  <span class="divider">|</span>
+  <span class="highlight">Free Shipping</span>
+  <span class="divider">|</span>
+  <span class="highlight2">Best & Premium Stocks</span>
 </div>
 
-<hr>
-<hr>
-<section class="cta-section">
-  <div class="Book-product-placeholder">
-    
-  </div>
-  <div class="book-right">
-    <p class="hero-tag">Famouse Book</p>
-    <h2 class="Famouse-book-title">The Artist’s Way</h2>
-    <p class="hero-sub">
-      A classic guide to unlocking creativity and overcoming artistic blocks.<br />
-      This book helps you reconnect with your inner artist and build a
-      sustainable creative practice.
-    </p>
-    <button class="btn">Read More</button>
+
+<!-- ======================================================
+                  TRENDING BOOK SLIDER
+====================================================== -->
+<section class="book-slider-section">
+  <h2 class="section-title">All Books</h2>
+  <span class="hero-tag">IT’S AVAILABLE ON KINDLE PUBLISHING</span>
+
+  <div class="book-slider">
+    <div class="book-slider-track">
+      
+     
+
+    </div>
   </div>
 </section>
-
 <div class="product-grid">
   <div class="book-card" *ngFor="let product of books">
 
@@ -207,23 +209,6 @@
 
 
 
-<!-- ======================================================
-                  TRENDING BOOK SLIDER
-====================================================== -->
-<section class="book-slider-section">
-  <h2 class="section-title">Trending Books</h2>
-  <span class="hero-tag">IT’S AVAILABLE ON KINDLE PUBLISHING</span>
-
-  <div class="book-slider">
-    <div class="book-slider-track">
-      
-     
-
-    </div>
-  </div>
-</section>
-
-
 
 
 
@@ -250,11 +235,4 @@
     </div>
   </div>
 </section>
-
-<!-- <app-footer></app-footer> -->
-<h2>Books</h2>
-
-<div *ngFor="let b of books">
-  {{ b.title }} - ₹{{ b.price }}
-</div>
- <app-footer></app-footer>
+<app-footer></app-footer>

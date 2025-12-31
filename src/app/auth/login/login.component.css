@@ -14,7 +14,7 @@
 }
 
 .login-container input {
-  width: 100%;
+  width: 90%;
   padding: 12px;
   margin-bottom: 16px; /* ✅ spacing here */
   border-radius: 8px;
@@ -23,7 +23,7 @@
 }
 
 .login-container button {
-  width: 100%;
+  width: 95%;
   padding: 12px;
   border-radius: 8px;
   background-color: var(--primary-color);

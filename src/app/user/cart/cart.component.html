@@ -28,14 +28,36 @@
 
     <div class="cart-footer">
       <div class="total">
-        Total: ₹ {{ cart.totalAmount }}
+        Subtotal: ₹ {{ subtotal }}
       </div>
 
-      <button class="clear-btn" (click)="clearCart()">
-        Clear Cart
-      </button>
+      <div class="actions">
+        <button class="clear-btn" (click)="clearCart()">
+          Clear Cart
+        </button>
+
+        <button class="pay-btn" (click)="openPayment()">
+          Pay
+        </button>
+      </div>
     </div>
 
   </div>
 </section>
- <app-footer></app-footer>
+
+<!-- PAYMENT POPUP -->
+<div class="payment-overlay" *ngIf="showPayment">
+  <div class="payment-modal">
+
+    <h3>Select Payment Method</h3>
+
+    <button (click)="confirmPayment('UPI')">UPI</button>
+    <button (click)="confirmPayment('Card')">Debit / Credit Card</button>
+    <button (click)="confirmPayment('COD')">Cash on Delivery</button>
+
+    <button class="close-btn" (click)="closePayment()">Cancel</button>
+
+  </div>
+</div>
+
+<app-footer></app-footer>

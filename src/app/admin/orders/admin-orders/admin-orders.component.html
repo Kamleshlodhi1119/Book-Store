@@ -1,28 +1,70 @@
 <app-admin-header></app-admin-header>
 
 <div class="admin-page">
-  <div class="admin-container">
-
-    <h2>Manage Orders</h2>
+<div class="admin-container">
+<!-- 
+    <h2>All Orders</h2>
 
     <div class="admin-list">
-      <div class="admin-item" *ngFor="let o of orders">
+      <div class="admin-item">
         <div>
-          <strong>Order #{{ o.id }}</strong><br />
-          User: {{ o.userEmail }}<br />
-          Status: {{ o.status }}
+          <strong>The Pragmatic Programmer</strong><br />
+          Author: Andrew Hunt, David Thomas<br />
+          Price: ₹799<br />
+          Category: Software Development<br />
+          Stock: 12
         </div>
 
         <div class="admin-actions">
-          <button class="btn-secondary" (click)="updateStatus(o.id, 'SHIPPED')">
-            Ship
+          <button class="btn-secondary">
+            Edit
           </button>
-          <button class="btn-secondary" (click)="updateStatus(o.id, 'DELIVERED')">
-            Deliver
+          <button class="btn-secondary">
+            Delete
           </button>
         </div>
       </div>
+
+      <div class="admin-item">
+        <div>
+          <strong>Clean Code</strong><br />
+          Author: Robert C. Martin<br />
+          Price: ₹699<br />
+          Category: Programming Practices<br />
+          Stock: 8
+        </div>
+
+        <div class="admin-actions">
+          <button class="btn-secondary">
+            Edit
+          </button>
+          <button class="btn-secondary">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div> -->
+
+<h2>Manage Orders</h2>
+
+<div class="admin-list">
+  <div class="admin-item" *ngFor="let o of orders">
+    <div>
+      <strong>Order #{{ o.id }}</strong><br />
+      User: {{ o.userEmail }}<br />
+      Status: {{ o.status }}
     </div>
 
+    <div class="admin-actions">
+      <button class="btn-secondary" (click)="updateStatus(o.id, 'SHIPPED')">
+        Ship
+      </button>
+      <button class="btn-secondary" (click)="updateStatus(o.id, 'DELIVERED')">
+        Deliver
+      </button>
+    </div>
   </div>
+</div>
+
+</div>
 </div>
