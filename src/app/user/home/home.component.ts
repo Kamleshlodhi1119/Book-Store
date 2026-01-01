@@ -31,7 +31,7 @@ export class UserHomeComponent implements OnInit {
 
   addToCart(bookId: number) {
     this.cartService.add({ bookId, quantity: 1 }).subscribe({
-      next: msg => this.alertService.show(msg, 'success'),
+      next: msg => this.alertService.show('Add to cart failed', 'success'),
       error: () => this.alertService.show('Add to cart failed', 'error')
     });
   }
