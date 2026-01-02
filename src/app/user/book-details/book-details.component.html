@@ -63,10 +63,13 @@
 
     <!-- IMAGE -->
     <div class="image-section">
-      <img
-        [src]="book.imageUrl || 'assets/book-placeholder.png'"
-        alt="{{ book.title }}"
-      />
+             <img
+  [src]="book.imageUrl 
+    ? 'assets/books/' + book.imageUrl 
+    : 'assets/book-placeholder.png'"
+  alt="{{ book.title }}"
+/>
+
     </div>
 
     <!-- INFO -->
@@ -160,6 +163,4 @@
 
     </div>
   </div>
-</section>
-
-<app-footer></app-footer>
+</section> 

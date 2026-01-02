@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { Component, OnInit } from '@angular/core'; 
+import { Book } from 'src/app/core/models/book';
 
 @Component({
   selector: 'app-admin-books',
@@ -9,20 +9,13 @@ import { environment } from 'src/environments/environment';
 })
 export class AdminBooksComponent implements OnInit {
 
-  books: any[] = [];
-  api = environment.apiUrl + '/admin/books';
+  books: Book[] = [];
+  api = 'http://localhost:8082/api/admin/books';
 
   showModal = false;
   isEdit = false;
 
-  book = {
-    id: null as number | null,
-    title: '',
-    authorName: '',
-    price: 0,
-    stockQuantity: 0,
-    description: ''
-  };
+  book: Partial<Book> = {};
 
   constructor(private http: HttpClient) {}
 
@@ -31,19 +24,17 @@ export class AdminBooksComponent implements OnInit {
   }
 
   load(): void {
-    this.http.get<any[]>(environment.apiUrl + '/books')
+    this.http.get<Book[]>('http://localhost:8082/api/books')
       .subscribe(res => this.books = res);
   }
 
-  // OPEN ADD POPUP
   openAdd(): void {
     this.isEdit = false;
-    this.resetForm();
+    this.book = {};
     this.showModal = true;
   }
 
-  // OPEN EDIT POPUP
-  openEdit(b: any): void {
+  openEdit(b: Book): void {
     this.isEdit = true;
     this.book = { ...b };
     this.showModal = true;
@@ -57,7 +48,7 @@ export class AdminBooksComponent implements OnInit {
       : this.http.post(this.api, this.book);
 
     req.subscribe(() => {
-      this.closeModal();
+      this.showModal = false;
       this.load();
     });
   }
@@ -67,6 +58,8 @@ export class AdminBooksComponent implements OnInit {
       .subscribe(() => this.load());
   }
 
+
+
   closeModal(): void {
     this.showModal = false;
     this.resetForm();
@@ -74,12 +67,13 @@ export class AdminBooksComponent implements OnInit {
 
   private resetForm(): void {
     this.book = {
-      id: null,
+      // id: null,
       title: '',
       authorName: '',
       price: 0,
       stockQuantity: 0,
-      description: ''
+      description: '',
+      imageUrl: '' 
     };
   }
 }

@@ -98,9 +98,12 @@
     <div class="image-container">
       <!-- fallback image if backend image not present -->
       <img
-        [src]="product.imageUrl || 'assets/book-placeholder.png'"
-        alt="{{ product.title }}"
-      />
+  [src]="product.imageUrl 
+    ? 'assets/books/' + product.imageUrl 
+    : 'assets/book-placeholder.png'"
+  alt="{{ product.title }}"
+/>
+
 
       <div class="overlay">
         <abbr title="View Book">
@@ -235,4 +238,3 @@
     </div>
   </div>
 </section>
-<app-footer></app-footer>

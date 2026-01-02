@@ -1,9 +1,12 @@
 export interface Book {
   id: number;
   title: string;
-  author: string;
+  authorName: string;
+  description: string;
   price: number;
-  isbn: string;
-  imageUrl: string;
-  stock: number;
+  stockQuantity: number;
+  isbn?: string;
+  imageUrl?: string | null;   // ✅ optional
+  averageRating?: number;
+  active: boolean;
 }

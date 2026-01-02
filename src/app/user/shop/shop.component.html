@@ -30,10 +30,13 @@
     <div class="shop-card" *ngFor="let b of filtered">
 
       <div class="image-box">
-        <img
-          [src]="b.imageUrl || 'assets/book-placeholder.png'"
-          alt="{{ b.title }}"
-        />
+          <img
+  [src]="b.imageUrl 
+    ? 'assets/books/' + b.imageUrl 
+    : 'assets/book-placeholder.png'"
+  alt="{{ b.title }}"
+/>
+
 
         <div class="overlay">
           <button class="icon-btn" (click)="viewBook(b.id)">
@@ -57,5 +60,4 @@
     </div>
 
   </div>
-</section>
- <app-footer></app-footer>
+</section> 
