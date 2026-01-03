@@ -19,6 +19,7 @@
 
         <div class="admin-actions">
           <button class="btn-edit" (click)="openEdit(b)">Edit</button>
+          <button class="btn-delete" (click)="openDelete(b)">Delete</button>
           <button class="btn-secondary" (click)="toggleStatus(b.id, b.active)">
             {{ b.active ? 'Disable' : 'Enable' }}
           </button>
@@ -28,6 +29,7 @@
 
   </div>
 </div>
+
 <!-- MODAL -->
 <div class="modal-backdrop" *ngIf="showModal">
   <div class="modal-box">
@@ -68,23 +70,36 @@
     </div>
 
     <!-- PREVIEW -->
-    <div class="image-preview" *ngIf="book.imageUrl">
-      <div class="image-preview">
-
-        <div class="image-preview">
-          <img
-            [src]="previewUrl || (book.imageUrl ? 'http://localhost:8082/api/books/' + book.id + 
-            '/image?ts=' + book.imageTimestamp : 'assets/book-placeholder.png')"
-            (error)="onImageError($event)" alt="{{ book.title }}" 
-          class="preview-uploeded-image" />
-      </div>
+    <div class="image-preview" *ngIf="book.imageUrl || previewUrl">
+      <img
+        [src]="previewUrl || (book.imageUrl ? 'http://localhost:8082/api/books/' + book.id + '/image?ts=' + book.imageTimestamp : 'assets/book-placeholder.png')"
+        (error)="onImageError($event)" 
+        alt="{{ book.title }}" 
+        class="preview-uploeded-image"
+      />
     </div>
 
+    <!-- MODAL ACTIONS -->
     <div class="modal-actions">
-      <button class="btn-primary" (click)="save()">
-        {{ isEdit ? 'Update' : 'Add' }}
-      </button>
-      <button class="btn-cancel" (click)="closeModal()">Cancel</button>
+      <!-- ADD BOOK BUTTONS -->
+       <!-- ADD BOOK BUTTONS -->
+  <ng-container *ngIf="!isEdit && !isDelete">
+    <button class="btn-primary" (click)="addBook()">Add Book</button>
+    <button class="btn-cancel" (click)="cancelAdd()">Cancel Add</button>
+  </ng-container>
+
+  <!-- EDIT BOOK BUTTONS -->
+  <ng-container *ngIf="isEdit && !isDelete">
+    <button class="btn-primary" (click)="save()">Update</button>
+    <button class="btn-cancel" (click)="closeModal()">Cancel</button>
+  </ng-container>
+
+  <!-- DELETE BOOK BUTTONS -->
+  <ng-container *ngIf="isDelete">
+    <button class="btn-delete" (click)="deleteBook()">Delete</button>
+    <button class="btn-cancel" (click)="closeModal()">Cancel</button>
+  </ng-container>
+
     </div>
 
   </div>

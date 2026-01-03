@@ -26,10 +26,10 @@ export class AdminBooksComponent implements OnInit {
 
   api = 'http://localhost:8082/api/admin/books';
   publicApi = 'http://localhost:8082/api/books';
-  
 
   showModal = false;
   isEdit = false;
+  isDelete = false;  // New flag for delete modal
 
   book: Partial<Book> = {};
   selectedFile: File | null = null;
@@ -42,7 +42,7 @@ export class AdminBooksComponent implements OnInit {
   }
 
   load(): void {
-    this.http.get<Book[]>(this.publicApi+"/byadmin")
+    this.http.get<Book[]>(this.publicApi + "/byadmin")
       .subscribe(res => {
         this.books = res.map(b => ({
           ...b,
@@ -53,101 +53,83 @@ export class AdminBooksComponent implements OnInit {
 
   openAdd(): void {
     this.isEdit = false;
+    this.isDelete = false;
     this.resetForm();
     this.showModal = true;
   }
 
   openEdit(b: Book): void {
     this.isEdit = true;
+    this.isDelete = false;
     this.book = { ...b };
     this.selectedFile = null;
     this.showModal = true;
   }
-  onFileChange(event: any): void {
-  this.selectedFile = event.target.files?.[0] || null;
 
-  if (this.selectedFile) {
-    // create a temporary preview URL
-    const reader = new FileReader();
-    reader.onload = e => this.previewUrl = reader.result as string;
-    reader.readAsDataURL(this.selectedFile);
-  } else {
-    this.previewUrl = null; // reset if no file selected
+  // --- NEW: Open delete modal ---
+  openDelete(b: Book): void {
+    this.isDelete = true;
+    this.isEdit = false;
+    this.book = { ...b };
+    this.selectedFile = null;
+    this.showModal = true;
   }
-}
 
-  // save(): void {
-  //   if (!this.book.title || !this.book.authorName) return;
+  onFileChange(event: any): void {
+    this.selectedFile = event.target.files?.[0] || null;
 
-  //   const request = this.isEdit
-  //     ? this.http.put<Book>(`${this.api}/${this.book.id}`, this.book)
-  //     : this.http.post<Book>(this.api, this.book);
-
-  //   request.subscribe(savedBook => {
-
-  //     if (this.selectedFile && savedBook.id) {
-  //       this.uploadImage(savedBook.id);
-  //     }
-
-  //     this.closeModal();
-  //     this.load();
-  //   });
-  // }
-
-  // uploadImage(bookId: number): void {
-  //   const formData = new FormData();
-  //   formData.append('file', this.selectedFile!, `${bookId}.png`);
-
-  //   this.http.post(
-  //     `http://localhost:8082/api/admin/books/${bookId}/image`,
-  //     formData
-  //   ).subscribe(() => {
-  //     // update timestamp to reload image immediately
-  //     const b = this.books.find(x => x.id === bookId);
-  //     if (b) b.imageTimestamp = new Date().getTime();
-  //   });
-  // }
+    if (this.selectedFile) {
+      const reader = new FileReader();
+      reader.onload = e => this.previewUrl = reader.result as string;
+      reader.readAsDataURL(this.selectedFile);
+    } else {
+      this.previewUrl = null;
+    }
+  }
 
   save(): void {
-  if (!this.book.title || !this.book.authorName) return;
+    if (!this.book.title || !this.book.authorName) return;
 
-  // Remove imageUrl before sending
-  const bookData = { ...this.book };
-  delete bookData.imageUrl; // prevent large base64 from being sent
+    const bookData = { ...this.book };
+    delete bookData.imageUrl;
 
-  const request = this.isEdit
-    ? this.http.put<Book>(`${this.api}/${this.book.id}`, bookData)
-    : this.http.post<Book>(this.api, bookData);
+    const request = this.isEdit
+      ? this.http.put<Book>(`${this.api}/${this.book.id}`, bookData)
+      : this.http.post<Book>(this.api, bookData);
 
-  request.subscribe(savedBook => {
-    if (this.selectedFile && savedBook.id) {
-      this.uploadImage(savedBook.id);
-    }
-    this.closeModal();
-    this.load();
-  });
-}
+    request.subscribe(savedBook => {
+      if (this.selectedFile && savedBook.id) this.uploadImage(savedBook.id);
+      this.closeModal();
+      this.load();
+    });
+  }
 
   uploadImage(bookId: number): void {
-  const formData = new FormData();
-  formData.append('file', this.selectedFile!, `${bookId}.png`);
+    const formData = new FormData();
+    formData.append('file', this.selectedFile!, `${bookId}.png`);
 
-  this.http.post(
-    `http://localhost:8082/api/admin/books/${bookId}/image`,
-    formData
-  ).subscribe();
-}
+    this.http.post(
+      `${this.api}/${bookId}/image`,
+      formData
+    ).subscribe();
+  }
 
+  // toggleStatus(id: number, active: boolean): void {
+  //   this.http.put(`${this.api}/${id}/status?active=${!active}`, {})
+  //     .subscribe(() => this.load());
+  // }
 
   toggleStatus(id: number, active: boolean): void {
-    this.http.put(`${this.api}/${id}/status?active=${!active}`, {})
-      .subscribe(() => this.load());
-  }
+  this.http.put(`${this.api}/${id}/status?active=${!active}`, {}, { responseType: 'text' })
+    .subscribe(() => this.load());
+}
+
 
   closeModal(): void {
     this.showModal = false;
-    this.load();
     this.resetForm();
+    this.isEdit = false;
+    this.isDelete = false;
   }
 
   private resetForm(): void {
@@ -159,26 +141,49 @@ export class AdminBooksComponent implements OnInit {
       stockQuantity: 0,
       imageUrl: null
     };
-    this.selectedFile = null;  // remove selected file
-  this.previewUrl = null;    // remove preview URL
+    this.selectedFile = null;
+    this.previewUrl = null;
   }
-
-  // ----------------- IMAGE HELPERS -----------------
 
   getImageUrl(book: Partial<Book>): string {
     if (!book.imageUrl) return 'assets/book-placeholder.png';
-
-    // backend image
     if (book.id) {
       return `http://localhost:8082/api/books/${book.id}/image?ts=${book.imageTimestamp || new Date().getTime()}`;
     }
-
-    // fallback to placeholder
     return 'assets/book-placeholder.png';
   }
 
   onImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
     img.src = 'assets/book-placeholder.png';
+  }
+
+  // --- ADD BOOK METHODS ---
+  addBook(): void {
+    if (!this.book.title || !this.book.authorName) return;
+
+    const bookData = { ...this.book };
+    delete bookData.imageUrl;
+
+    this.http.post<Book>(this.api, bookData).subscribe(savedBook => {
+      if (this.selectedFile && savedBook.id) this.uploadImage(savedBook.id);
+      this.cancelAdd();
+      this.load();
+    });
+  }
+
+  cancelAdd(): void {
+    this.showModal = false;
+    this.resetForm();
+  }
+
+  // --- DELETE BOOK METHOD ---
+  deleteBook(): void {
+    if (!this.book.id) return;
+
+    this.http.delete(`${this.api}/${this.book.id}`).subscribe(() => {
+      this.closeModal();
+      this.load();
+    });
   }
 }

@@ -65,7 +65,14 @@
   margin-right: 8px;
   border-radius: 6px;
 }
-
+.btn-delete {
+  background: #ef0606;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  margin-right: 8px;
+  border-radius: 6px;
+}
 .btn-cancel {
   background: #9e9e9e;
   color: #fff;
