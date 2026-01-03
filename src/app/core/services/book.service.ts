@@ -23,6 +23,10 @@ private api = 'http://localhost:8082/api/books';
     return this.http.get<Book[]>(this.api);
   }
 
+  getAllbyAdmin(): Observable<Book[]> {
+    return this.http.get<Book[]>(this.api+" /byadmin");
+  }
+ 
   getById(id: number): Observable<Book> {
     return this.http.get<Book>(`${this.api}/${id}`);
   }

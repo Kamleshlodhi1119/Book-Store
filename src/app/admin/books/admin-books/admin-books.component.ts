@@ -42,7 +42,7 @@ export class AdminBooksComponent implements OnInit {
   }
 
   load(): void {
-    this.http.get<Book[]>(this.publicApi)
+    this.http.get<Book[]>(this.publicApi+"/byadmin")
       .subscribe(res => {
         this.books = res.map(b => ({
           ...b,
