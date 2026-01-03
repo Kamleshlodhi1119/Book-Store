@@ -34,6 +34,11 @@
   color: #666;
 }
 
+
+/* preview-uploeded-image */
+.preview-uploeded-image{
+  max-width: 100px !important;
+}
 /* BUTTONS */
 .btn-primary {
   background: #4caf50;
@@ -68,6 +73,8 @@
   padding: 10px 16px;
   border-radius: 6px;
 }
+
+
 
 /* MODAL */
 .modal-backdrop {
