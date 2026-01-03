@@ -1,63 +1,154 @@
 <app-user-header></app-user-header>
 
+<!-- HERO BANNER -->
+<section class="shop-hero">
+  <div class="hero-content">
+    <span class="shop-heading">Book Store</span>
+    <h1>DISCOVER YOUR NEXT <br />FAVORITE BOOK</h1>
+    <p>
+      Browse our curated collection of books from top authors.
+      Learn, grow, and explore new worlds with every read.
+    </p>
+  </div>
+</section>
+
 <section class="shop-container">
 
-  <h2 class="shop-title">Shop Books</h2>
+  <div class="shop-layout">
 
-  <!-- Search Bar -->
-  <!-- <div class="shop-search">
-    <input
-      type="text"
-      placeholder="Search by title or author..."
-      [(ngModel)]="searchText"
-      (input)="search()"
-    />
-  </div> -->
+    <!-- FILTER SIDEBAR -->
+    <aside class="shop-filter">
+      <h3>Filter Books</h3>
 
-  <!-- Loading -->
-  <div *ngIf="loading" class="shop-loading">
-    Loading books...
-  </div>
+      <!-- BOOK NAME -->
+      <div class="filter-block">
+        <label>Book Name</label>
+        <input
+          type="text"
+          class="filter-input"
+          placeholder="Search by title"
+          [(ngModel)]="filters.name"
+          (input)="applyFilters()"
+        />
+      </div>
 
-  <!-- Empty -->
-  <div *ngIf="!loading && filtered.length === 0" class="shop-empty">
-    No books found
-  </div>
+      <!-- AUTHOR -->
+      <div class="filter-block">
+        <label>Author</label>
+        <select
+          class="filter-select"
+          [(ngModel)]="filters.author"
+          (change)="applyFilters()"
+        >
+          <option value="">All Authors</option>
+          <option *ngFor="let a of authors" [value]="a.name">
+            {{ a.name }}
+          </option>
+        </select>
+      </div>
 
-  <!-- Grid -->
-  <div class="shop-grid" *ngIf="!loading && filtered.length">
+      <!-- PRICE -->
+      <div class="filter-block">
+        <label>Max Price: ₹ {{ filters.maxPrice }}</label>
+        <input
+          type="range"
+          min="0"
+          [max]="maxBookPrice"
+          [(ngModel)]="filters.maxPrice"
+          (input)="applyFilters()"
+        />
+      </div>
+    </aside>
 
-    <div class="shop-card" *ngFor="let b of filtered">
+    <!-- MAIN CONTENT -->
+    <div class="shop-content">
 
-      <div class="image-box">
-        <img
-  [src]="b.imageUrl
-    ? 'http://localhost:8082/api/books/' + b.id + '/image'
-    : 'assets/book-placeholder.png'"
-  alt="{{ b.title }}"
-/>
+      <div *ngIf="loading" class="shop-loading">Loading books...</div>
 
+      <div *ngIf="!loading && filtered.length === 0" class="shop-empty">
+        No books found
+      </div>
 
-        <div class="overlay">
-          <button class="icon-btn" (click)="viewBook(b.id)">
-            <i class="fa fa-search"></i>
-          </button>
+      <!-- BOOK GRID -->
+      <div class="shop-grid" *ngIf="!loading && filtered.length">
 
-          <button class="icon-btn" (click)="addToCart(b.id)">
-            <i class="fa fa-shopping-cart"></i>
-          </button>
+        <div class="shop-card" *ngFor="let b of filtered">
 
-          <button class="icon-btn" (click)="addToWishlist(b.id)">
-            <i class="fa fa-heart"></i>
-          </button>
+          <div class="image-box">
+            <img
+              [src]="b.imageUrl
+                ? 'http://localhost:8082/api/books/' + b.id + '/image'
+                : 'assets/book-placeholder.png'"
+              alt="{{ b.title }}"
+            />
+
+            <div class="overlay">
+              <button class="icon-btn" (click)="viewBook(b.id)">
+                <i class="fa fa-search"></i>
+              </button>
+              <button class="icon-btn" (click)="addToCart(b.id)">
+                <i class="fa fa-shopping-cart"></i>
+              </button>
+              <button class="icon-btn" (click)="addToWishlist(b.id)">
+                <i class="fa fa-heart"></i>
+              </button>
+            </div>
+          </div>
+
+          <h3>{{ b.title }}</h3>
+          <p class="author">{{ b.authorName }}</p>
+          <p class="price">₹ {{ b.price }}</p>
+
         </div>
       </div>
 
-      <h3>{{ b.title }}</h3>
-      <p class="author">{{ b.author }}</p>
-      <p class="price">₹ {{ b.price }}</p>
+      <!-- PAGINATION (UI ONLY) -->
+      <div class="shop-pagination">
+        <button>&lt; Prev</button>
+        <span class="active">1</span>
+        <span>2</span>
+        <span>3</span>
+        <button>Next &gt;</button>
+      </div>
 
     </div>
-
   </div>
-</section> 
+</section>
+
+<!-- OTHER BOOK CATEGORY -->
+<section class="other-category">
+  <h2>OTHER BOOK CATEGORIES</h2>
+
+  <div class="category-cards">
+    <div class="category-card">
+      <div class="text">
+        <h3>Technology Books</h3>
+        <p>Master programming, AI, and modern technologies</p>
+        <button>Explore Books →</button>
+      </div>
+      <!-- <img src="assets/images/tech-books.jpg" alt="Technology Books"> -->
+    </div>
+
+    <div class="category-card">
+      <div class="text">
+        <h3>Self Improvement</h3>
+        <p>Build habits, mindset, and personal growth</p>
+        <button>Explore Books →</button>
+      </div>
+      <!-- <img src="assets/images/self-help.jpg" alt="Self Help Books"> -->
+    </div>
+  </div>
+</section>
+
+<!-- EXPLORE CATALOG CTA -->
+<section class="explore-catalog">
+  <div class="overlay"></div>
+  <div class="content">
+    <h2>EXPLORE OUR BOOK CATALOG</h2>
+    <p>
+      From bestsellers to hidden gems, find books that inspire,
+      educate, and entertain.
+    </p>
+    <button>VIEW ALL BOOKS</button>
+  </div>
+</section>

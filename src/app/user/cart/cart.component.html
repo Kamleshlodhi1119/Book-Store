@@ -1,8 +1,21 @@
 <app-user-header></app-user-header>
 
-<section class="cart-container">
 
-  <h2 class="cart-title">My Cart</h2>
+<!-- HERO (SAME AS SHOP PAGE – REUSED STYLE) -->
+<section class="cart-hero">
+  <div class="hero-content">
+    
+     <span class="shop-heading">MY Cart</span> 
+ 
+    <p>
+      Track all your purchases, order status, and order history in one place.
+    </p>
+  </div>
+</section>
+
+
+
+<section class="cart-container">
 
   <div *ngIf="loading" class="cart-loading">
     Loading your cart...

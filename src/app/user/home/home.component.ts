@@ -13,6 +13,10 @@ import { AlertService } from 'src/app/core/services/alert.service';
 export class UserHomeComponent implements OnInit {
 
   books: any[] = [];
+ authors: any[] = [];
+  displayAuthors: any[] = [];
+  MAX_AUTHORS = 4;
+
 
   constructor(
     private bookService: BookService,
@@ -27,6 +31,26 @@ export class UserHomeComponent implements OnInit {
       next: res => this.books = res as any[],
       error: () => this.alertService.show('Failed to load books', 'error')
     });
+
+      this.loadAuthors();
+  }
+loadAuthors() {
+    this.bookService.getAuthors().subscribe({
+      next: res => {
+        this.authors = res;
+        this.pickRandomAuthors();
+      },
+      error: err => {
+        console.error('Failed to load authors', err);
+      }
+    });
+  }
+
+  pickRandomAuthors() {
+    const shuffled = [...this.authors]
+      .sort(() => 0.5 - Math.random());
+
+    this.displayAuthors = shuffled.slice(0, this.MAX_AUTHORS);
   }
 
   addToCart(bookId: number) {

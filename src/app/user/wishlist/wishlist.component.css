@@ -1,7 +1,37 @@
+/* HERO */
+.shop-hero {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.485), #05360c98),
+     url('src\assets\images\banner\bg4.png') center/cover no-repeat;
+  padding: 80px 60px;
+  border-radius: 20px;
+  margin: 30px;
+}
+.hero-content {
+  max-width: 520px;
+  color: #fff;
+}
+
+.shop-heading{
+  font-size: 64px;
+  font-weight: 800;
+}
+.hero-content h1 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.hero-content p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+
+
 .wishlist-container {
-  padding: 40px;
-  min-height: 100vh;
-  background: var(--color-light);
+  padding: 60px;
+  min-height: 100vh; 
   font-family: var(--font);
 }
 

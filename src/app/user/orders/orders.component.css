@@ -1,62 +1,114 @@
+/* HERO – REUSED EXACT STYLE */
+.order-hero {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.485), #05360c98),
+    url('src/assets/images/banner/bg4.png') center/cover no-repeat;
+  padding: 80px 60px;
+  border-radius: 20px;
+  margin: 30px;
+}
+ 
+.hero-content {
+  max-width: 520px;
+  color: #fff;
+}
+
+.shop-heading{
+  font-size: 64px;
+  font-weight: 800;
+}
+.hero-content h1 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.hero-content p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+
+
+/* PAGE LAYOUT */
 .orders-container {
-  padding: 40px;
-  min-height: 100vh;
-  background: var(--color-light);
+  padding: 40px 60px;
+  min-height: 100vh; 
   font-family: var(--font);
 }
 
-.orders-title {
-  font-size: 2rem;
-  margin-bottom: 25px;
-  color: var(--primary-color);
+.orders-layout {
+  display: flex;
+  justify-content: center;
 }
 
+.orders-content {
+  width: 100%;
+  max-width: 900px;
+}
+
+/* STATES */
 .orders-loading,
 .empty-orders {
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: var(--text-color);
-  margin-top: 40px;
+  margin-top: 60px;
 }
 
+/* ORDER CARD – SHOP STYLE FEEL */
 .order-card {
   background: var(--color-surface);
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 25px;
+  border-radius: 18px;
   box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.order-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+}
+
+/* HEADER */
 .order-header {
   display: flex;
   justify-content: space-between;
-  font-weight: bold;
+  font-weight: 600;
   color: var(--secondary-color);
-  margin-bottom: 10px;
+  margin-bottom: 14px;
 }
 
 .status {
+  padding: 4px 12px;
+  border-radius: 14px;
+  font-size: 13px;
+  background: rgba(53, 79, 82, 0.1);
   color: var(--primary-color);
 }
 
+/* ITEMS */
 .order-items {
   border-top: 1px solid var(--color-border-light);
   margin-top: 10px;
-  padding-top: 10px;
+  padding-top: 12px;
 }
 
 .order-item {
   display: flex;
   justify-content: space-between;
-  padding: 6px 0;
+  padding: 8px 0;
   color: var(--color-dark);
+  font-size: 14px;
 }
 
+/* FOOTER */
 .order-footer {
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
-  font-weight: bold;
+  margin-top: 18px;
+  font-weight: 600;
 }
 
 .total {
@@ -65,5 +117,5 @@
 
 .date {
   color: var(--text-color);
-  font-size: 14px;
+  font-size: 13px;
 }

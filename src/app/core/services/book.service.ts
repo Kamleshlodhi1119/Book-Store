@@ -6,16 +6,18 @@ import { Observable } from 'rxjs';
 export interface Book {
   id: number;
   title: string;
-  author: string;
+  authorName: string;   // ✅ FIX
   price: number;
   isbn: string;
   imageUrl: string;
   stock: number;
 }
 
+
 @Injectable({ providedIn: 'root' })
 export class BookService {
 private api = 'http://localhost:8082/api/books';
+private authorApi = 'http://localhost:8082/api/authors';
 
   constructor(private http: HttpClient) {}
 
@@ -58,4 +60,16 @@ private api = 'http://localhost:8082/api/books';
       {}
     );
   }
+
+filterBooks(params: any) {
+  return this.http.get<any[]>(`${this.api}/filter`, { params });
+}
+
+ getAuthors(): Observable<any[]> {
+    return this.http.get<any[]>(this.authorApi);
+  }
+
+
+
+
 }

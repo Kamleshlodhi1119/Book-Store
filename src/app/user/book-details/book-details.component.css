@@ -19,11 +19,14 @@
   box-shadow: 0 6px 20px rgba(0,0,0,0.08);
 }
 
-.image-section img {
-  width: 100%;
+/* .image-section img {
+  width: 60%;
   border-radius: 10px;
-}
+} */
 
+.book-details-img{
+max-width: 50rem !important;
+}
 .info-section h1 {
   font-size: 28px;
   margin-bottom: 5px;

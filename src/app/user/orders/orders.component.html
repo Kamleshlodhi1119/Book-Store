@@ -1,39 +1,58 @@
 <app-user-header></app-user-header>
+
+<!-- HERO (SAME AS SHOP PAGE – REUSED STYLE) -->
+<section class="order-hero">
+  <div class="hero-content">
+     <span class="shop-heading">MY ORDERS</span> 
+    <p>
+      Track all your purchases, order status, and order history in one place.
+    </p>
+  </div>
+</section>
+
+ 
+
 <section class="orders-container">
 
-  <h2 class="orders-title">My Orders</h2>
+  <div class="orders-layout">
 
-  <div *ngIf="loading" class="orders-loading">
-    Loading orders...
-  </div>
+    <!-- MAIN CONTENT -->
+    <div class="orders-content">
 
-  <div *ngIf="!loading && orders.length === 0" class="empty-orders">
-    You have not placed any orders yet
-  </div>
-
-  <div *ngIf="!loading && orders.length">
-
-    <div class="order-card" *ngFor="let o of orders">
-
-      <div class="order-header">
-        <span>Order #{{ o.id }}</span>
-        <span class="status">{{ o.status }}</span>
+      <div *ngIf="loading" class="orders-loading">
+        Loading orders...
       </div>
 
-      <div class="order-items">
-        <div class="order-item" *ngFor="let i of o.items">
-          <span>{{ i.book.title }}</span>
-          <span>x{{ i.quantity }}</span>
-          <span>₹ {{ i.price }}</span>
+      <div *ngIf="!loading && orders.length === 0" class="empty-orders">
+        You have not placed any orders yet
+      </div>
+
+      <div *ngIf="!loading && orders.length">
+
+        <div class="order-card" *ngFor="let o of orders">
+
+          <div class="order-header">
+            <span>Order #{{ o.id }}</span>
+            <span class="status">{{ o.status }}</span>
+          </div>
+
+          <div class="order-items">
+            <div class="order-item" *ngFor="let i of o.items">
+              <span>{{ i.book.title }}</span>
+              <span>x{{ i.quantity }}</span>
+              <span>₹ {{ i.price }}</span>
+            </div>
+          </div>
+
+          <div class="order-footer">
+            <span class="total">Total: ₹ {{ o.totalAmount }}</span>
+            <span class="date">{{ o.createdAt }}</span>
+          </div>
+
         </div>
-      </div>
 
-      <div class="order-footer">
-        <span class="total">Total: ₹ {{ o.totalAmount }}</span>
-        <span class="date">{{ o.createdAt }}</span>
       </div>
 
     </div>
-
   </div>
-</section> 
+</section>

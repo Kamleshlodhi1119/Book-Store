@@ -1,6 +1,15 @@
 /* TOP BAR */
 .top-bar {
-  background-color: var(--primary-color);
+  position: relative;
+ 
+  border: 20px;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.485), #05360c98),
+    url("src\assets\images\banner\bg5.png") center/cover no-repeat;
+  /* background: url('src\assets\images\banner\bg5.png'); */
+
+  z-index: 1;
+  overflow: hidden;
   color: var(--bg-color);
   padding: 5px 20px;
   display: flex;
@@ -9,7 +18,9 @@
   flex-wrap: wrap;
 }
 .top-bar a {
-  color: var(--bg-color);
+  color: white;
+  font-size: 16px ;
+  font-weight: 800;
   margin: 0 5px;
   text-decoration: none;
 }

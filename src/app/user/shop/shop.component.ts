@@ -4,6 +4,7 @@ import { CartService } from 'src/app/core/services/cart.service';
 import { WishlistService } from 'src/app/core/services/wishlist.service';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-shop',
@@ -14,27 +15,40 @@ export class ShopComponent implements OnInit {
 
   books: any[] = [];
   filtered: any[] = [];
+  authors: any[] = [];
+
   loading = true;
-  searchText = '';
+  maxBookPrice = 0;
+
+  filters = {
+    name: '',
+    author: '',
+    maxPrice: 0
+  };
 
   constructor(
     private bookService: BookService,
     private cartService: CartService,
     private wishlistService: WishlistService,
     private alertService: AlertService,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
     this.loadBooks();
+    this.loadAuthors();
   }
 
   loadBooks() {
     this.loading = true;
+
     this.bookService.getAll().subscribe({
       next: res => {
         this.books = res as any[];
-        this.filtered = this.books;
+        this.filtered = res as any[];
+        this.maxBookPrice = Math.max(...this.books.map(b => b.price));
+        this.filters.maxPrice = this.maxBookPrice;
         this.loading = false;
       },
       error: () => {
@@ -44,13 +58,39 @@ export class ShopComponent implements OnInit {
     });
   }
 
-  search() {
-    const q = this.searchText.toLowerCase();
-    this.filtered = this.books.filter(b =>
-      b.title.toLowerCase().includes(q) ||
-      b.author?.toLowerCase().includes(q)
-    );
+
+loadAuthors() {
+  this.bookService.getAuthors().subscribe({
+    next: res => this.authors = res,
+    error: () => this.alertService.show('Failed to load authors', 'error')
+  });
+}
+
+
+applyFilters() {
+
+  const params: any = {};
+
+  if (this.filters.name?.trim()) {
+    params.name = this.filters.name.trim();
   }
+
+  if (this.filters.author) {
+    params.author = this.filters.author;
+  }
+
+  if (this.filters.maxPrice > 0) {
+    params.maxPrice = this.filters.maxPrice;
+  }
+
+  console.log('FILTER PARAMS 👉', params); // 🔥 IMPORTANT
+
+  this.bookService.filterBooks(params).subscribe({
+    next: res => this.filtered = res,
+    error: err => console.error('Filter error', err)
+  });
+}
+
 
   addToCart(bookId: number) {
     this.cartService.add({ bookId, quantity: 1 }).subscribe({
@@ -67,7 +107,6 @@ export class ShopComponent implements OnInit {
   }
 
   viewBook(id: number) {
-  this.router.navigate(['/book-details', id]);
-}
-
+    this.router.navigate(['/book-details', id]);
+  }
 }
