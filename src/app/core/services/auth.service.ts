@@ -20,8 +20,11 @@ export class AuthService {
   }
 
   register(data: any): Observable<any> {
-    return this.http.post(`${this.api}/register`, data);
+    return this.http.post(`${this.api}/register`,  data, { 
+    responseType: 'text' 
+  });
   }
+
 
   me(): Observable<any> {
     return this.http.get(`${this.api}/me`);

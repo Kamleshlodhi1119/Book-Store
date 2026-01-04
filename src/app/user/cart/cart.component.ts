@@ -56,22 +56,44 @@ export class CartComponent implements OnInit {
   }
 
   remove(bookId: number): void {
-    this.cartService.remove(bookId).subscribe(() => {
-      this.alert.show('Item removed', 'success');
-      this.loadCart();
+    // Handling text response and error block
+    this.cartService.remove(bookId).subscribe({
+      next: () => {
+        this.alert.show('Item removed from cart', 'success');
+        this.loadCart();
+      },
+      error: (err) => {
+        // If your service doesn't have responseType: 'text', 
+        // we check if it's actually a successful deletion
+        if (err.status === 200) {
+          this.alert.show('Item removed', 'success');
+          this.loadCart();
+        } else {
+          this.alert.show('Could not remove item', 'error');
+        }
+      }
     });
   }
 
   clearCart(): void {
-    this.cartService.clear().subscribe(() => {
-      this.alert.show('Cart cleared', 'success');
-      this.loadCart();
+    this.cartService.clear().subscribe({
+      next: () => {
+        this.alert.show('Cart cleared successfully', 'success');
+        this.loadCart();
+      },
+      error: () => {
+        this.alert.show('Failed to clear cart', 'error');
+      }
     });
   }
 
   // payment
   openPayment(): void {
-    this.showPayment = true;
+    if (this.cart?.items?.length > 0) {
+      this.showPayment = true;
+    } else {
+      this.alert.show('Your cart is empty', 'error');
+    }
   }
 
   closePayment(): void {
@@ -81,6 +103,6 @@ export class CartComponent implements OnInit {
   confirmPayment(method: string): void {
     this.alert.show(`Payment successful via ${method}`, 'success');
     this.showPayment = false;
-    this.clearCart(); // optional
+    this.clearCart(); 
   }
 }

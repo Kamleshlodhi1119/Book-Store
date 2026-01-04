@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { AlertService } from 'src/app/core/services/alert.service'; // Added
 
 export interface Book {
   id: number;
@@ -29,13 +30,13 @@ export class AdminBooksComponent implements OnInit {
 
   showModal = false;
   isEdit = false;
-  isDelete = false;  // New flag for delete modal
+  isDelete = false;  
 
   book: Partial<Book> = {};
   selectedFile: File | null = null;
   previewUrl: string | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private alertService: AlertService) {} // Added AlertService
 
   ngOnInit(): void {
     this.load();
@@ -43,11 +44,14 @@ export class AdminBooksComponent implements OnInit {
 
   load(): void {
     this.http.get<Book[]>(this.publicApi + "/byadmin")
-      .subscribe(res => {
-        this.books = res.map(b => ({
-          ...b,
-          imageTimestamp: new Date().getTime() // initial timestamp
-        }));
+      .subscribe({
+        next: (res) => {
+          this.books = res.map(b => ({
+            ...b,
+            imageTimestamp: new Date().getTime() 
+          }));
+        },
+        error: () => this.alertService.show('Error loading books', 'error')
       });
   }
 
@@ -66,7 +70,6 @@ export class AdminBooksComponent implements OnInit {
     this.showModal = true;
   }
 
-  // --- NEW: Open delete modal ---
   openDelete(b: Book): void {
     this.isDelete = true;
     this.isEdit = false;
@@ -97,10 +100,14 @@ export class AdminBooksComponent implements OnInit {
       ? this.http.put<Book>(`${this.api}/${this.book.id}`, bookData)
       : this.http.post<Book>(this.api, bookData);
 
-    request.subscribe(savedBook => {
-      if (this.selectedFile && savedBook.id) this.uploadImage(savedBook.id);
-      this.closeModal();
-      this.load();
+    request.subscribe({
+      next: (savedBook) => {
+        if (this.selectedFile && savedBook.id) this.uploadImage(savedBook.id);
+        this.alertService.show('Book saved successfully', 'success');
+        this.closeModal();
+        this.load();
+      },
+      error: () => this.alertService.show('Error saving book', 'error')
     });
   }
 
@@ -108,22 +115,23 @@ export class AdminBooksComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', this.selectedFile!, `${bookId}.png`);
 
-    this.http.post(
-      `${this.api}/${bookId}/image`,
-      formData
-    ).subscribe();
+    this.http.post(`${this.api}/${bookId}/image`, formData, { responseType: 'text' })
+      .subscribe({
+        next: () => this.alertService.show('Image uploaded', 'success'),
+        error: () => this.alertService.show('Image upload failed', 'error')
+      });
   }
 
-  // toggleStatus(id: number, active: boolean): void {
-  //   this.http.put(`${this.api}/${id}/status?active=${!active}`, {})
-  //     .subscribe(() => this.load());
-  // }
-
   toggleStatus(id: number, active: boolean): void {
-  this.http.put(`${this.api}/${id}/status?active=${!active}`, {}, { responseType: 'text' })
-    .subscribe(() => this.load());
-}
-
+    this.http.put(`${this.api}/${id}/status?active=${!active}`, {}, { responseType: 'text' })
+      .subscribe({
+        next: () => {
+          this.alertService.show('Status updated', 'success');
+          this.load();
+        },
+        error: () => this.alertService.show('Failed to update status', 'error')
+      });
+  }
 
   closeModal(): void {
     this.showModal = false;
@@ -158,17 +166,20 @@ export class AdminBooksComponent implements OnInit {
     img.src = 'assets/book-placeholder.png';
   }
 
-  // --- ADD BOOK METHODS ---
   addBook(): void {
     if (!this.book.title || !this.book.authorName) return;
 
     const bookData = { ...this.book };
     delete bookData.imageUrl;
 
-    this.http.post<Book>(this.api, bookData).subscribe(savedBook => {
-      if (this.selectedFile && savedBook.id) this.uploadImage(savedBook.id);
-      this.cancelAdd();
-      this.load();
+    this.http.post<Book>(this.api, bookData).subscribe({
+      next: (savedBook) => {
+        if (this.selectedFile && savedBook.id) this.uploadImage(savedBook.id);
+        this.alertService.show('Book added', 'success');
+        this.cancelAdd();
+        this.load();
+      },
+      error: () => this.alertService.show('Failed to add book', 'error')
     });
   }
 
@@ -177,13 +188,16 @@ export class AdminBooksComponent implements OnInit {
     this.resetForm();
   }
 
-  // --- DELETE BOOK METHOD ---
   deleteBook(): void {
     if (!this.book.id) return;
 
-    this.http.delete(`${this.api}/${this.book.id}`).subscribe(() => {
-      this.closeModal();
-      this.load();
+    this.http.delete(`${this.api}/${this.book.id}`, { responseType: 'text' }).subscribe({
+      next: () => {
+        this.alertService.show('Book deleted', 'success');
+        this.closeModal();
+        this.load();
+      },
+      error: () => this.alertService.show('Delete failed', 'error')
     });
   }
 }
