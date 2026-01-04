@@ -2,104 +2,93 @@
 
 <section class="details-container">
 
-  <!-- LOADING -->
   <div *ngIf="loading" class="details-loading">
     Loading book details...
   </div>
 
-  <!-- BOOK DETAILS -->
-  <div *ngIf="!loading && book" class="details-card">
+  <ng-container *ngIf="!loading && book">
 
-    <!-- IMAGE -->
-    <img [src]="book.imageUrl
-                ? 'http://localhost:8082/api/books/' + book.id + '/image'
-                : 'assets/book-placeholder.png'" alt="{{ book.title }}" 
-                class="book-details-img"/>
-
-  </div>
-
-  <!-- INFO -->
-  <div class="info-section">
-
-    <h1>{{ book.title }}</h1>
-    <p class="author">by {{ book.authorName }}</p>
-
-    <p class="price">₹ {{ book.price }}</p>
-
-    <p class="stock" *ngIf="book.stockQuantity > 0">
-      In Stock ({{ book.stockQuantity }} available)
-    </p>
-
-    <p class="stock out" *ngIf="book.stockQuantity === 0">
-      Out of Stock
-    </p>
-
-    <p class="description">
-      {{ book.description }}
-    </p>
-
-    <!-- ACTIONS -->
-    <div class="actions">
-      <button class="btn primary" (click)="addToCart()" [disabled]="book.stockQuantity === 0">
-        Add to Cart
-      </button>
-
-      <button class="btn secondary" (click)="addToWishlist()">
-        Add to Wishlist
-      </button>
+    <div class="details-card">
+      <img
+        class="book-details-img"
+        [src]="book.imageUrl
+          ? 'http://localhost:8082/api/books/' + book.id + '/image'
+          : 'assets/book-placeholder.png'"
+        [alt]="book.title"
+      />
     </div>
 
-    <!-- AVERAGE RATING -->
-    <div class="average-rating">
-      ⭐ {{ book.averageRating || 0 }} / 5
-    </div>
+    <div class="info-section">
 
-    <!-- ADD REVIEW -->
-    <div class="rating-box">
+      <h1>{{ book.title }}</h1>
+      <p class="author">by {{ book.authorName }}</p>
+      <p class="price">₹ {{ book.price }}</p>
 
-      <h3>Rate this Book</h3>
+      <p class="stock" *ngIf="book.stockQuantity > 0">
+        In Stock ({{ book.stockQuantity }} available)
+      </p>
 
-      <div *ngIf="!isLoggedIn" class="disabled-note">
-        Login to add rating and review.
-      </div>
+      <p class="stock out" *ngIf="book.stockQuantity === 0">
+        Out of Stock
+      </p>
 
-      <div *ngIf="isLoggedIn">
+      <p class="description">{{ book.description }}</p>
 
-        <label>Rating</label>
-        <!-- <select [(ngModel)]="rating">
-          <option value="0">Select Rating</option>
-          <option *ngFor="let r of [1,2,3,4,5]" [value]="r">
-            {{ r }}
-          </option>
-        </select> -->
-
-        <label>Comment</label>
-        <textarea [(ngModel)]="comment"></textarea>
-
-        <button class="btn primary" (click)="submitRating()">
-          Submit Review
+      <!-- ACTIONS -->
+      <div class="actions">
+        <button class="btn primary" (click)="addToCart()"
+                [disabled]="book.stockQuantity === 0">
+          Add to Cart
         </button>
+        <button class="btn secondary" (click)="addToWishlist()">
+          Add to Wishlist
+        </button>
+      </div>
 
+      <!-- AVERAGE RATING -->
+      <div class="average-rating">
+        ⭐ {{ book.averageRating || 0 }} / 5
+      </div>
+
+      <!-- ADD REVIEW -->
+      <div class="rating-box">
+        <h3>Rate this Book</h3>
+
+        <div *ngIf="!isLoggedIn" class="disabled-note">
+          Login to add rating and review.
+        </div>
+
+        <div *ngIf="isLoggedIn">
+          <select [(ngModel)]="rating">
+            <option [value]="0">Select Stars</option>
+            <option *ngFor="let r of [1,2,3,4,5]" [value]="r">
+              {{ r }} ⭐
+            </option>
+          </select>
+
+          <textarea [(ngModel)]="comment"></textarea>
+
+          <button (click)="submitRating()">Submit Review</button>
+        </div>
+      </div>
+
+      <!-- REVIEWS -->
+      <div class="reviews">
+        <h3>User Reviews</h3>
+
+        <div *ngIf="!book.ratings || book.ratings.length === 0">
+          No reviews yet.
+        </div>
+
+        <div *ngFor="let r of book.ratings">
+          <strong>{{ r.username }}</strong>
+          <span>⭐ {{ r.rating }}/5</span>
+          <p>{{ r.comment }}</p>
+        </div>
       </div>
 
     </div>
 
-    <!-- ALL REVIEWS -->
-    <div class="reviews">
-      <h3>User Reviews</h3>
+  </ng-container>
 
-      <div *ngIf="!book.ratings || book.ratings.length === 0">
-        No reviews yet.
-      </div>
-
-      <div class="review" *ngFor="let r of book.ratings">
-        <strong>{{ r.username }}</strong>
-        <span>⭐ {{ r.rating }}/5</span>
-        <p>{{ r.comment }}</p>
-      </div>
-
-    </div>
-
-  </div>
-  <!-- </div> -->
 </section>

@@ -1,23 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
 export interface Book {
   id: number;
   title: string;
-  authorName: string;   // ✅ FIX
+  authorName: string;
   price: number;
   isbn: string;
   imageUrl: string;
-  stock: number;
+  stockQuantity: number;
+  ratings?: any[];
+  averageRating?: number;
 }
-
 
 @Injectable({ providedIn: 'root' })
 export class BookService {
-private api = 'http://localhost:8082/api/books';
-private authorApi = 'http://localhost:8082/api/authors';
+
+  private api = 'http://localhost:8082/api/books';
+  private authorApi = 'http://localhost:8082/api/authors';
 
   constructor(private http: HttpClient) {}
 
@@ -25,10 +26,6 @@ private authorApi = 'http://localhost:8082/api/authors';
     return this.http.get<Book[]>(this.api);
   }
 
-  getAllbyAdmin(): Observable<Book[]> {
-    return this.http.get<Book[]>(this.api+" /byadmin");
-  }
- 
   getById(id: number): Observable<Book> {
     return this.http.get<Book>(`${this.api}/${id}`);
   }
@@ -45,31 +42,19 @@ private authorApi = 'http://localhost:8082/api/authors';
     return this.http.get<Book[]>(`${this.api}/top-rated`);
   }
 
-
-
-
-  addRating(
-    bookId: number,
-    rating: number,
-    comment: string,
-    username: string
-  ) {
+  addRating(bookId: number, rating: number, comment: string, username: string) {
     return this.http.post(
-      `${this.api}/${bookId}/rating` +
-      `?rating=${rating}&comment=${encodeURIComponent(comment)}&username=${username}`,
-      {}
+      `${this.api}/${bookId}/rating?rating=${rating}&comment=${encodeURIComponent(comment)}&username=${username}`,
+      {},
+      { responseType: 'text' }
     );
   }
 
-filterBooks(params: any) {
-  return this.http.get<any[]>(`${this.api}/filter`, { params });
-}
-
- getAuthors(): Observable<any[]> {
-    return this.http.get<any[]>(this.authorApi);
+  filterBooks(params: any) {
+    return this.http.get<Book[]>(`${this.api}/filter`, { params });
   }
 
-
-
-
+  getAuthors(): Observable<any[]> {
+    return this.http.get<any[]>(this.authorApi);
+  }
 }

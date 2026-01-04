@@ -11,7 +11,7 @@ import { AlertService } from 'src/app/core/services/alert.service'; // Added
 export class AdminOrdersComponent implements OnInit {
 
   orders: any[] = [];
-  api = environment.apiUrl + '/api/admin/orders';
+  api = environment.apiUrl + '/admin/orders';
 
   constructor(
     private http: HttpClient, 

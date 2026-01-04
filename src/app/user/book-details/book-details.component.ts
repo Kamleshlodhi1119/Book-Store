@@ -4,7 +4,7 @@ import { BookService } from 'src/app/core/services/book.service';
 import { CartService } from 'src/app/core/services/cart.service';
 import { WishlistService } from 'src/app/core/services/wishlist.service';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { AlertService } from 'src/app/core/services/alert.service'; // Added
+import { AlertService } from 'src/app/core/services/alert.service';
 
 @Component({
   selector: 'app-book-details',
@@ -13,15 +13,13 @@ import { AlertService } from 'src/app/core/services/alert.service'; // Added
 })
 export class BookDetailsComponent implements OnInit {
 
-  book: any;
+  book: any = null;
   loading = true;
 
-  // rating form
   rating = 0;
   comment = '';
 
   isLoggedIn = false;
-  username: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,16 +27,17 @@ export class BookDetailsComponent implements OnInit {
     private cartService: CartService,
     private wishlistService: WishlistService,
     private authService: AuthService,
-    private alertService: AlertService // Injected
+    private alertService: AlertService
   ) {}
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.isLoggedIn = this.authService.isLoggedIn();
-    this.username = localStorage.getItem('email');
 
     if (id) {
       this.loadBook(id);
+    } else {
+      this.loading = false;
     }
   }
 
@@ -57,22 +56,23 @@ export class BookDetailsComponent implements OnInit {
   }
 
   addToCart() {
-    // Handling text response for Cart
+    if (!this.book) return;
+
     this.cartService.add({ bookId: this.book.id, quantity: 1 }).subscribe({
       next: () => this.alertService.show('Added to cart', 'success'),
-      error: (err) => {
-        // Checking if the error is actually just a plain text success message
+      error: err => {
         if (err.status === 200) {
-           this.alertService.show('Added to cart', 'success');
+          this.alertService.show('Added to cart', 'success');
         } else {
-           this.alertService.show('Failed to add to cart', 'error');
+          this.alertService.show('Failed to add to cart', 'error');
         }
       }
     });
   }
 
   addToWishlist() {
-    // Handling text response for Wishlist
+    if (!this.book) return;
+
     this.wishlistService.add(this.book.id).subscribe({
       next: () => this.alertService.show('Added to wishlist', 'success'),
       error: () => this.alertService.show('Failed to add to wishlist', 'error')
@@ -84,10 +84,13 @@ export class BookDetailsComponent implements OnInit {
       this.alertService.show('Please login to submit a rating', 'error');
       return;
     }
+
     if (this.rating === 0) {
       this.alertService.show('Please select a star rating', 'error');
       return;
     }
+
+    if (!this.book) return;
 
     const email = localStorage.getItem('email');
     if (!email) return;
@@ -102,7 +105,7 @@ export class BookDetailsComponent implements OnInit {
         this.alertService.show('Rating submitted successfully', 'success');
         this.rating = 0;
         this.comment = '';
-        this.loadBook(this.book.id); // Refresh data
+        this.loadBook(this.book.id);
       },
       error: () => this.alertService.show('Failed to submit rating', 'error')
     });
