@@ -235,12 +235,3 @@ This project is developed for **academic and learning purposes**.
 You are free to extend and modify it for educational use.
 
 ---
-
-If you want, next I can:
-
-* Create **separate README for backend & frontend**
-* Add **API table format**
-* Add **architecture & ER diagrams**
-* Convert this into **University / IEEE project format**
-
-Just tell me 👍
