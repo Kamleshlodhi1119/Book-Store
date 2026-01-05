@@ -22,14 +22,20 @@ const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+   { path: 'home', component: UserHomeComponent},
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
+  { path: 'wishlist', component: WishlistComponent , canActivate: [AuthGuard]},
+  { path: 'shop', component: ShopComponent},
+  { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
+  { path: 'book-details/:id', component: BookDetailsComponent },
 
   // USER
-  { path: 'home', component: UserHomeComponent, canActivate: [AuthGuard] },
-  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
-  { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] },
-  { path: 'shop', component: ShopComponent, canActivate: [AuthGuard] },
-  { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
-  { path: 'book-details/:id', component: BookDetailsComponent, canActivate: [AuthGuard] },
+  // { path: 'home', component: UserHomeComponent, canActivate: [AuthGuard] },
+  // { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
+  // { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] },
+  // { path: 'shop', component: ShopComponent, canActivate: [AuthGuard] },
+  // { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
+  // { path: 'book-details/:id', component: BookDetailsComponent, canActivate: [AuthGuard] },
 
   // ADMIN
   {
