@@ -1,11 +1,3 @@
-Below is a **clean, professional, GitHub-ready `README.md`** rewritten from your provided content.
-It is **concise, structured, and developer-friendly**, while still reflecting the academic depth of your project.
-You can **directly copy–paste** this into your GitHub repository.
-
-(Information sourced and refined from your project document )
-
----
-
 # 📚 BookStore – Full Stack E-Commerce Application
 
 A secure, scalable, and role-based **Online BookStore** application built using **Spring Boot (Backend)** and **Angular (Frontend)**.
