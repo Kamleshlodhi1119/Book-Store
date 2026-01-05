@@ -1,27 +1,246 @@
-# Bookstore
+Below is a **clean, professional, GitHub-ready `README.md`** rewritten from your provided content.
+It is **concise, structured, and developer-friendly**, while still reflecting the academic depth of your project.
+You can **directly copy–paste** this into your GitHub repository.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.11.
+(Information sourced and refined from your project document )
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+# 📚 BookStore – Full Stack E-Commerce Application
 
-## Code scaffolding
+A secure, scalable, and role-based **Online BookStore** application built using **Spring Boot (Backend)** and **Angular (Frontend)**.
+The system supports complete e-commerce functionality with **JWT authentication**, **ADMIN / USER roles**, and a **layered architecture** suitable for academic and real-world use.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## 🚀 Project Overview
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+The BookStore application enables users to browse books, manage carts, place orders, and track purchases, while administrators can manage users, books, and orders through secure APIs.
 
-## Running unit tests
+The project follows modern software engineering practices including:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+* RESTful API design
+* JWT-based authentication & authorization
+* Modular frontend architecture
+* Layered backend architecture
 
-## Running end-to-end tests
+---
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## 🛠️ Technology Stack
 
-## Further help
+### Backend
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+* **Java 17**
+* **Spring Boot**
+* **Spring Security (JWT)**
+* **JPA / Hibernate**
+* **H2 (Dev) / MySQL (Prod)**
+* **Maven**
+
+### Frontend
+
+* **Angular 15**
+* **TypeScript**
+* **HTML5 / CSS3**
+* **Angular Services, Guards & Interceptors**
+
+### Tools
+
+* Postman
+* Git & GitHub
+* IntelliJ IDEA / Eclipse
+* Visual Studio Code
+
+---
+
+## 🔐 Security Features
+
+* JWT-based stateless authentication
+* Role-based authorization (`USER`, `ADMIN`)
+* Protected REST endpoints
+* Secure password handling
+* HTTP interceptor for token attachment
+
+---
+
+## 👥 User Roles
+
+### USER
+
+* Register & Login
+* Browse books
+* Add to cart & wishlist
+* Place orders
+* View order history
+
+### ADMIN
+
+* Admin login
+* Dashboard analytics
+* Manage users & roles
+* Manage books
+* View all orders
+
+---
+
+## 🧩 Core Modules
+
+### Customer Module
+
+* Login & Registration
+* Home & Shop
+* Cart Management
+* Wishlist
+* Order Placement
+* Payment (Mock)
+* Order History
+
+### Admin Module
+
+* Admin Login
+* Dashboard
+* Manage Users
+* Manage Books
+* View All Orders
+
+---
+
+## 🏗️ System Architecture
+
+The application follows a **3-Tier Layered Architecture**:
+
+1. **Presentation Layer**
+   Angular SPA handling UI, routing, validation, and API calls.
+
+2. **Application Layer**
+   Spring Boot REST controllers, services, and security logic.
+
+3. **Data Layer**
+   JPA entities, repositories, relational database.
+
+All communication is **RESTful** and **stateless**.
+
+---
+
+## 🗄️ Database Design
+
+### Main Entities
+
+* User
+* Role
+* Book
+* Cart
+* CartItem
+* Order
+* OrderItem
+
+### Relationships
+
+* One User → One Cart
+* One Cart → Many CartItems
+* One User → Many Orders
+* One Order → Many OrderItems
+
+Database is normalized up to **3NF** with proper constraints.
+
+---
+
+## 🌐 API Highlights
+
+### Authentication
+
+* `POST /api/auth/register`
+* `POST /api/auth/login`
+
+### Books
+
+* `GET /api/books`
+* `POST /api/books` (ADMIN)
+* `PUT /api/books/{id}` (ADMIN)
+* `DELETE /api/books/{id}` (ADMIN)
+
+### Cart
+
+* `POST /api/cart/add`
+* `GET /api/cart`
+* `PUT /api/cart/update`
+* `DELETE /api/cart/remove/{bookId}`
+
+### Orders
+
+* `POST /api/orders`
+* `GET /api/orders/my`
+* `GET /api/orders/all` (ADMIN)
+
+---
+
+## 🧪 Testing Strategy
+
+* Unit Testing (Services & Repositories)
+* Integration Testing (API flows)
+* System Testing (End-to-End)
+* Security Testing (JWT & RBAC)
+* Manual UI Testing
+
+---
+
+## ⚙️ Setup Instructions
+
+### Backend
+
+```bash
+cd backend
+mvn clean install
+mvn spring-boot:run
+```
+
+Runs on: `http://localhost:8082`
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+ng serve
+```
+
+Runs on: `http://localhost:4200`
+
+---
+
+## 📌 Key Highlights
+
+* Clean separation of concerns
+* Scalable & maintainable architecture
+* Secure authentication & authorization
+* Real-world e-commerce workflow
+* Academic + industry ready
+
+---
+
+## 📖 References
+
+* Ian Sommerville – *Software Engineering*
+* Craig Walls – *Spring in Action*
+* Angular Official Documentation
+* Spring Boot Reference Guide
+* OWASP Top 10
+* JWT Official Docs
+
+---
+
+## 📜 License
+
+This project is developed for **academic and learning purposes**.
+You are free to extend and modify it for educational use.
+
+---
+
+If you want, next I can:
+
+* Create **separate README for backend & frontend**
+* Add **API table format**
+* Add **architecture & ER diagrams**
+* Convert this into **University / IEEE project format**
+
+Just tell me 👍
