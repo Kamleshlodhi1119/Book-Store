@@ -80,7 +80,14 @@
   padding: 10px 16px;
   border-radius: 6px;
 }
-
+.book-preview-section{
+  display: flex;
+  flex-direction: row;
+   gap: 20px;
+}
+.logo-book-preview-img{
+  max-width: 70px !important;
+}
 
 
 /* MODAL */

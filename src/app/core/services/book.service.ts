@@ -42,14 +42,30 @@ export class BookService {
     return this.http.get<Book[]>(`${this.api}/top-rated`);
   }
 
-  addRating(bookId: number, rating: number, comment: string, username: string) {
-    return this.http.post(
-      `${this.api}/${bookId}/rating?rating=${rating}&comment=${encodeURIComponent(comment)}&username=${username}`,
-      {},
-      { responseType: 'text' }
-    );
-  }
+addRating(bookId: number, rating: number, comment: string, username: string) {
+  const token = localStorage.getItem('token');
+  
+  return this.http.post(`${this.api}/${bookId}/rating`, 
+    { rating, comment, username }, // 'username' is now just a placeholder
+    {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    }
+  );
+}
 
+
+deleteRating(bookId: number): Observable<any> {
+  const token = localStorage.getItem('token');
+  return this.http.delete(`${this.api}/${bookId}/rating`, {
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+}
+
+getRatingsForBook(bookId: number): Observable<any[]> {
+  return this.http.get<any[]>(`${this.api}/${bookId}/ratings`);
+}
   filterBooks(params: any) {
     return this.http.get<Book[]>(`${this.api}/filter`, { params });
   }

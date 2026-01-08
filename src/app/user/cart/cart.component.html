@@ -4,9 +4,9 @@
 <!-- HERO (SAME AS SHOP PAGE – REUSED STYLE) -->
 <section class="cart-hero">
   <div class="hero-content">
-    
-     <span class="shop-heading">MY Cart</span> 
- 
+
+    <span class="shop-heading">MY Cart</span>
+
     <p>
       Track all your purchases, order status, and order history in one place.
     </p>
@@ -29,16 +29,31 @@
 
     <div class="cart-item" *ngFor="let i of cart.items">
       <div class="item-info">
-        <h3>{{ i.book.title }}</h3>
-        <p class="price">₹ {{ i.book.price }}</p>
-        <p class="qty">Quantity: {{ i.quantity }}</p>
-      </div>
 
+        <div class="book-preview-section">
+          <div>
+            <img class="logo-book-preview-img"
+              [src]="i.imageUrl ? 'http://localhost:8082/api/books/' + i.id + '/image' : 'assets/book-placeholder.png'"
+              [alt]="i.title" />
+          </div>
+          <div>
+            <h3>{{ i.book.title }}</h3>
+            <p class="price">₹ {{ i.book.price }}</p>
+            <div class="quantity-controls">
+              <button class="qty-btn" (click)="updateQuantity(i.book.id, i.quantity - 1)"
+                [disabled]="i.quantity <= 1">-</button>
+
+              <span class="qty-value">{{ i.quantity }}</span>
+
+              <button class="qty-btn" (click)="updateQuantity(i.book.id, i.quantity + 1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <button class="remove-btn" (click)="remove(i.book.id)">
         Remove
       </button>
     </div>
-
     <div class="cart-footer">
       <div class="total">
         Subtotal: ₹ {{ subtotal }}
@@ -50,7 +65,7 @@
         </button>
 
         <button class="pay-btn" (click)="openPayment()">
-          Pay
+          Place Order Now
         </button>
       </div>
     </div>
@@ -71,4 +86,4 @@
     <button class="close-btn" (click)="closePayment()">Cancel</button>
 
   </div>
-</div> 
+</div>

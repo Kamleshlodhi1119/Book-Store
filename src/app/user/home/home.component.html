@@ -1,99 +1,65 @@
 <app-user-header></app-user-header>
-<!-- <app-header></app-header> -->
-
-<!-- ======================================================
-                     HERO SECTION
-====================================================== -->
 
 <section class="hero">
   <div class="container hero-center">
-    <span class="hero-tag">IT’S AVAILABLE ON KINDLE PUBLISHING</span>
+    <span class="hero-tag">FEATURED RELEASE OF THE MONTH</span>
     <h1 class="hero-title">
       The Man In The<br />Glass House
     </h1>
     <p class="hero-sub">
-      A guide to inspiring your self-belief
+      A masterpiece on self-belief and the power of human resilience.
     </p>
-    <p class="hero-sub">Explore thousands of books across genres — curated, reviewed, and loved by readers worldwide.
+    <p class="hero-sub">
+      Explore thousands of hand-picked titles across all genres-curated for the true bibliophile.
     </p>
 
     <button class="btn btn--primary">Buy Now</button>
-
-    <p class="hero-note">* Available in PDF, EPUB & Kindle</p>
+    <p class="hero-note">* Available in Premium Hardcover, EPUB & Kindle</p>
   </div>
 </section>
 
-
-
-<!-- ======================================================
-                  SHOP BY CATEGORY
-====================================================== -->
 <section class="category-section">
-  <pre>
-
-    
-  </pre>
-  <h2 class="section-title">View by Authors</h2>
-  <span class="hero-tag">IT’S AVAILABLE ON KINDLE PUBLISHING</span>
-
-  <pre>
-
-
-</pre>
+  <pre></pre>
+  <h2 class="section-title">Meet the Authors</h2>
+  <span class="hero-tag">THE BRILLIANT MINDS BEHIND THE STORIES</span>
+  <pre></pre>
+  
   <div class="category-grid">
-
-  <div
-    class="category-card"
-    *ngFor="let author of displayAuthors"
-  ><a routerLink="/shop"> 
-    <img src="../../../assets/images/icon/Author.png">
-    <pre> </pre>
-    <h3>{{ author.name }}</h3></a>
+    <div class="category-card" *ngFor="let author of displayAuthors">
+      <a routerLink="/shop"> 
+        <img src="../../../assets/images/icon/Author.png"> </a>
+        <pre> </pre>
+        <h3>{{ author.name }}</h3>
+     
+    </div>
   </div>
-</div>
-
-
 </section>
 
-
-
-<!-- ======================================================
-                STATIC ANNOUNCEMENT BAR
-====================================================== -->
 <div class="announcement-bar">
   <span class="highlight">Free Shipping</span>
   <span class="divider">|</span>
   On orders above ₹999
   <span class="divider">|</span>
-  <span class="highlight2">New Releases Every Week</span>
+  <span class="highlight2">New Arrivals Every Monday</span>
   <span class="divider">|</span>
-  <span class="highlight">Free Shipping</span>
+  <span class="highlight">Pan India Delivery</span>
   <span class="divider">|</span>
-  <span class="highlight2">Best & Premium Stocks</span>
+  <span class="highlight2">100% Collector's Editions</span>
 </div>
 
-
-<!-- ======================================================
-                  TRENDING BOOK SLIDER
-====================================================== -->
-
 <section class="book-slider-section">
-  <h2 class="section-title">All Books</h2>
-  <span class="hero-tag">IT’S AVAILABLE ON KINDLE PUBLISHING</span>
- 
+  <h2 class="section-title">Our Collection</h2>
+  <span class="hero-tag">DISCOVER GENUINE COPIES FROM GLOBAL PUBLISHERS</span>
 </section>
 
 <div class="product-grid">
-  <div class="book-card" *ngFor="let product of books">
-
+  <div class="book-card" *ngFor="let product of books | slice:0:8">
     <div class="image-container">
-      <!-- fallback image if backend image not present -->
-          <img
-  [src]="product.imageUrl
-    ? 'http://localhost:8082/api/books/' + product.id + '/image'
-    : 'assets/book-placeholder.png'"
-  alt="{{ product.title }}"
-/>
+      <img [src]="product.imageUrl
+        ? 'http://localhost:8082/api/books/' + product.id + '/image'
+        : 'assets/book-placeholder.png'"
+        alt="{{ product.title }}" />
+      
       <div class="overlay">
         <abbr title="View Book">
           <button class="icon-btn" (click)="viewBook(product.id)">
@@ -114,13 +80,22 @@
         </abbr>
       </div>
     </div>
-
     <h3>{{ product.title }}</h3>
     <p class="price">₹ {{ product.price }}</p>
-
   </div>
 </div>
 
+<div class="announcement-bar">
+  <span class="highlight">Secure Packaging</span>
+  <span class="divider">|</span>
+  Hassle-free Returns
+  <span class="divider">|</span>
+  <span class="highlight2">Member Discounts Available</span>
+  <span class="divider">|</span>
+  <span class="highlight">Eco-friendly Prints</span>
+  <span class="divider">|</span>
+  <span class="highlight2">Verified Author Signed Stocks</span>
+</div>
 
 <section class="book-section">
   <div class="Book-product-placeholder">
@@ -129,152 +104,77 @@
     </div>
   </div>
   <div class="book-right">
-    <p class="hero-tag">Famouse Book</p>
+    <p class="hero-tag">EDITOR'S CHOICE</p>
     <h2 class="Famouse-book-title">The Artist’s Way</h2>
     <p class="hero-sub">
-      A classic guide to unlocking creativity and overcoming artistic blocks.<br />
-      This book helps you reconnect with your inner artist and build a
-      sustainable creative practice.
+      The definitive guide to unlocking creativity and overcoming artistic blocks.<br />
+      Used by millions to build a sustainable and inspired creative practice.
     </p>
-    <button class="btn">Read More</button>
+    <button class="btn">Read Preview</button>
   </div>
 </section>
 
-
-
-<!-- ======================================================
-                STATIC ANNOUNCEMENT BAR
-====================================================== -->
-<div class="announcement-bar">
-  <span class="highlight">Free Shipping</span>
-  <span class="divider">|</span>
-  On orders above ₹999
-  <span class="divider">|</span>
-  <span class="highlight2">New Releases Every Week</span>
-  <span class="divider">|</span>
-  <span class="highlight">Free Shipping</span>
-  <span class="divider">|</span>
-  <span class="highlight2">Best & Premium Stocks</span>
-</div>
-
-
-<section class="book-section">
-  <div class="book-left">
-    <p class="hero-tag">Famouse Book</p>
-    <h2 class="Famouse-book-title">The Artist’s Way</h2>
-    <p class="hero-sub">
-      A classic guide to unlocking creativity and overcoming artistic blocks.<br />
-      This book helps you reconnect with your inner artist and build a
-      sustainable creative practice.
-    </p>
-    <button class="btn">Read More</button>
-  </div>
-
-  <div class="book-secondary-section ">
-    <div class="feature-quotes">
-      <span>Julia Cameron :</span>
-      <span class="hero-sub">
-        <p class="quotes-section">
-          When we move out on faith into the act of creation, the universe is able to advance.</p>
-      </span>
+<section class="cta-banner">
+  <div class="cta-container">
+    <span class="cta-tag">THE BIBLIOPHILE'S PROMISE</span>
+    <h1 class="cta-title">Discover Your Next Great Read</h1>
+    
+    <div class="cta-content">
+      <p class="cta-sub">100% Genuine Editions & Curated Genres</p>
+      <p class="cta-description">
+        We believe in the soul of a physical book. From leather-bound classics to the latest 
+        contemporary bestsellers, our library is hand-picked for the highest quality.
+      </p>
     </div>
-  </div>
 
+    <div class="cta-actions">
+      <button class="btn-cta-primary">Browse Collection</button>
+      <button class="btn-cta-outline">Join the Book Club</button>
+    </div>
+    <p class="cta-note">* Certified Authentic Prints & Digital Rights Management</p>
+  </div>
 </section>
 
-
-<!-- ======================================================
-                STATIC ANNOUNCEMENT BAR
-====================================================== -->
-<div class="announcement-bar">
-  <span class="highlight">Free Shipping</span>
-  <span class="divider">|</span>
-  On orders above ₹999
-  <span class="divider">|</span>
-  <span class="highlight2">New Releases Every Week</span>
-  <span class="divider">|</span>
-  <span class="highlight">Free Shipping</span>
-  <span class="divider">|</span>
-  <span class="highlight2">Best & Premium Stocks</span>
-</div>
-
-
-
-
-
-<!-- ======================================================
-                  TRENDING BOOK SLIDER
-====================================================== -->
 <section class="book-slider-section">
-  <h2 class="section-title">Trending Books</h2>
-  <span class="hero-tag">IT’S AVAILABLE ON KINDLE PUBLISHING</span>
+  <h2 class="section-title">Trending Now</h2>
+  <span class="hero-tag">WHAT READERS AROUND THE WORLD ARE LOVING</span>
 
   <div class="book-slider">
     <div class="book-slider-track">
-      
       <div class="book-card" *ngFor="let product of books">
+        <div class="image-container">
+          <img [src]="product.imageUrl
+            ? 'http://localhost:8082/api/books/' + product.id + '/image'
+            : 'assets/book-placeholder.png'" alt="{{ product.title }}" />
 
-    <div class="image-container">
-      <!-- fallback image if backend image not present -->
-      <img [src]="product.imageUrl
-    ? 'http://localhost:8082/api/books/' + product.id + '/image'
-    : 'assets/book-placeholder.png'" alt="{{ product.title }}" />
-
-
-
-      <div class="overlay">
-        <abbr title="View Book">
-          <button class="icon-btn" (click)="viewBook(product.id)">
-            <i class="fa fa-search"></i>
-          </button>
-        </abbr>
-
-        <abbr title="Add To Cart">
-          <button class="icon-btn" (click)="addToCart(product.id)">
-            <i class="fa fa-shopping-cart"></i>
-          </button>
-        </abbr>
-
-        <abbr title="Add To Wishlist">
-          <button class="icon-btn" (click)="addToWishlist(product.id)">
-            <i class="fa fa-heart"></i>
-          </button>
-        </abbr>
+          <div class="overlay">
+            <button class="icon-btn" (click)="viewBook(product.id)"><i class="fa fa-search"></i></button>
+            <button class="icon-btn" (click)="addToCart(product.id)"><i class="fa fa-shopping-cart"></i></button>
+            <button class="icon-btn" (click)="addToWishlist(product.id)"><i class="fa fa-heart"></i></button>
+          </div>
+        </div>
+        <h3>{{ product.title }}</h3>
+        <p class="price">₹ {{ product.price }}</p>
       </div>
-    </div>
-
-    <h3>{{ product.title }}</h3>
-    <p class="price">₹ {{ product.price }}</p>
-
-  </div>
-
     </div>
   </div>
 </section>
 
-
-
-
-
-<!-- ======================================================
-                     BLOG SECTION
-====================================================== -->
 <section class="blog-section">
-
-  <h2 class="section-title">From The Blog</h2>
-  <p class="Famouse-book">Famouse Book</p>
+  <h2 class="section-title">Literary Insights</h2>
+  <p class="Famouse-book">LATEST FROM OUR BLOG</p>
 
   <div class="blog-grid">
     <div class="blog-card">
       <img src="../../../assets/images/icon/the_artist_way.png">
-      <h3>Top 10 Books to Read in 2025</h3>
-      <p>Dive into the best titles releasing this year.</p>
+      <h3>The Art of the Home Library</h3>
+      <p>Organize your collection like a professional curator.</p>
     </div>
 
     <div class="blog-card">
       <img src="../../../assets/images/icon/the_artist_way.png">
-      <h3>How to Build a Reading Habit</h3>
-      <p>Start small and transform your life with daily reading.</p>
+      <h3>Morning Rituals for Readers</h3>
+      <p>How 15 minutes of reading can transform your productivity.</p>
     </div>
   </div>
 </section>

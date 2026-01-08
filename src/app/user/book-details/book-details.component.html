@@ -1,94 +1,99 @@
 <app-user-header></app-user-header>
 
-<section class="details-container">
-
-  <div *ngIf="loading" class="details-loading">
-    Loading book details...
-  </div>
-
-  <ng-container *ngIf="!loading && book">
-
-    <div class="details-card">
-      <img
-        class="book-details-img"
-        [src]="book.imageUrl
-          ? 'http://localhost:8082/api/books/' + book.id + '/image'
-          : 'assets/book-placeholder.png'"
-        [alt]="book.title"
-      />
+<div class="details-page-wrapper">
+  <section class="details-container" *ngIf="!loading && book">
+    
+    <div class="media-column">
+      <div class="sticky-wrapper">
+        <img class="main-book-img"
+             [src]="book.imageUrl ? 'http://localhost:8082/api/books/' + book.id + '/image' : 'assets/book-placeholder.png'"
+             [alt]="book.title" />
+        
+        <div class="quick-meta">
+          <div class="avg-badge">
+            <span class="star-icon">⭐</span>
+            <span class="rating-val">{{ book.averageRating || 0 }}</span>
+            <span class="total-reviews">({{ bookRatings?.length || 0 }} reviews)</span>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="info-section">
+    <div class="content-column">
+      <header class="book-header">
+         <div class="tag-row">
+          <span class="stock-tag" [class.out]="book.stockQuantity === 0">
+            {{ book.stockQuantity > 0 ? 'In Stock' : 'Out of Stock' }}
+          </span>
+          <span class="isbn-tag">ISBN: {{book.isbn}}</span>
+        </div>
+        <h1 class="book-title">{{ book.title }}</h1>
+        <p class="book-author">By <span>{{ book.authorName }}</span></p>
+      </header>
 
-      <h1>{{ book.title }}</h1>
-      <p class="author">by {{ book.authorName }}</p>
-      <p class="price">₹ {{ book.price }}</p>
+      <div class="price-section">
+        <span class="currency">₹</span>
+        <span class="amount">{{ book.price }}</span>
+      </div>
 
-      <p class="stock" *ngIf="book.stockQuantity > 0">
-        In Stock ({{ book.stockQuantity }} available)
-      </p>
+      <p class="description-text">{{ book.description }}</p>
 
-      <p class="stock out" *ngIf="book.stockQuantity === 0">
-        Out of Stock
-      </p>
-
-      <p class="description">{{ book.description }}</p>
-
-      <!-- ACTIONS -->
-      <div class="actions">
-        <button class="btn primary" (click)="addToCart()"
-                [disabled]="book.stockQuantity === 0">
-          Add to Cart
+      <div class="action-buttons">
+        <button class="buy-btn" (click)="addToCart()" [disabled]="book.stockQuantity === 0">
+          <i class="shopping-cart-icon"></i> Add to Cart
         </button>
-        <button class="btn secondary" (click)="addToWishlist()">
-          Add to Wishlist
+        <button class="wish-btn" (click)="addToWishlist()">
+          ♥ Add to Wishlist
         </button>
       </div>
 
-      <!-- AVERAGE RATING -->
-      <div class="average-rating">
-        ⭐ {{ book.averageRating || 0 }} / 5
-      </div>
+      <hr class="divider">
 
-      <!-- ADD REVIEW -->
-      <div class="rating-box">
-        <h3>Rate this Book</h3>
+      <section class="rating-form-section" *ngIf="isLoggedIn">
+        <h3>Share your thoughts</h3>
+        <div class="form-group">
+          <label>How would you rate it?</label>
+          <div class="star-rating-input">
+             <select [(ngModel)]="rating" class="modern-select">
+                <option [value]="0">Select Stars</option>
+                <option *ngFor="let r of [5,4,3,2,1]" [value]="r">{{r}} Stars</option>
+             </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <textarea [(ngModel)]="comment" placeholder="Write your review here..."></textarea>
+        </div>
+        <button class="submit-review-btn" (click)="submitRating()">Post Review</button>
+      </section>
 
-        <div *ngIf="!isLoggedIn" class="disabled-note">
-          Login to add rating and review.
+      <section class="user-reviews-list">
+        <h3>Community Reviews ({{ bookRatings.length }})</h3>
+        
+        <div *ngIf="bookRatings.length === 0" class="no-reviews">
+          Be the first to review this book!
         </div>
 
-        <div *ngIf="isLoggedIn">
-          <select [(ngModel)]="rating">
-            <option [value]="0">Select Stars</option>
-            <option *ngFor="let r of [1,2,3,4,5]" [value]="r">
-              {{ r }} ⭐
-            </option>
-          </select>
+        <div class="review-card" *ngFor="let r of bookRatings">
+          <div class="review-header">
+            <span class="user-avatar">{{ r.username.charAt(0).toUpperCase() }}</span>
+            <div class="user-meta">
+              <span class="user-name">
+                {{ r.username }} 
+                <b *ngIf="isMyReview(r.username)" style="color: #27ae60;"> (You)</b>
+              </span>
+              <span class="review-stars">⭐ {{ r.rating }}/5</span>
+            </div>
 
-          <textarea [(ngModel)]="comment"></textarea>
-
-          <button (click)="submitRating()">Submit Review</button>
+            <button *ngIf="isMyReview(r.username)" 
+                    (click)="deleteMyReview()" 
+                    class="delete-review-btn" 
+                    title="Delete my review">
+              🗑️
+            </button>
+          </div>
+          <p class="review-body">{{ r.comment }}</p>
         </div>
-      </div>
-
-      <!-- REVIEWS -->
-      <div class="reviews">
-        <h3>User Reviews</h3>
-
-        <div *ngIf="!book.ratings || book.ratings.length === 0">
-          No reviews yet.
-        </div>
-
-        <div *ngFor="let r of book.ratings">
-          <strong>{{ r.username }}</strong>
-          <span>⭐ {{ r.rating }}/5</span>
-          <p>{{ r.comment }}</p>
-        </div>
-      </div>
-
+      </section>
     </div>
-
-  </ng-container>
-
-</section>
+  </section>
+</div>

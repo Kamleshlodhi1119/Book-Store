@@ -57,6 +57,23 @@
   color: var(--accent-color);
 }
 
+
+.logout-btn {
+  background: #fff;
+  border: 1px solid var(--primary-color);
+  color: var(--bg-color);
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.logout-btn:hover {
+  background:var(--primary-color);
+  color: #fff;
+}
+
 /* SEARCH AND CART */
 .search-cart {
   display: flex;

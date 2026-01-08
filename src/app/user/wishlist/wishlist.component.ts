@@ -8,7 +8,6 @@ import { AlertService } from 'src/app/core/services/alert.service';
   styleUrls: ['./wishlist.component.css']
 })
 export class WishlistComponent implements OnInit {
-
   list: any[] = [];
   loading = true;
 
@@ -34,11 +33,25 @@ export class WishlistComponent implements OnInit {
       }
     });
   }
-remove(bookId: number) {
-  this.wishlist.remove(bookId).subscribe({
-    next: () => this.loadWishlist(),
-    error: () => this.loadWishlist() // 👈 IMPORTANT
-  });
-}
 
+  // New method to handle the 2-second delay and animation
+  handleRemove(item: any) {
+    // 1. Start animation
+    item.isRemoving = true;
+
+    // 2. Wait 2 seconds then execute actual removal
+    setTimeout(() => {
+      this.remove(item.book.id);
+    }, 2000);
+  }
+
+  remove(bookId: number) {
+    this.wishlist.remove(bookId).subscribe({
+      next: () => {
+        this.alertService.show('Item removed', 'success');
+        this.loadWishlist();
+      },
+      error: () => this.loadWishlist() 
+    });
+  }
 }

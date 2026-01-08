@@ -70,20 +70,85 @@
   color: var(--color-dark);
 }
 
+
+.book-preview-section {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.logo-book-preview-img {
+  width: 90px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
 .price {
   font-weight: bold;
   color: var(--primary-color);
 }
 
-.remove-btn {
-  background: var(--color-error);
-  color: var(--text-light);
+.heart-btn {
+  background: none;
   border: none;
-  padding: 10px 14px;
-  border-radius: 6px;
   cursor: pointer;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
 }
 
-.remove-btn:hover {
-  opacity: 0.85;
+.heart-btn:hover {
+  transform: scale(1.2);
+}
+
+.heart-icon {
+  width: 30px;
+  height: 30px;
+  /* Filled Pink State */
+  fill: #ff69b4; 
+  stroke: #ff69b4;
+  stroke-width: 1;
+}
+.heart-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.heart-btn:hover {
+  transform: scale(1.2);
+}
+
+.heart-icon {
+  width: 30px;
+  height: 30px;
+  /* Filled Pink State */
+  fill: #ff69b4; 
+  stroke: #ff69b4;
+  stroke-width: 1;
+}
+
+/* 2-Second Drain Animation */
+.heart-btn.removing .heart-icon {
+  animation: drainColor 2s forwards;
+}
+
+@keyframes drainColor {
+  0% {
+    fill: #ff69b4;
+    stroke: #ff69b4;
+  }
+  100% {
+    fill: transparent;
+    stroke: #bdc3c7; /* Gray outline at end */
+  }
 }

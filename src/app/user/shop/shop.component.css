@@ -158,12 +158,13 @@
   border-radius: 18px;
   padding: 15px;
   text-align: center;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
 }
 
 .shop-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.24);
 }
 
 /* IMAGE */

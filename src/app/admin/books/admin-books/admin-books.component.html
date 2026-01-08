@@ -11,12 +11,18 @@
     <!-- BOOK LIST -->
     <div class="admin-list">
       <div class="admin-item" *ngFor="let b of books">
+        <div class="book-preview-section">
+        <img class="logo-book-preview-img"
+             [src]="b.imageUrl ? 'http://localhost:8082/api/books/' + b.id + '/image' : 'assets/book-placeholder.png'"
+             [alt]="b.title" />
+      
         <div class="book-info">
           <strong>{{ b.title }}</strong>
+          <span> ₹ {{b.price }}</span>
           <span>Author: {{ b.authorName }}</span>
           <span>Status: {{ b.active ? 'Active' : 'Disabled' }}</span>
         </div>
-
+</div>
         <div class="admin-actions">
           <button class="btn-edit" (click)="openEdit(b)">Edit</button>
           <button class="btn-delete" (click)="openDelete(b)">Delete</button>

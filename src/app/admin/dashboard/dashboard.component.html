@@ -3,59 +3,49 @@
   <div class="container hero-center">
     <span class="hero-tag">IT’S AVAILABLE ON KINDLE PUBLISHING</span>
     <h1 class="hero-title">
-      Admin DashBoard<br />
+      Discover Your Next<br />
+      Great Adventure
     </h1>
     <p class="hero-sub">
-      See the All the details.
+      Find your favorite books here.
     </p>
     <p class="hero-sub">Explore thousands of books across genres — curated, reviewed, and loved by readers worldwide.
     </p>
 
-    <button class="btn btn--primary">Buy Now</button>
+    <button class="btn btn--primary">Shop Now</button>
 
     <p class="hero-note">* Available in PDF, EPUB & Kindle</p>
   </div>
 </section>
 
-
-
-<!-- ======================================================
-                  SHOP BY CATEGORY
-====================================================== -->
 <section class="category-section">
-  <h2 class="section-title">Quick Links</h2>
+  <h2 class="section-title">Shop by Genre</h2>
   <span class="hero-tag">IT’S AVAILABLE ON KINDLE PUBLISHING</span>
 <pre>
 
 </pre>
   <div class="category-grid">
     <div class="category-card">
-   <pre></pre>   <!-- <img src="../../../assets/images/icon/the_artist_way.png"> -->
-      <h3>Users</h3>
+   <pre></pre>   <h3>Fiction</h3>
     </div>
 
     <div class="category-card">
        <pre></pre>
-       <!-- <img src="../../../assets/images/icon/the_artist_way.png"> -->
-      <h3>All Books</h3>
+       <h3>Self Help</h3>
     </div>
 
     <div class="category-card">
-      <!-- <img src="../../../assets/images/icon/the_artist_way.png"> --> <pre></pre>
-      <h3>All Orders</h3>
+      <pre></pre>
+      <h3>Business</h3>
     </div>
 
     <div class="category-card">
-      <!-- <img src="../../../assets/images/icon/the_artist_way.png"> -->
-       <pre></pre>
-      <h3>Others</h3>
+      <pre></pre>
+      <h3>Biography</h3>
     </div>
   </div>
 </section>
 
-<!-- ======================================================
-                STATIC ANNOUNCEMENT BAR
-====================================================== -->
 <div class="announcement-bar">
   <span class="highlight">Free Shipping</span>
   <span class="divider">|</span>
@@ -70,17 +60,16 @@
 
 
 <section class="book-slider-section">
-  <h2 class="section-title">All Books</h2>
+  <h2 class="section-title">Featured Collection</h2>
   <span class="hero-tag">IT’S AVAILABLE ON KINDLE PUBLISHING</span>
  
 </section>
 
 <div class="product-grid">
-  <div class="book-card" *ngFor="let product of books">
+    <div class="book-card" *ngFor="let product of books | slice:0:08">
 
     <div class="image-container">
-      <!-- fallback image if backend image not present -->
-          <img
+      <img
   [src]="product.imageUrl
     ? 'http://localhost:8082/api/books/' + product.id + '/image'
     : 'assets/book-placeholder.png'"
@@ -113,9 +102,6 @@
   </div>
 </div>
 
-<!-- ======================================================
-                STATIC ANNOUNCEMENT BAR
-====================================================== -->
 <div class="announcement-bar">
   <span class="highlight">Free Shipping</span>
   <span class="divider">|</span>
@@ -137,11 +123,8 @@
 
 
 
-<!-- ======================================================
-                  TRENDING BOOK SLIDER
-====================================================== -->
 <section class="book-slider-section">
-  <h2 class="section-title">Trending Books</h2>
+  <h2 class="section-title">Trending Now</h2>
   <span class="hero-tag">IT’S AVAILABLE ON KINDLE PUBLISHING</span>
 
   <div class="book-slider">
@@ -150,7 +133,6 @@
       <div class="book-card" *ngFor="let product of books">
 
     <div class="image-container">
-      <!-- fallback image if backend image not present -->
       <img [src]="product.imageUrl
     ? 'http://localhost:8082/api/books/' + product.id + '/image'
     : 'assets/book-placeholder.png'" alt="{{ product.title }}" />
@@ -187,26 +169,21 @@
   </div>
 </section>
 
-<!-- ======================================================
-                     BLOG SECTION
-====================================================== -->
 <section class="blog-section">
-
-  <h2 class="section-title">From The Blog</h2>
-  <p class="Famouse-book">Famouse Book</p>
+  <h2 class="section-title">Literary Insights</h2>
+  <p class="Famouse-book">LATEST FROM OUR BLOG</p>
 
   <div class="blog-grid">
     <div class="blog-card">
       <img src="../../../assets/images/icon/the_artist_way.png">
-      <h3>Top 10 Books to Read in 2025</h3>
-      <p>Dive into the best titles releasing this year.</p>
+      <h3>The Art of the Home Library</h3>
+      <p>Organize your collection like a professional curator.</p>
     </div>
 
     <div class="blog-card">
       <img src="../../../assets/images/icon/the_artist_way.png">
-      <h3>How to Build a Reading Habit</h3>
-      <p>Start small and transform your life with daily reading.</p>
+      <h3>Morning Rituals for Readers</h3>
+      <p>How 15 minutes of reading can transform your productivity.</p>
     </div>
   </div>
 </section>
- 

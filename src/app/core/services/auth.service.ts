@@ -8,10 +8,14 @@ interface LoginResponse {
   role: string;
 }
 
+
+
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
   private api = `${environment.apiBaseUrl}/auth`;
+
+  
 
   constructor(private http: HttpClient) {}
 
