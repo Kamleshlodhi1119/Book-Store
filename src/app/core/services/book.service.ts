@@ -17,8 +17,8 @@ export interface Book {
 @Injectable({ providedIn: 'root' })
 export class BookService {
 
-  private api = 'http://localhost:8082/api/books';
-  private authorApi = 'http://localhost:8082/api/authors';
+  private api = 'https://bookstore-h5qp.onrender.com/api/books';
+  private authorApi = 'https://bookstore-h5qp.onrender.com/api/authors';
 
   constructor(private http: HttpClient) {}
 
