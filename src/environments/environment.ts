@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8082/api',
-  apiBaseUrl:'http://localhost:8082/api'
+  apiUrl: 'https://bookstore-h5qp.onrender.com/api',
+  apiBaseUrl:'https://bookstore-h5qp.onrender.com/api'
 };
