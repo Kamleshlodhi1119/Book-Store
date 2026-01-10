@@ -49,8 +49,8 @@ const routes: Routes = [
     ]
   },
 
-  { path: '', redirectTo: 'https://books-storeapp.netlify.app/', pathMatch: 'full' },
-  { path: '**', redirectTo: 'https://books-storeapp.netlify.app/' }
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home' }
 ];
 
 
