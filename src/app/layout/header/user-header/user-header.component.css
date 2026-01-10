@@ -117,7 +117,7 @@
   border-radius: 50%;
 }
 .dropdown-menu {
-  display: none;
+  /* display: none; */
   position: absolute;
   top: 110%;
   right: 0;
@@ -162,7 +162,7 @@
     left: 0;
     width: 100%;
     align-items: center;
-    display: none;
+    /* display: none; */
     box-shadow: var(--shadow);
     z-index: 99;
   }
