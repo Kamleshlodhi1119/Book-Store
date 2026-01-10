@@ -47,10 +47,10 @@ const routes: Routes = [
       { path: 'books', component: AdminBooksComponent },
       { path: 'orders', component: AdminOrdersComponent }
     ]
-  }
+  },
 
-  // { path: '', redirectTo: 'home', pathMatch: 'full' },
-  // { path: '**', redirectTo: 'home' }
+  { path: '', redirectTo: 'https://books-storeapp.netlify.app/', pathMatch: 'full' },
+  { path: '**', redirectTo: 'https://books-storeapp.netlify.app/' }
 ];
 
 
