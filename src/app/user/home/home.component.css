@@ -48,6 +48,7 @@ h1, h2, h3 { color: var(--primary-color); }
   font-family: "Indie Flower", cursive;
   font-weight: 800;
   font-style: normal;
+  text-align: center;
   font-size: 12px;
   letter-spacing: .08em;
   color: var(--secondary-font);
@@ -656,6 +657,164 @@ font-family: "Style Script", cursive;
   margin-bottom: 10px;
 }
 
+
+/* =========================================================
+   GLOBAL RESPONSIVE FIXES
+========================================================= */
+@media (max-width: 1200px) {
+  .product-grid {
+    padding: 20px 4em;
+  }
+}
+
+@media (max-width: 992px) {
+
+  /* SECTION TITLES */
+  .section-title {
+    font-size: 2rem;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 70px 20px 60px;
+  }
+
+  .hero-title {
+    font-size: 42px;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+  }
+
+  /* PRODUCT GRID */
+  .product-grid {
+    justify-content: center;
+    padding: 20px 2em;
+  }
+
+  /* BOOK SECTION (EDITOR'S CHOICE) */
+  .book-section {
+    flex-direction: column;
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .book-right {
+    align-items: center;
+  }
+
+  .Famouse-book-title {
+    font-size: 2rem;
+  }
+
+  /* BLOG */
+  .blog-grid {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  /* ANNOUNCEMENT BAR */
+  .announcement-bar {
+    flex-wrap: wrap;
+    text-align: center;
+    font-size: 1rem;
+    gap: 10px;
+  }
+}
+
+/* =========================================================
+   MOBILE (PHONES)
+========================================================= */
+@media (max-width: 576px) {
+
+  /* HERO */
+  .hero-title {
+    font-size: 32px;
+    line-height: 1.2;
+  }
+
+  .hero-sub {
+    font-size: 15px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+
+ 
+  /* CATEGORY GRID */
+  .category-card {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  /* PRODUCT GRID */
+  .product-grid {
+    padding: 15px;
+    gap: 15px;
+  }
+
+  .book-card {
+    width: 100%;
+    max-width: 220px;
+  }
+
+  /* BOOK SLIDER */
+  .book-slide {
+    width: 180px;
+  }
+
+  /* CTA */
+  .cta-title {
+    font-size: 30px;
+  }
+
+  .cta-sub {
+    font-size: 20px;
+  }
+
+  .cta-description {
+    font-size: 16px;
+  }
+
+  .cta-actions button {
+    width: 100%;
+  }
+
+  /* ANNOUNCEMENT BAR */
+  .announcement-bar {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  /* BLOG */
+  .blog-card {
+    width: 80%;
+    max-width: 320px;
+  }
+
+   .Book-product-placeholder img{
+    max-width: 80%;
+   }
+
+
+.blog-section,
+.category-section,
+.book-slider-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-direction: center
+  ;
+}
+
+
+
+
+
+}
 
 
 

@@ -9,6 +9,8 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 
 export class AdminHeaderComponent {
+  isMenuOpen = false;
+
 
   constructor(private auth: AuthService, private router: Router) {}
 

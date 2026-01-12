@@ -8,6 +8,8 @@ import { AuthService } from 'src/app/core/services/auth.service';
   styleUrls: ['./user-header.component.css']
 })
 export class UserHeaderComponent {
+  isMenuOpen = false;
+
 
   constructor(private auth: AuthService, private router: Router) {}
 
