@@ -13,7 +13,7 @@
       <div class="admin-item" *ngFor="let b of books">
         <div class="book-preview-section">
         <img class="logo-book-preview-img"
-             [src]="b.imageUrl ? 'http://localhost:8082/api/books/' + b.id + '/image' : 'assets/book-placeholder.png'"
+             [src]="b.imageUrl ? imageApi + b.id + '/image' : 'assets/book-placeholder.png'"
              [alt]="b.title" />
       
         <div class="book-info">

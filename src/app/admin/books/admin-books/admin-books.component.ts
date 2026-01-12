@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from 'src/app/core/services/alert.service'; // Added
+import { environment } from 'src/environments/environment';
 
 export interface Book {
   id: number;
@@ -25,8 +26,9 @@ export class AdminBooksComponent implements OnInit {
 
   books: Book[] = [];
 
-  api = 'http://localhost:8082/api/admin/books';
-  publicApi = 'http://localhost:8082/api/books';
+  api = 'https://bookstore-h5qp.onrender.com/api/admin/books';
+  publicApi = 'https://bookstore-h5qp.onrender.com/api/books';
+  readonly imageApi = environment.bookImageBaseUrl;
 
   showModal = false;
   isEdit = false;
@@ -156,7 +158,7 @@ export class AdminBooksComponent implements OnInit {
   getImageUrl(book: Partial<Book>): string {
     if (!book.imageUrl) return 'assets/book-placeholder.png';
     if (book.id) {
-      return `http://localhost:8082/api/books/${book.id}/image?ts=${book.imageTimestamp || new Date().getTime()}`;
+      return `https://bookstore-h5qp.onrender.com/api/books/${book.id}/image?ts=${book.imageTimestamp || new Date().getTime()}`;
     }
     return 'assets/book-placeholder.png';
   }

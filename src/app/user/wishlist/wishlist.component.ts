@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WishlistService } from 'src/app/core/services/wishlist.service';
 import { AlertService } from 'src/app/core/services/alert.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-wishlist',
@@ -8,6 +9,8 @@ import { AlertService } from 'src/app/core/services/alert.service';
   styleUrls: ['./wishlist.component.css']
 })
 export class WishlistComponent implements OnInit {
+
+  readonly imageApi = environment.bookImageBaseUrl;
   list: any[] = [];
   loading = true;
 

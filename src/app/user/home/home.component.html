@@ -56,7 +56,7 @@
   <div class="book-card" *ngFor="let product of books | slice:0:8">
     <div class="image-container">
       <img [src]="product.imageUrl
-        ? 'http://localhost:8082/api/books/' + product.id + '/image'
+        ? imageApi + product.id + '/image'
         : 'assets/book-placeholder.png'"
         alt="{{ product.title }}" />
       
@@ -144,7 +144,7 @@
       <div class="book-card" *ngFor="let product of books">
         <div class="image-container">
           <img [src]="product.imageUrl
-            ? 'http://localhost:8082/api/books/' + product.id + '/image'
+            ? imageApi + product.id + '/image'
             : 'assets/book-placeholder.png'" alt="{{ product.title }}" />
 
           <div class="overlay">

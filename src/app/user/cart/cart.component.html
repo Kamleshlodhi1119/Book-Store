@@ -33,7 +33,7 @@
         <div class="book-preview-section">
           <div>
             <img class="logo-book-preview-img"
-              [src]="i.imageUrl ? 'http://localhost:8082/api/books/' + i.id + '/image' : 'assets/book-placeholder.png'"
+              [src]="i.imageUrl ? imageApi + i.id + '/image' : 'assets/book-placeholder.png'"
               [alt]="i.title" />
           </div>
           <div>

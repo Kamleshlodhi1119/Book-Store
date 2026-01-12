@@ -5,6 +5,7 @@ import { WishlistService } from 'src/app/core/services/wishlist.service';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-shop',
@@ -12,6 +13,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./shop.component.css']
 })
 export class ShopComponent implements OnInit {
+  readonly imageApi = environment.bookImageBaseUrl;
 
   books: any[] = [];
   filtered: any[] = [];

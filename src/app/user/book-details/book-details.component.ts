@@ -5,6 +5,7 @@ import { CartService } from 'src/app/core/services/cart.service';
 import { WishlistService } from 'src/app/core/services/wishlist.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { AlertService } from 'src/app/core/services/alert.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-book-details',
@@ -12,6 +13,8 @@ import { AlertService } from 'src/app/core/services/alert.service';
   styleUrls: ['./book-details.component.css']
 })
 export class BookDetailsComponent implements OnInit {
+
+  readonly imageApi = environment.bookImageBaseUrl;
   book: any = null;
   bookRatings: any[] = []; // Direct list from the Ratings entity
   loading = true;

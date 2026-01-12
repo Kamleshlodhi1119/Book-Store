@@ -3,6 +3,7 @@ import { CartService } from 'src/app/core/services/cart.service';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { Router } from '@angular/router';
 import { OrderService } from 'src/app/core/services/order.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-cart',
@@ -10,6 +11,7 @@ import { OrderService } from 'src/app/core/services/order.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
+  readonly imageApi = environment.bookImageBaseUrl;
 
   cart: any;
   loading = true;
