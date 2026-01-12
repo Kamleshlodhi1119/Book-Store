@@ -27,7 +27,7 @@ login() {
           this.router.navigate(['/admin/dashboard']);
         } else if (res.role === 'ROLE_USER') {
           this.alertService.show('Login Sccessfull', 'success');
-          this.router.navigate(['/home']);
+          this.router.navigate(['/admin/dashboard']);
         }
       },
       error: (err) => {
