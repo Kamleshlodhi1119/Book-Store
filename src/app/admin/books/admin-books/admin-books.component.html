@@ -78,7 +78,7 @@
     <!-- PREVIEW -->
     <div class="image-preview" *ngIf="book.imageUrl || previewUrl">
       <img
-        [src]="previewUrl || (book.imageUrl ? 'http://localhost:8082/api/books/' + book.id + '/image?ts=' + book.imageTimestamp : 'assets/book-placeholder.png')"
+        [src]="previewUrl || (book.imageUrl ? imageApi + book.id + '/image?ts=' + book.imageTimestamp : 'assets/book-placeholder.png')"
         (error)="onImageError($event)" 
         alt="{{ book.title }}" 
         class="preview-uploeded-image"
