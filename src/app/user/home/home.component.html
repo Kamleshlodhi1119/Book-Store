@@ -23,28 +23,34 @@
   <h2 class="section-title">Meet the Authors</h2>
   <span class="hero-tag">THE BRILLIANT MINDS BEHIND THE STORIES</span>
   <pre></pre>
-  
+
   <div class="category-grid">
     <div class="category-card" *ngFor="let author of displayAuthors">
-      <a routerLink="/shop"> 
+      <a routerLink="/shop">
         <img src="../../../assets/images/icon/Author.png"> </a>
-        <pre> </pre>
-        <h3>{{ author.name }}</h3>
-     
+      <pre> </pre>
+      <h3>{{ author.name }}</h3>
+
     </div>
   </div>
 </section>
 
 <div class="announcement-bar">
-  <span class="highlight">Free Shipping</span>
-  <span class="divider">|</span>
-  On orders above ₹999
-  <span class="divider">|</span>
-  <span class="highlight2">New Arrivals Every Monday</span>
-  <span class="divider">|</span>
-  <span class="highlight">Pan India Delivery</span>
-  <span class="divider">|</span>
-  <span class="highlight2">100% Collector's Editions</span>
+  <div class="announcement-content">
+    <span class="highlight">Secure Packaging</span>
+    <span class="divider">|</span>
+    <span>Hassle-free Returns</span>
+    <span class="divider">|</span>
+    <span class="highlight2">Member Discounts Available</span>
+    <span class="divider">|</span>
+    <span class="highlight">Eco-friendly Prints</span>
+    <span class="divider">|</span>
+    <span class="highlight2">Verified Author Signed Stocks</span>
+    <span class="divider">|</span>
+    <span class="highlight">Secure Packaging</span>
+    <span class="divider">|</span>
+    <span>Hassle-free Returns</span>
+  </div>
 </div>
 
 <section class="book-slider-section">
@@ -57,9 +63,8 @@
     <div class="image-container">
       <img [src]="product.imageUrl
         ? imageApi + product.id + '/image'
-        : 'assets/book-placeholder.png'"
-        alt="{{ product.title }}" />
-      
+        : 'assets/book-placeholder.png'" alt="{{ product.title }}" />
+
       <div class="overlay">
         <abbr title="View Book">
           <button class="icon-btn" (click)="viewBook(product.id)">
@@ -85,17 +90,27 @@
   </div>
 </div>
 
+
 <div class="announcement-bar">
-  <span class="highlight">Secure Packaging</span>
-  <span class="divider">|</span>
-  Hassle-free Returns
-  <span class="divider">|</span>
-  <span class="highlight2">Member Discounts Available</span>
-  <span class="divider">|</span>
-  <span class="highlight">Eco-friendly Prints</span>
-  <span class="divider">|</span>
-  <span class="highlight2">Verified Author Signed Stocks</span>
+  <div class="announcement-content">
+    <span class="highlight">Secure Packaging</span>
+    <span class="divider">|</span>
+    <span>Hassle-free Returns</span>
+    <span class="divider">|</span>
+    <span class="highlight2">Member Discounts Available</span>
+    <span class="divider">|</span>
+    <span class="highlight">Eco-friendly Prints</span>
+    <span class="divider">|</span>
+    <span class="highlight2">Verified Author Signed Stocks</span>
+    <span class="divider">|</span>
+    <span class="highlight">Secure Packaging</span>
+    <span class="divider">|</span>
+    <span>Hassle-free Returns</span>
+  </div>
 </div>
+
+
+
 
 <section class="book-section">
   <div class="Book-product-placeholder">
@@ -118,11 +133,11 @@
   <div class="cta-container">
     <span class="cta-tag">THE BIBLIOPHILE'S PROMISE</span>
     <h1 class="cta-title">Discover Your Next Great Read</h1>
-    
+
     <div class="cta-content">
       <p class="cta-sub">100% Genuine Editions & Curated Genres</p>
       <p class="cta-description">
-        We believe in the soul of a physical book. From leather-bound classics to the latest 
+        We believe in the soul of a physical book. From leather-bound classics to the latest
         contemporary bestsellers, our library is hand-picked for the highest quality.
       </p>
     </div>

@@ -18,19 +18,24 @@ import { ShopComponent } from './user/shop/shop.component';
 import { OrdersComponent } from './user/orders/orders.component';
 import { BookDetailsComponent } from './user/book-details/book-details.component';
 import { AboutusComponent } from './user/aboutus/aboutus.component';
+import { ReturnsComponent } from './privacy/returns/returns.component';
+import { TermsComponent } from './privacy/terms/terms.component';
+import { PrivacyComponent } from './privacy/privacy/privacy.component';
 
 const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: UserHomeComponent},
-    { path: 'aboutus', component: AboutusComponent},
-  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
-  { path: 'wishlist', component: WishlistComponent , canActivate: [AuthGuard]},
+  { path: 'aboutus', component: AboutusComponent},
+  { path: 'cart', component: CartComponent },
+  { path: 'wishlist', component: WishlistComponent },
   { path: 'shop', component: ShopComponent},
-  { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
+  { path: 'orders', component: OrdersComponent},
   { path: 'book-details/:id', component: BookDetailsComponent },
-
+  { path: 'privacy-policy', component:PrivacyComponent  },
+  { path: 'terms-conditions', component:TermsComponent  },
+  { path: 'return-policy', component: ReturnsComponent },
   // USER
   // { path: 'home', component: UserHomeComponent, canActivate: [AuthGuard] },
   // { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },

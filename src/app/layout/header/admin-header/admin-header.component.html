@@ -1,7 +1,6 @@
-<!-- TOP BAR -->
 <div class="top-bar">
   <div class="top-left">
-    <span>Admin Panel</span>
+    <span class="admin-label">Admin Panel</span>
   </div>
 
   <div class="social-icons">
@@ -12,31 +11,24 @@
   </div>
 </div>
 
-<!-- HEADER -->
 <header class="main-header">
-
   <div class="logo">
     <img src="../../../../assets/Logo/Logo.png" alt="Logo">
   </div>
 
-
-  <!-- NAV -->
   <nav class="main-nav" [class.active]="isMenuOpen">
     <ul class="menu">
-      <li><a routerLink="/admin/dashboard">Dashboard</a></li>
-      <li><a routerLink="/admin/users">Users</a></li>
-      <li><a routerLink="/admin/books">Books</a></li>
-      <li><a routerLink="/admin/orders">Orders</a></li>
+      <li><a routerLink="/admin/dashboard" routerLinkActive="active-admin">Dashboard</a></li>
+      <li><a routerLink="/admin/users" routerLinkActive="active-admin">Users</a></li>
+      <li><a routerLink="/admin/books" routerLinkActive="active-admin">Books</a></li>
+      <li><a routerLink="/admin/orders" routerLinkActive="active-admin">Orders</a></li>
       <li>
         <button class="logout-btn" (click)="logout()">Logout</button>
       </li>
     </ul>
   </nav>
-  <!-- HAMBURGER -->
+
   <button class="menu-toggle" (click)="isMenuOpen = !isMenuOpen">
-    <i class="fas fa-bars"></i>
+    <i class="fas" [ngClass]="isMenuOpen ? 'fa-times' : 'fa-bars'"></i>
   </button>
-
-
-
 </header>

@@ -1,183 +1,129 @@
-/* =======================
-   TOP BAR
-======================= */
 .top-bar {
   position: relative;
-  background: linear-gradient(rgba(0,0,0,0.45), #05360c98),
+  background: linear-gradient(rgba(0,0,0,0.6), #0a2d0f),
               url("src/assets/images/banner/bg5.png") center/cover no-repeat;
   color: #fff;
-  padding: 6px 20px;
+  padding: 8px 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 14px;
-  flex-wrap: wrap;
 }
 
-.top-bar a {
-  color: #fff;
-  font-size: 16px;
+.admin-label {
   font-weight: 800;
-  text-decoration: none;
-  margin: 0 5px;
-}
-
-.top-left {
-  display: flex;
-  align-items: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .social-icons i {
-  font-size: 14px;
-  margin: 0 8px;
+  margin: 0 10px;
   cursor: pointer;
-  transition: color 0.3s;
+  transition: opacity 0.3s;
 }
 
-.social-icons i:hover {
-  color: var(--bg-color);
-}
-
-/* =======================
-   HEADER
-======================= */
 .main-header {
   background: #fff;
-  border-bottom: 1px solid #e5e5e5;
-  padding: 15px 20px;
+  border-bottom: 2px solid #f0f0f0;
+  padding: 10px 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .logo img {
-  height: 60px;
+  height: 50px;
 }
 
-/* =======================
-   NAVIGATION
-======================= */
 .main-nav .menu {
   list-style: none;
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin: 0;
-  padding: 0;
+  gap: 20px;
 }
 
 .menu li a {
-  font-weight: bold;
-  color: var(--text-color);
-  padding: 10px;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.menu li a:hover {
-  color: var(--accent-color);
-}
-
-/* =======================
-   LOGOUT BUTTON
-======================= */
-.logout-btn {
-  background: #fff;
-  border: 1px solid var(--primary-color);
-  color: var(--bg-color);
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
+  font-weight: 700;
+  color: #333;
+  text-decoration: none !important;
+  padding: 8px 12px;
   transition: all 0.3s;
+  border-radius: 4px;
+}
+
+.menu li a:hover, .active-admin {
+  color: #4a6d6a !important;
+  background: rgba(74, 109, 106, 0.1);
+}
+
+.logout-btn {
+  background: #c0392b;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
 .logout-btn:hover {
-  background: var(--primary-color);
-  color: #fff;
+  background: #a93226;
 }
 
-/* =======================
-   HAMBURGER MENU
-======================= */
 .menu-toggle {
   display: none;
   background: none;
   border: none;
-  font-size: 26px;
+  font-size: 24px;
   cursor: pointer;
-  color: var(--text-color);
+  color: #333;
 }
 
-/* =======================
-   RESPONSIVE DESIGN
-======================= */
 @media (max-width: 992px) {
+  .top-bar, .main-header {
+    padding: 10px 20px;
+  }
 
   .menu-toggle {
     display: block;
   }
 
   .main-nav {
-    width: 100%;
-  }
-
-  .main-nav .menu {
     display: none;
-    flex-direction: column;
-    width: 100%;
-    background: #fff;
     position: absolute;
     top: 100%;
     left: 0;
-    border-top: 1px solid #ddd;
-    padding: 15px 0;
-    box-shadow: var(--shadow);
-    z-index: 99;
-  }
-
-  .main-nav.active .menu {
-    display: flex;
-  }
-
-  .menu li {
     width: 100%;
-    text-align: center;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
 
-  .menu li a,
-  .logout-btn {
-    width: 100%;
-    padding: 12px;
+  .main-nav.active {
+    display: block;
   }
 
-  .top-bar {
-    justify-content: center;
+  .main-nav .menu {
+    flex-direction: column;
+    padding: 20px;
     gap: 10px;
   }
 
-  .top-left,
-  .social-icons {
+  .menu li a, .logout-btn {
+    display: block;
     width: 100%;
-    justify-content: center;
-    display: flex;
+    text-align: center;
   }
 }
 
 @media (max-width: 576px) {
-
   .logo img {
-    height: 45px;
+    height: 40px;
   }
-  .main-nav{
-    width: 0%;
-  }
-  .top-bar a {
-    font-size: 14px;
-  }
-
-  .social-icons i {
+  .admin-label {
     font-size: 12px;
   }
 }

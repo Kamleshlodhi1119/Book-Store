@@ -26,6 +26,13 @@
 
   --gradient-primary: linear-gradient(135deg, #354f52, #52796f);
   --gradient-soft: linear-gradient(135deg, #cad2c5, #84a98c);
+
+
+ /* animation  */
+
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --card-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  --card-hover-shadow: 0 12px 25px rgba(0,0,0,0.15);
 }
 
 body {

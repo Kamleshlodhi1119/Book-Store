@@ -1,0 +1,40 @@
+.legal-hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), #05360c98),
+              url('src/assets/images/banner/bg4.png') center/cover no-repeat;
+  padding: 60px;
+  border-radius: 20px;
+  margin: 30px;
+  text-align: center;
+}
+
+.legal-hero h1 {
+  font-size: 48px;
+  color: #fff;
+  font-weight: 800;
+}
+
+.content-section {
+  max-width: 1000px;
+  margin: 0 auto 80px;
+  padding: 0 20px;
+  color: #444;
+  line-height: 1.8;
+}
+
+.content-section h2 {
+  color: #2d4342;
+  margin-top: 40px;
+  font-size: 28px;
+}
+
+.content-section p {
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.last-updated {
+  font-style: italic;
+  color: #4a6d6a;
+  margin-bottom: 40px;
+  display: block;
+}

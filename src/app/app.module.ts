@@ -18,6 +18,10 @@ import { OrdersComponent } from './user/orders/orders.component';
 import { ShopComponent } from './user/shop/shop.component';
 import { BookDetailsComponent } from './user/book-details/book-details.component';
 import { AboutusComponent } from './user/aboutus/aboutus.component';
+import { TermsComponent } from './privacy/terms/terms.component';
+import { LegalComponent } from './privacy/legal/legal.component';
+import { ReturnsComponent } from './privacy/returns/returns.component';
+import { PrivacyComponent } from './privacy/privacy/privacy.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +35,10 @@ import { AboutusComponent } from './user/aboutus/aboutus.component';
     ShopComponent,
     BookDetailsComponent,
     AboutusComponent,
+    LegalComponent,
+    TermsComponent,
+    ReturnsComponent,
+    PrivacyComponent,
   ],
   imports: [
     BrowserModule,
