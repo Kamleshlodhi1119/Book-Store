@@ -119,3 +119,20 @@
   color: var(--text-color);
   font-size: 13px;
 }
+
+
+@media (max-width: 480px) {
+.shop-heading {
+  font-size: 36px;
+  font-weight: 800;
+  display: block;
+}
+
+  .orders-container{
+    max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: 45vh;
+
+  }
+}

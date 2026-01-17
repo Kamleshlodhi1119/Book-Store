@@ -152,3 +152,23 @@
     stroke: #bdc3c7; /* Gray outline at end */
   }
 }
+
+
+
+
+
+@media (max-width: 480px) {
+.shop-heading {
+  font-size: 36px;
+  font-weight: 800;
+  display: block;
+}
+
+  .wishlist-container{
+    max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: 45vh;
+
+  }
+}
