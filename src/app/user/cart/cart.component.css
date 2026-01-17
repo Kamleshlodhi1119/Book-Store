@@ -254,3 +254,35 @@
   from { opacity: 0; transform: translateY(-20px); }
   to { opacity: 1; transform: translateY(0); }
 }
+@media (max-width: 480px) {
+
+
+  .cart-container{
+    max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: 45vh;
+
+  }
+    /* CART ITEM EXTRA COMPACT */
+    .book-preview-section h3 {
+        font-size: 1rem;
+        max-width: 150px; /* Prevent text overlap with remove btn */
+    }
+
+    .quantity-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .qty-btn {
+        flex: 1;
+        padding: 12px;
+    }
+
+    /* PAYMENT MODAL */
+    .payment-modal {
+        padding: 25px 20px;
+        width: 95%;
+    }
+}
