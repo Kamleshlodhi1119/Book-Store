@@ -254,8 +254,16 @@
   from { opacity: 0; transform: translateY(-20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-@media (max-width: 480px) {
 
+
+
+
+@media (max-width: 480px) {
+.shop-heading {
+  font-size: 36px;
+  font-weight: 800;
+  display: block;
+}
 
   .cart-container{
     max-width: 1000px;
