@@ -22,6 +22,7 @@ import { TermsComponent } from './privacy/terms/terms.component';
 import { LegalComponent } from './privacy/legal/legal.component';
 import { ReturnsComponent } from './privacy/returns/returns.component';
 import { PrivacyComponent } from './privacy/privacy/privacy.component';
+import { AuthModalComponent } from './auth/auth-modal/auth-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +40,7 @@ import { PrivacyComponent } from './privacy/privacy/privacy.component';
     TermsComponent,
     ReturnsComponent,
     PrivacyComponent,
+    AuthModalComponent,
   ],
   imports: [
     BrowserModule,

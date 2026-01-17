@@ -1,9 +1,28 @@
-<app-user-header></app-user-header>
-<div class="login-container">
-  <h2>Login</h2>
-<input [(ngModel)]="email" placeholder="Email"> 
-<input [(ngModel)]="password" type="password" placeholder="Password"><br>
-<pre></pre>
-<button type="submit"  (click)="login()">Login</button>
-</div>
- 
+<!-- <app-user-header></app-user-header>
+
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h2>Welcome Back</h2>
+      <p>Log in to access your curated library</p>
+    </div>
+
+    <div class="auth-form">
+      <div class="input-group">
+        <i class="fa fa-envelope"></i>
+        <input [(ngModel)]="email" placeholder="Email Address">
+      </div>
+
+      <div class="input-group">
+        <i class="fa fa-lock"></i>
+        <input [(ngModel)]="password" type="password" placeholder="Password">
+      </div>
+
+      <button class="btn-auth" (click)="login()">Sign In</button>
+      
+      <div class="auth-footer">
+        <p>New to the club? <a routerLink="/register">Join Now</a></p>
+      </div>
+    </div>
+  </div>
+</div> -->

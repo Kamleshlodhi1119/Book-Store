@@ -1,22 +1,38 @@
 <div class="top-bar">
   <div class="top-left">
-    <a routerLink="/login" routerLinkActive="active-top">Login</a>
-    <span>|</span>
-    <a routerLink="/register" routerLinkActive="active-top">Register</a>
+    <div class="nav-actions">
+      <ng-container *ngIf="!isLoggedIn">
+        <button class="nav-btn auth-link" (click)="openLogin()">
+          <i class="fa-solid fa-circle-user"></i> Login
+        </button>
+        <span class="v-divider"></span>
+        <button class="nav-btn auth-link" (click)="openRegister()">
+          <i class="fa-solid fa-feather-pointed"></i> Join Now
+        </button>
+      </ng-container>
+
+      <ng-container *ngIf="isLoggedIn">
+        <span class="welcome-text">
+          <i class="fa-solid fa-book-open-reader"></i> Hello, <strong>{{ username }}</strong>
+        </span>
+        <button class="logout-link" (click)="logout()">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+        </button>
+      </ng-container>
+    </div>
   </div>
 
   <div class="social-icons">
-    <i class="fab fa-facebook"></i>
-    <i class="fab fa-google"></i>
-    <i class="fab fa-twitter"></i>
-    <i class="fab fa-github"></i>
-    <i class="fab fa-slack"></i>
+    <a href="#" class="social-tip"><i class="fab fa-facebook-f"></i></a>
+    <a href="#" class="social-tip"><i class="fab fa-google"></i></a>
+    <a href="#" class="social-tip"><i class="fab fa-twitter"></i></a>
+    <a href="#" class="social-tip"><i class="fab fa-github"></i></a>
   </div>
 </div>
 
 <header class="main-header">
   <div class="logo">
-    <img src="../../../../assets/Logo/Logo.png" alt="Logo">
+    <img src="../../../../assets/Logo/Logo.png" alt="Library Logo">
   </div>
 
   <nav class="main-nav" [class.active]="isMenuOpen">
@@ -24,16 +40,15 @@
       <li><a routerLink="/home" routerLinkActive="active-link">Home</a></li>
       <li><a routerLink="/aboutus" routerLinkActive="active-link">About Us</a></li>
       <li><a routerLink="/shop" routerLinkActive="active-link">Shop</a></li>
-      <li><a routerLink="/cart" routerLinkActive="active-link">Cart</a></li>
+      <li><a routerLink="/cart" routerLinkActive="active-link">Cart <span class="badge" *ngIf="cartCount > 0">{{cartCount}}</span></a></li>
       <li><a routerLink="/orders" routerLinkActive="active-link">Orders</a></li>
       <li><a routerLink="/wishlist" routerLinkActive="active-link">Wishlist</a></li>
-      <li>
-        <button class="logout-btn" (click)="logout()">Logout</button>
-      </li>
     </ul>
   </nav>
 
-  <button class="menu-toggle" (click)="isMenuOpen = !isMenuOpen">
-    <i class="fas" [ngClass]="isMenuOpen ? 'fa-times' : 'fa-bars'"></i>
-  </button>
+  <div class="header-right">
+    <button class="menu-toggle" (click)="isMenuOpen = !isMenuOpen">
+      <i class="fas" [ngClass]="isMenuOpen ? 'fa-times' : 'fa-bars-staggered'"></i>
+    </button>
+  </div>
 </header>

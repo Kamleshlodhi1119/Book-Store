@@ -1,16 +1,33 @@
-<app-user-header></app-user-header>
+<!-- <app-user-header></app-user-header>
 
-<pre>
-    
-</pre>
-<h2>Register</h2>
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h2>Join the Club</h2>
+      <p>Create an account to start your journey</p>
+    </div>
 
-<input [(ngModel)]="username" placeholder="Username">
-<input [(ngModel)]="email" placeholder="Email">
-<input [(ngModel)]="password" type="password" placeholder="Password">
+    <div class="auth-form">
+      <div class="input-group">
+        <i class="fa fa-user"></i>
+        <input [(ngModel)]="username" placeholder="Full Name">
+      </div>
 
-<button (click)="register()">Register</button>
+      <div class="input-group">
+        <i class="fa fa-envelope"></i>
+        <input [(ngModel)]="email" placeholder="Email Address">
+      </div>
 
-<pre>
+      <div class="input-group">
+        <i class="fa fa-lock"></i>
+        <input [(ngModel)]="password" type="password" placeholder="Password">
+      </div>
 
-</pre> 
+      <button class="btn-auth" (click)="register()">Create Account</button>
+      
+      <div class="auth-footer">
+        <p>Already a member? <a routerLink="/login">Log In</a></p>
+      </div>
+    </div>
+  </div>
+</div> -->

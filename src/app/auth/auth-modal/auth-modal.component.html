@@ -1,0 +1,27 @@
+<div class="auth-overlay" *ngIf="mode" (click)="close()">
+  <div class="auth-card" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="close()">×</button>
+
+    <h2 class="auth-title">{{ mode === 'login' ? 'Welcome Back' : 'Create Account' }}</h2>
+
+    <div class="auth-form">
+      <input *ngIf="mode === 'register'" [(ngModel)]="username" placeholder="Username" type="text">
+      
+      <input [(ngModel)]="email" placeholder="Email Address" type="email">
+      
+      <input [(ngModel)]="password" placeholder="Password" type="password">
+
+      <button *ngIf="mode === 'login'" class="main-btn" (click)="handleLogin()">Login</button>
+      <button *ngIf="mode === 'register'" class="main-btn" (click)="handleRegister()">Register</button>
+    </div>
+
+    <div class="auth-footer">
+      <p *ngIf="mode === 'login'">
+        New user? <a (click)="mode = 'register'">Sign up here</a>
+      </p>
+      <p *ngIf="mode === 'register'">
+        Already have an account? <a (click)="mode = 'login'">Log in here</a>
+      </p>
+    </div>
+  </div>
+</div>

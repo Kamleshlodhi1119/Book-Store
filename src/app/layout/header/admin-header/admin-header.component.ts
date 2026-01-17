@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { LoginRegisterService } from 'src/app/core/services/login-register.service';
 
 @Component({
   selector: 'app-admin-header',
@@ -10,12 +11,26 @@ import { AuthService } from 'src/app/core/services/auth.service';
 
 export class AdminHeaderComponent {
   isMenuOpen = false;
+isLoggedIn: any;
+username: any;
 
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router,
+      private loginRegisterService: LoginRegisterService
+    ) {}
+  openLogin() {
+    this.loginRegisterService.openLogin();
+  }
+
+  openRegister() {
+    this.loginRegisterService.openRegister();
+  }
 
   logout() {
-    this.auth.logout();
-    this.router.navigate(['/login']);
+    this.auth.logout(); // Ensure your auth service handles clearing session
   }
+  // logout() {
+  //   this.auth.logout();
+  //   this.router.navigate(['/login']);
+  // }
 }

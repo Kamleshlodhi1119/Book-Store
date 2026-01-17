@@ -1,34 +1,133 @@
-.login-container {
-  max-width: 400px;
-  margin: 40px auto;
-  /* padding: 30px; */
-  /* border-radius: 12px;
-  background-color: var(--card-bg, #fff);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); */
+/* BACKGROUND WRAPPER */
+.auth-wrapper {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Use a blurred version of your bookstore background */
+  background: linear-gradient(rgba(45, 67, 66, 0.8), rgba(45, 67, 66, 0.9)),
+              url("../../../assets/images/banner/bg2.png") center/cover no-repeat;
+  padding: 20px;
+}
+
+/* THE CARD */
+.auth-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  width: 100%;
+  max-width: 450px;
+  padding: 50px 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  animation: fadeUp 0.6s ease-out;
+}
+
+.auth-header {
   text-align: center;
+  margin-bottom: 35px;
 }
 
-.login-container h2 {
-  margin-bottom: 25px;
+.auth-header h2 {
+  font-size: 2rem;
+  font-weight: 800;
   color: var(--primary-color);
+  margin-bottom: 10px;
 }
 
-.login-container input {
-  width: 90%;
-  padding: 12px;
-  margin-bottom: 16px; /* ✅ spacing here */
-  border-radius: 8px;
-  border: 1px solid #ccc;
+.auth-header p {
+  color: #666;
   font-size: 14px;
 }
 
-.login-container button {
-  width: 95%;
-  padding: 12px;
-  border-radius: 8px;
-  background-color: var(--primary-color);
-  color: #fff;
-  font-weight: 600;
+/* INPUT STYLES */
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-group i {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  transition: 0.3s;
+}
+
+.input-group input {
+  width: 90%;
+  padding: 14px 15px 14px 45px; /* Extra padding for the icon */
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  background: #fdfdfd;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(74, 109, 106, 0.1);
+}
+
+.input-group input:focus + i {
+  color: var(--secondary-color);
+}
+
+/* AUTH BUTTON */
+.btn-auth {
+  width: 100%;
+  padding: 15px;
+  border-radius: 12px;
+  background: var(--primary-color);
+  color: white;
   border: none;
+  font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 10px;
+}
+
+.btn-auth:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* FOOTER LINKS */
+.auth-footer {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.auth-footer p {
+  font-size: 14px;
+  color: #666;
+}
+
+.auth-footer a {
+  color: var(--primary-color);
+  font-weight: 700;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.auth-footer a:hover {
+  color: var(--accent-color);
+  text-decoration: underline;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* MOBILE ADJUSTMENTS */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 35px 20px;
+  }
 }
