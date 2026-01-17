@@ -345,3 +345,188 @@
   border-radius: 22px;
   cursor: pointer;
 }
+
+
+/* =========================
+   RESPONSIVE – TABLET
+   ========================= */
+@media (max-width: 1024px) {
+
+  /* HERO */
+  .shop-hero {
+    padding: 60px 40px;
+    margin: 20px;
+  }
+
+  .shop-heading {
+    font-size: 48px;
+  }
+
+  /* LAYOUT */
+  .shop-container {
+    padding: 30px 40px;
+  }
+
+  .shop-layout {
+    grid-template-columns: 220px 1fr;
+    gap: 30px;
+  }
+
+  /* FILTER */
+  .shop-filter {
+    top: 100px;
+  }
+
+  /* IMAGE */
+  .image-box img {
+    height: 220px;
+  }
+
+  /* OTHER CATEGORY */
+  .other-category {
+    padding: 60px 40px;
+  }
+
+  .category-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .category-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .category-card img {
+    width: 140px;
+  }
+}
+
+
+/* =========================
+   RESPONSIVE – MOBILE
+   ========================= */
+@media (max-width: 768px) {
+
+  /* HERO */
+  .shop-hero {
+    padding: 50px 25px;
+    margin: 15px;
+    border-radius: 16px;
+  }
+
+  .shop-heading {
+    font-size: 36px;
+  }
+
+  .hero-content h1 {
+    font-size: 18px;
+  }
+
+  .hero-content p {
+    font-size: 13px;
+  }
+
+  /* MAIN LAYOUT */
+  .shop-container {
+    padding: 20px;
+  }
+
+  .shop-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  /* FILTER → CARD STYLE */
+  .shop-filter {
+    position: relative;
+    top: 0;
+    width: 90%;
+  }
+
+  /* FILTER CHECKBOX */
+  .checkbox-group {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* GRID */
+  .shop-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .image-box img {
+    height: 200px;
+  }
+
+  /* CARD TEXT */
+  .shop-card h3 {
+    font-size: 14px;
+  }
+
+  .author {
+    font-size: 12px;
+  }
+
+  .price {
+    font-size: 14px;
+  }
+
+  /* PAGINATION */
+  .shop-pagination {
+    flex-wrap: wrap;
+  }
+
+  /* OTHER CATEGORY */
+  .other-category {
+    padding: 50px 20px;
+  }
+
+  .other-category h2 {
+    font-size: 20px;
+  }
+
+  /* EXPLORE CTA */
+  .explore-catalog {
+    padding: 50px 25px;
+    height: auto;
+  }
+
+  .explore-catalog h2 {
+    font-size: 22px;
+  }
+
+  .explore-catalog p {
+    font-size: 13px;
+  }
+
+  .explore-catalog button {
+    padding: 12px 22px;
+    font-size: 14px;
+  }
+}
+
+
+/* =========================
+   EXTRA SMALL DEVICES
+   ========================= */
+@media (max-width: 480px) {
+
+  .shop-heading {
+    font-size: 30px;
+  }
+
+  .shop-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .image-box img {
+    height: 240px;
+  }
+
+  .icon-btn {
+    width: 34px;
+    height: 34px;
+  }
+}
+

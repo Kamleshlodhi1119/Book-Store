@@ -5,7 +5,6 @@
   "projects": {
     "bookstore": {
       "projectType": "application",
-      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -22,7 +21,8 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/_redirects"
             ],
             "styles": [
               "src/styles.css"
@@ -31,19 +31,18 @@
           },
           "configurations": {
             "production": {
-             "budgets": [
-  {
-    "type": "initial",
-    "maximumWarning": "500kb",
-    "maximumError": "1mb"
-  },
-  {
-    "type": "anyComponentStyle",
-    "maximumWarning": "10kb",
-    "maximumError": "20kb"
-  }
-]
-,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "10kb",
+                  "maximumError": "20kb"
+                }
+              ],
               "outputHashing": "all"
             },
             "development": {
@@ -85,8 +84,7 @@
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              "src/_redirects"
+              "src/assets"
             ],
             "styles": [
               "src/styles.css"
@@ -98,6 +96,6 @@
     }
   },
   "cli": {
-    "analytics": "358ee60f-46b6-415d-8029-cbe427938b6a"
+    "analytics": false
   }
 }
