@@ -1,0 +1,191 @@
+
+/* HERO */
+.about-hero {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.485), #05360c98),
+     url('src\assets\images\banner\bg4.png') center/cover no-repeat;
+  padding: 80px 60px;
+  border-radius: 20px;
+  margin: 30px;
+}
+.hero-content {
+  max-width: 520px;
+  color: #fff;
+}
+
+.about-heading{
+  font-size: 64px;
+  font-weight: 800;
+}
+.hero-content h1 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.hero-content p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+
+
+/* hero section end here  */
+
+
+
+
+
+
+
+
+
+
+
+:host {
+  display: block;
+}
+
+/* MAIN SECTION */
+/* .pc-services {
+  background: #000;
+  padding: 120px 0;
+} */
+
+/* TWO-SIDE CONTAINER */
+.pc-container {
+  max-width: 1400px;
+  margin: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0 0px;
+  gap: 20px;
+}
+
+/* LEFT FLEX CARDS */
+.pc-cards {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 310px;
+  gap: 15px;
+
+}
+.pc-cards-right {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  margin-bottom: -20px;
+  flex-direction: row;
+  width: 400px;
+  gap: 15px;
+}
+
+/* BASE CARD */
+.pc-card {
+  width: 260px;
+  min-height: 260px;
+  background: #1f1f1f;
+  border-radius: 18px;
+  padding: 32px;
+}
+
+
+/* UNIQUE HOOK CLASSES */
+.pc-card-1 {}
+.pc-card-2 {}
+.pc-card-3 {}
+.pc-card-4 {}
+
+/* ACTIVE CARD */
+.pc-active {
+  background: #ff7a00;
+}
+
+.pc-active h3,
+.pc-active p,
+.pc-active .pc-icon {
+  color: #000;
+}
+
+/* CARD CONTENT */
+.pc-card h3 {
+  margin: 18px 0 10px;
+  font-size: 20px;
+  color: #fff;
+}
+
+.pc-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #bdbdbd;
+}
+
+.pc-icon {
+  font-size: 42px;
+  color: #ff7a00;
+}
+
+/* RIGHT TEXT */
+.pc-text {
+  max-width: 560px;
+}
+
+.pc-sub {
+  display: inline-block;
+  letter-spacing: 3px;
+  font-size: 13px;
+  color: #ff7a00;
+  margin-bottom: 12px;
+}
+
+.pc-text h2 {
+  font-size: 54px;
+  line-height: 1.2;
+  margin-bottom: 28px;
+  color: #fff;
+}
+
+.pc-text h2 span {
+  color: #ff7a00;
+}
+
+.pc-text p {
+  color: #bdbdbd;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+/* BUTTON */
+.pc-btn {
+  margin-top: 10px;
+  background: #ff7a00;
+  border: none;
+  padding: 14px 40px;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pc-btn:hover {
+  background: #e56d00;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .pc-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .pc-cards {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .pc-text {
+    text-align: center;
+    margin: auto;
+  }
+}

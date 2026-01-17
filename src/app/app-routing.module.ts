@@ -17,12 +17,14 @@ import { AdminGuard } from './core/guards/admin.guard';
 import { ShopComponent } from './user/shop/shop.component';
 import { OrdersComponent } from './user/orders/orders.component';
 import { BookDetailsComponent } from './user/book-details/book-details.component';
+import { AboutusComponent } from './user/aboutus/aboutus.component';
 
 const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: UserHomeComponent},
+    { path: 'aboutus', component: AboutusComponent},
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
   { path: 'wishlist', component: WishlistComponent , canActivate: [AuthGuard]},
   { path: 'shop', component: ShopComponent},

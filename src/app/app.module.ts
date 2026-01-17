@@ -17,6 +17,7 @@ import { AlertComponent } from './alert/alert.component';
 import { OrdersComponent } from './user/orders/orders.component';
 import { ShopComponent } from './user/shop/shop.component';
 import { BookDetailsComponent } from './user/book-details/book-details.component';
+import { AboutusComponent } from './user/aboutus/aboutus.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +30,7 @@ import { BookDetailsComponent } from './user/book-details/book-details.component
     OrdersComponent,
     ShopComponent,
     BookDetailsComponent,
+    AboutusComponent,
   ],
   imports: [
     BrowserModule,

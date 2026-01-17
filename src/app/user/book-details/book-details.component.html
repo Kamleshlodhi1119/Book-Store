@@ -13,7 +13,7 @@
           <div class="avg-badge">
             <span class="star-icon">⭐</span>
             <span class="rating-val">{{ book.averageRating || 0 }}</span>
-            <span class="total-reviews">({{ bookRatings?.length || 0 }} reviews)</span>
+            <span class="total-reviews" *ngFor="let r of bookRatings">({{ r?.length || 0 }} reviews)</span>
           </div>
         </div>
       </div>
