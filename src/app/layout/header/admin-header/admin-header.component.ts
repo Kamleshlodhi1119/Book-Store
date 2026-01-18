@@ -11,8 +11,8 @@ import { LoginRegisterService } from 'src/app/core/services/login-register.servi
 
 export class AdminHeaderComponent {
   isMenuOpen = false;
-isLoggedIn: any;
-username: any;
+  isLoggedIn: any;
+  username: any;
 
 
   constructor(private auth: AuthService, private router: Router,

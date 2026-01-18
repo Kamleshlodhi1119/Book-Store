@@ -35,20 +35,35 @@
     <img src="../../../../assets/Logo/Logo.png" alt="Library Logo">
   </div>
 
-  <nav class="main-nav" [class.active]="isMenuOpen">
-    <ul class="menu">
-      <li><a routerLink="/home" routerLinkActive="active-link">Home</a></li>
-      <li><a routerLink="/aboutus" routerLinkActive="active-link">About Us</a></li>
-      <li><a routerLink="/shop" routerLinkActive="active-link">Shop</a></li>
-      <li><a routerLink="/cart" routerLinkActive="active-link">Cart <span class="badge" *ngIf="cartCount > 0">{{cartCount}}</span></a></li>
-      <li><a routerLink="/orders" routerLinkActive="active-link">Orders</a></li>
-      <li><a routerLink="/wishlist" routerLinkActive="active-link">Wishlist</a></li>
-    </ul>
-  </nav>
 
-  <div class="header-right">
-    <button class="menu-toggle" (click)="isMenuOpen = !isMenuOpen">
-      <i class="fas" [ngClass]="isMenuOpen ? 'fa-times' : 'fa-bars-staggered'"></i>
-    </button>
+  <!-- DESKTOP MENU -->
+<nav class="desktop-nav">
+  <ul class="menu">
+    <li><a routerLink="/home" routerLinkActive="active-link">Home</a></li>
+    <li><a routerLink="/aboutus" routerLinkActive="active-link">About Us</a></li>
+    <li><a routerLink="/shop" routerLinkActive="active-link">Shop</a></li>
+    <li><a routerLink="/cart" routerLinkActive="active-link">Cart</a></li>
+    <li><a routerLink="/orders" routerLinkActive="active-link">Orders</a></li>
+    <li><a routerLink="/wishlist" routerLinkActive="active-link">Wishlist</a></li>
+  </ul>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-nav">
+  <div class="hamburger" (click)="toggleMobileMenu()">
+    <span [class.open]="mobileMenuOpen"></span>
+    <span [class.open]="mobileMenuOpen"></span>
+    <span [class.open]="mobileMenuOpen"></span>
   </div>
-</header>
+
+  <div class="mobile-menu" [class.open]="mobileMenuOpen">
+    <a routerLink="/home" (click)="closeMobileMenu()">Home</a>
+    <a routerLink="/aboutus" (click)="closeMobileMenu()">About Us</a>
+    <a routerLink="/shop" (click)="closeMobileMenu()">Shop</a>
+    <a routerLink="/cart" (click)="closeMobileMenu()">Cart</a>
+    <a routerLink="/orders" (click)="closeMobileMenu()">Orders</a>
+    <a routerLink="/wishlist" (click)="closeMobileMenu()">Wishlist</a>
+  </div>
+</div>
+
+ </header>

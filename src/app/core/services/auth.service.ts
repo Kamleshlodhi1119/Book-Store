@@ -7,29 +7,21 @@ interface LoginResponse {
   token: string;
   role: string;
 }
-
-
-
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-
   private api = `${environment.apiBaseUrl}/auth`;
-
-  
-
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   login(data: { email: string; password: string }): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.api}/login`, data);
   }
 
   register(data: any): Observable<any> {
-    return this.http.post(`${this.api}/register`,  data, { 
-    responseType: 'text' 
-  });
+    return this.http.post(`${this.api}/register`, data, {
+      responseType: 'text'
+    });
   }
-
-
+  
   me(): Observable<any> {
     return this.http.get(`${this.api}/me`);
   }
@@ -54,5 +46,9 @@ export class AuthService {
 
   getToken(): string | null {
     return localStorage.getItem('token');
+  }
+
+  getUsername(): string | null{
+    return localStorage.getItem('email');
   }
 }

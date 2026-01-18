@@ -8,47 +8,36 @@
   <div class="top-right">
     <div class="nav-actions">
       <ng-container *ngIf="isLoggedIn">
-        <span class="admin-user">
-          <i class="fa-solid fa-user-tie"></i> {{ username }} 
+        <span class="welcome-text">
+          <i class="fa-solid fa-user-tie"></i> Hello, <strong>{{ username }}</strong>
           <span class="status-dot"></span>
         </span>
         <span class="v-divider"></span>
-        <button class="top-logout" (click)="logout()">
+        <button class="logout-link" (click)="logout()">
           <i class="fa-solid fa-power-off"></i> Logout
         </button>
       </ng-container>
+
+      <div class="social-icons" *ngIf="!isLoggedIn">
+        <a href="#" class="social-tip"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-tip"><i class="fab fa-github"></i></a>
+      </div>
     </div>
   </div>
 </div>
 
 <header class="main-header admin-header">
   <div class="logo">
-    <img src="../../../../assets/Logo/Logo.png" alt="Admin Logo">
-    <span class="logo-tag">Management</span>
+    <img src="../../../../assets/Logo/Logo.png" alt="Library Logo">
+    <!-- <span class="logo-tag">Management</span> -->
   </div>
 
   <nav class="main-nav" [class.active]="isMenuOpen">
     <ul class="menu">
-      <li>
-        <a routerLink="/admin/dashboard" routerLinkActive="active-admin">
-          <i class="fa-solid fa-chart-line"></i> Dashboard
-        </a>
-      </li>
-      <li>
-        <a routerLink="/admin/users" routerLinkActive="active-admin">
-          <i class="fa-solid fa-users-gear"></i> Users
-        </a>
-      </li>
-      <li>
-        <a routerLink="/admin/books" routerLinkActive="active-admin">
-          <i class="fa-solid fa-book"></i> Inventory
-        </a>
-      </li>
-      <li>
-        <a routerLink="/admin/orders" routerLinkActive="active-admin">
-          <i class="fa-solid fa-truck-ramp-box"></i> Orders
-        </a>
-      </li>
+      <li><a routerLink="/admin/dashboard" routerLinkActive="active-admin"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+      <li><a routerLink="/admin/users" routerLinkActive="active-admin"><i class="fa-solid fa-users-gear"></i> Users</a></li>
+      <li><a routerLink="/admin/books" routerLinkActive="active-admin"><i class="fa-solid fa-book"></i> Inventory</a></li>
+      <li><a routerLink="/admin/orders" routerLinkActive="active-admin"><i class="fa-solid fa-truck-ramp-box"></i> Orders</a></li>
     </ul>
   </nav>
 

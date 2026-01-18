@@ -9,21 +9,22 @@ import { LoginRegisterService } from 'src/app/core/services/login-register.servi
   styleUrls: ['./user-header.component.css']
 })
 export class UserHeaderComponent {
-  isMenuOpen = false;
 isLoggedIn: any;
 username: any;
-cartCount: any;
+
+mobileMenuOpen = false;
 
 
   constructor(private auth: AuthService, private router: Router,
     private loginRegisterService: LoginRegisterService
   ) {}
 
-  // logout() {
-  //   this.auth.logout();
-  //   this.router.navigate(['/login']);
-  // }
-
+ngOnInit() {
+  if (this.auth.isLoggedIn()) {
+    this.isLoggedIn = true;
+    this.username = this.auth.getUsername();
+  }
+}
 
   openLogin() {
     this.loginRegisterService.openLogin();
@@ -36,4 +37,13 @@ cartCount: any;
   logout() {
     this.auth.logout(); // Ensure your auth service handles clearing session
   }
+
+  toggleMobileMenu() {
+  this.mobileMenuOpen = !this.mobileMenuOpen;
+    document.body.style.overflow = this.mobileMenuOpen ? 'hidden' : 'auto';
+}
+
+closeMobileMenu() {
+  this.mobileMenuOpen = false;
+}
 }

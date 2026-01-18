@@ -1,112 +1,202 @@
-/* ADMIN SPECIFIC COLORS */
+/* REUSING YOUR USER VARIABLES */
 :root {
-  --admin-primary: #2c3e50;
-  --admin-accent: #3498db;
-  --admin-dark: #1a252f;
-  --success-glow: #2ecc71;
+  --primary-color: #4a6d6a;
+  --secondary-color: #354f52;
+  --accent-color: #bfff5f;
+  --text-dark: #2d3436;
+  --glass-white: rgba(255, 255, 255, 0.95);
 }
 
-/* TOP BAR - Dark Tech Style */
-.top-bar.admin-theme {
-  background: var(--admin-dark);
-  color: #ecf0f1;
-  padding: 8px 60px;
+/* TOP BAR - Exact same background and gradient as User */
+.top-bar {
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(5, 54, 12, 0.85)),
+              url("../../../../assets/images/banner/bg5.png") center/cover no-repeat;
+  color: #fff;
+  padding: 10px 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 12px;
-  border-bottom: 2px solid var(--admin-accent);
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
+/* New Admin Badge styling to fit the top bar */
 .admin-badge {
-  background: rgba(52, 152, 219, 0.2);
-  color: var(--admin-accent);
-  padding: 4px 12px;
-  border-radius: 4px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.admin-user {
+  color: var(--accent-color);
   display: flex;
   align-items: center;
   gap: 8px;
-  font-weight: 500;
 }
 
-.status-dot {
-  width: 8px;
-  height: 8px;
-  background: var(--success-glow);
-  border-radius: 50%;
-  box-shadow: 0 0 8px var(--success-glow);
+.v-divider {
+  width: 1px;
+  height: 14px;
+  background: rgba(255,255,255,0.3);
+  margin: 0 10px;
 }
 
-.top-logout {
-  background: none;
-  border: none;
-  color: #bdc3c7;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s;
-}
-
-.top-logout:hover {
-  color: #e74c3c;
-}
-
-/* MAIN HEADER ADMIN */
-.admin-header {
-  background: #ffffff;
-  border-bottom: 1px solid #ddd;
-}
-
-.logo-tag {
-  font-size: 10px;
-  background: var(--admin-primary);
-  color: white;
-  padding: 2px 6px;
-  border-radius: 3px;
-  margin-left: 10px;
-  vertical-align: middle;
-  text-transform: uppercase;
-}
-
-/* ADMIN MENU LINKS */
-.menu li a {
+/* NAV ACTIONS (Login/Welcome/Logout) */
+.nav-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
-  color: #555;
+  gap: 15px;
+}
+
+.auth-link {
+  color: #fff;
+  background: none;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   transition: all 0.3s ease;
 }
 
-.active-admin {
-  color: var(--admin-accent) !important;
-  background: rgba(52, 152, 219, 0.05);
-  border-radius: 8px;
-  padding: 8px 15px !important;
+.auth-link:hover {
+  color: var(--accent-color);
+  transform: translateY(-1px);
 }
 
-.active-admin::after {
+.welcome-text i {
+  color: var(--accent-color);
+  margin-right: 5px;
+}
+
+.logout-link {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-link:hover {
+  background: #ff7675;
+  border-color: #ff7675;
+}
+
+/* SOCIAL ICONS */
+.social-icons a {
+  color: rgba(255,255,255,0.8);
+  margin: 0 8px;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  color: var(--accent-color);
+}
+
+/* MAIN HEADER - Exact same glass effect */
+.main-header {
+  background: var(--glass-white);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 15px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo img {
+  height: 55px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+/* ADMIN NAVIGATION MENU */
+.main-nav .menu {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.menu li a {
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between icon and text */
+}
+
+/* Your specific Icons inside the links */
+.menu li a i {
+  font-size: 16px;
+  color: var(--primary-color);
+}
+
+/* Underline animation - Same as User */
+.menu li a::after {
   content: '';
   position: absolute;
-  bottom: -15px;
+  bottom: 0;
   left: 0;
-  width: 100%;
-  height: 3px;
-  background: var(--admin-accent);
+  width: 0;
+  height: 2px;
+  background: var(--primary-color);
+  transition: width 0.3s ease;
 }
 
-/* RESPONSIVE ADAPTATION */
+.menu li a:hover::after, .active-admin::after {
+  width: 100%;
+}
+
+.active-admin {
+  color: var(--primary-color) !important;
+}
+
+/* MOBILE TOGGLE */
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-dark);
+}
+
 @media (max-width: 992px) {
-  .top-bar.admin-theme { padding: 10px 20px; }
-  .admin-header { padding: 10px 20px; }
+  .top-bar { padding: 10px 20px; flex-direction: column; gap: 10px; }
+  .main-header { padding: 10px 20px; }
   
-  .main-nav .menu {
-    background: var(--admin-dark);
+  .menu-toggle { display: block; }
+
+  .main-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: #fff;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+    display: block;
+    z-index: 2000;
   }
-  
-  .menu li a { color: #fff; }
+
+  .main-nav.active { right: 0; }
+
+  .main-nav .menu {
+    flex-direction: column;
+    padding: 80px 30px;
+    gap: 20px;
+  }
 }

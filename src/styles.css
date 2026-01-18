@@ -28,6 +28,11 @@
   --gradient-soft: linear-gradient(135deg, #cad2c5, #84a98c);
 
 
+   --primary-color: #4a6d6a;
+  --secondary-color: #354f52;
+  --accent-color: #bfff5f;
+  --text-dark: #2d3436;
+  --glass-white: rgba(255, 255, 255, 0.95);
  /* animation  */
 
   --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
