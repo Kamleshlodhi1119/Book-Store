@@ -47,10 +47,10 @@ const routes: Routes = [
   // ADMIN
   {
     path: 'admin',
-    canActivate: [AdminGuard],
+    // canActivate: [AdminGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'users', component: AdminUsersComponent },
+      { path: 'users', component: AdminUsersComponent },      
       { path: 'books', component: AdminBooksComponent },
       { path: 'orders', component: AdminOrdersComponent }
     ]
