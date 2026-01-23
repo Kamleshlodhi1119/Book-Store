@@ -27,7 +27,7 @@
    <div class="wishlist-card" *ngFor="let w of list">
   <div class="book-preview-section">
     <img class="logo-book-preview-img"
-      [src]="w.book.imageUrl ? imageApi + w.book.id + '/image' : 'assets/book-placeholder.png'"
+       [src]="w.imageUrl ? imageApi + w.imageUrl : 'assets/book-placeholder.png'"
       [alt]="w.book.title" />
     
     <div class="info">

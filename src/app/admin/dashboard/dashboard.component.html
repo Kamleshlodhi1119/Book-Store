@@ -70,9 +70,7 @@
 
     <div class="image-container">
       <img
-  [src]="product.imageUrl
-    ? 'https://bookstore-h5qp.onrender.com/api/books/' + product.id + '/image'
-    : 'assets/book-placeholder.png'"
+   [src]="product.imageUrl ? imageApi + product.imageUrl : 'assets/book-placeholder.png'"
   alt="{{ product.title }}"
 />
       <div class="overlay">
@@ -133,9 +131,9 @@
       <div class="book-card" *ngFor="let product of books">
 
     <div class="image-container">
-      <img [src]="product.imageUrl
-    ? 'https://bookstore-h5qp.onrender.com/api/books/' + product.id + '/image'
-    : 'assets/book-placeholder.png'" alt="{{ product.title }}" />
+      <img 
+       [src]="product.imageUrl ? imageApi + product.imageUrl : 'assets/book-placeholder.png'"
+     alt="{{ product.title }}" />
 
 
 

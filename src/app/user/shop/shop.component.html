@@ -76,9 +76,7 @@
 
           <div class="image-box">
             <img
-              [src]="b.imageUrl
-                ? imageApi + b.id + '/image'
-                : 'assets/book-placeholder.png'"
+              [src]="b.imageUrl ? imageApi + b.imageUrl : 'assets/book-placeholder.png'"
               alt="{{ b.title }}"
             />
 

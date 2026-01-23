@@ -26,8 +26,13 @@ export class AdminBooksComponent implements OnInit {
 
   books: Book[] = [];
 
-  api = 'https://bookstore-h5qp.onrender.com/api/admin/books';
-  publicApi = 'https://bookstore-h5qp.onrender.com/api/books';
+
+   private api = `${environment.apiBaseUrl}/admin/books`;
+    private publicApi = `${environment.apiBaseUrl}/books`;
+  // api = 'https://bookstore-h5qp.onrender.com/api';
+  // publicApi = 'https://bookstore-h5qp.onrender.com/api';
+
+
   readonly imageApi = environment.bookImageBaseUrl;
 
   showModal = false;
@@ -155,13 +160,13 @@ export class AdminBooksComponent implements OnInit {
     this.previewUrl = null;
   }
 
-  getImageUrl(book: Partial<Book>): string {
-    if (!book.imageUrl) return 'assets/book-placeholder.png';
-    if (book.id) {
-      return `https://bookstore-h5qp.onrender.com/api/books/${book.id}/image?ts=${book.imageTimestamp || new Date().getTime()}`;
-    }
-    return 'assets/book-placeholder.png';
-  }
+  // getImageUrl(book: Partial<Book>): string {
+  //   if (!book.imageUrl) return 'assets/book-placeholder.png';
+  //   if (book.id) {
+  //     return `https://bookstore-h5qp.onrender.com/api/books/${book.id}/image?ts=${book.imageTimestamp || new Date().getTime()}`;
+  //   }
+  //   return 'assets/book-placeholder.png';
+  // }
 
   onImageError(event: Event): void {
     const img = event.target as HTMLImageElement;

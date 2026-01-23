@@ -61,9 +61,11 @@
 <div class="product-grid">
   <div class="book-card" *ngFor="let product of books | slice:0:8">
     <div class="image-container">
-      <img [src]="product.imageUrl
-        ? imageApi + product.id + '/image'
-        : 'assets/book-placeholder.png'" alt="{{ product.title }}" />
+      <img 
+      
+       [src]="product.imageUrl ? imageApi + product.imageUrl : 'assets/book-placeholder.png'"
+        
+        alt="{{ product.title }}" />
 
       <div class="overlay">
         <abbr title="View Book">
@@ -158,9 +160,10 @@
     <div class="book-slider-track">
       <div class="book-card" *ngFor="let product of books">
         <div class="image-container">
-          <img [src]="product.imageUrl
-            ? imageApi + product.id + '/image'
-            : 'assets/book-placeholder.png'" alt="{{ product.title }}" />
+          <img 
+          
+           [src]="product.imageUrl ? imageApi + product.imageUrl : 'assets/book-placeholder.png'"
+             alt="{{ product.title }}" />
 
           <div class="overlay">
             <button class="icon-btn" (click)="viewBook(product.id)"><i class="fa fa-search"></i></button>

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 export interface Book {
   id: number;
@@ -17,8 +18,11 @@ export interface Book {
 @Injectable({ providedIn: 'root' })
 export class BookService {
 
-  private api = 'https://bookstore-h5qp.onrender.com/api/books';
-  private authorApi = 'https://bookstore-h5qp.onrender.com/api/authors';
+  // private api = 'https://bookstore-h5qp.onrender.com/api/';
+  // private  = 'https://bookstore-h5qp.onrender.com/api/';
+
+   private api = `${environment.apiBaseUrl}/books`;
+    private authorApi = `${environment.apiBaseUrl}/authors`;
 
   constructor(private http: HttpClient) {}
 

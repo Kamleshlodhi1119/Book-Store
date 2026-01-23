@@ -13,7 +13,7 @@
       <div class="admin-item" *ngFor="let b of books">
         <div class="book-preview-section">
         <img class="logo-book-preview-img"
-             [src]="b.imageUrl ? imageApi + b.id + '/image' : 'assets/book-placeholder.png'"
+            [src]="b.imageUrl ? imageApi + b.imageUrl : 'assets/book-placeholder.png'"
              [alt]="b.title" />
       
         <div class="book-info">
@@ -78,7 +78,8 @@
     <!-- PREVIEW -->
     <div class="image-preview" *ngIf="book.imageUrl || previewUrl">
       <img
-        [src]="previewUrl || (book.imageUrl ? imageApi + book.id + '/image?ts=' + book.imageTimestamp : 'assets/book-placeholder.png')"
+        [src]="previewUrl || (book.imageUrl ? imageApi + book.imageUrl + '?ts=' + book.imageTimestamp : 'assets/book-placeholder.png')"
+
         (error)="onImageError($event)" 
         alt="{{ book.title }}" 
         class="preview-uploeded-image"

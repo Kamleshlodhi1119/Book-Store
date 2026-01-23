@@ -4,6 +4,7 @@ import { AlertService } from 'src/app/core/services/alert.service';
 import { BookService } from 'src/app/core/services/book.service';
 import { CartService } from 'src/app/core/services/cart.service';
 import { WishlistService } from 'src/app/core/services/wishlist.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,6 +14,9 @@ import { WishlistService } from 'src/app/core/services/wishlist.service';
 export class DashboardComponent {
 
   books: any[] = [];
+
+
+   readonly imageApi = environment.bookImageBaseUrl;
 
  constructor(
     private bookService: BookService,
