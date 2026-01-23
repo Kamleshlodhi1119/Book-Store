@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { LoginRegisterService } from 'src/app/core/services/login-register.service';
@@ -8,29 +8,37 @@ import { LoginRegisterService } from 'src/app/core/services/login-register.servi
   templateUrl: './admin-header.component.html',
   styleUrls: ['./admin-header.component.css']
 })
-
-export class AdminHeaderComponent {
+export class AdminHeaderComponent implements OnInit {
   isMenuOpen = false;
-  isLoggedIn: any;
-  username: any;
+  isLoggedIn = false;
+  username = '';
 
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private loginRegisterService: LoginRegisterService
+  ) {}
 
-  constructor(private auth: AuthService, private router: Router,
-      private loginRegisterService: LoginRegisterService
-    ) {}
-  openLogin() {
-    this.loginRegisterService.openLogin();
+  ngOnInit() {
+    if (this.auth.isLoggedIn()) {
+      this.isLoggedIn = true;
+      // this.username = this.auth.getUsername();
+    }
   }
 
-  openRegister() {
-    this.loginRegisterService.openRegister();
+  toggleMobileMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+    document.body.style.overflow = this.isMenuOpen ? 'hidden' : 'auto';
+  }
+
+  closeMobileMenu() {
+    this.isMenuOpen = false;
+    document.body.style.overflow = 'auto';
   }
 
   logout() {
-    this.auth.logout(); // Ensure your auth service handles clearing session
+    this.auth.logout();
+    this.closeMobileMenu();
+    this.router.navigate(['/login']);
   }
-  // logout() {
-  //   this.auth.logout();
-  //   this.router.navigate(['/login']);
-  // }
 }

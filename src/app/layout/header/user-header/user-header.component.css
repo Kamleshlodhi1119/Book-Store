@@ -1,19 +1,6 @@
-/* ==============================
-   ROOT VARS (Safe Defaults)
-============================== */
-:root {
-  --primary-color: #2ecc71;
-  --accent-color: #1abc9c;
-  --glass-white: rgba(255, 255, 255, 0.75);
-  --text-dark: #1f2d2b;
-}
-
-/* ==============================
-   TOP BAR
-============================== */
+/* ================= TOP BAR ================= */
 .top-bar {
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.6), rgba(5, 54, 12, 0.85)),
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(5, 54, 12, 0.85)),
     url("../../../../assets/images/banner/bg5.png") center/cover no-repeat;
   color: #fff;
   padding: 10px 60px;
@@ -21,46 +8,33 @@
   justify-content: space-between;
   align-items: center;
   font-size: 13px;
-  letter-spacing: 0.5px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.v-divider {
-  width: 1px;
-  height: 14px;
-  background: rgba(255, 255, 255, 0.3);
-  margin: 0 5px;
-}
-
-/* ==============================
-   NAV ACTIONS
-============================== */
 .nav-actions {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
+.v-divider {
+  width: 1px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
 .auth-link {
-  color: #fff;
   background: none;
   border: none;
-  font-weight: 500;
+  color: white;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 6px;
-  transition: all 0.3s ease;
 }
 
 .auth-link:hover {
   color: var(--accent-color);
-  transform: translateY(-1px);
-}
-
-.welcome-text i {
-  color: var(--accent-color);
-  margin-right: 5px;
 }
 
 .logout-link {
@@ -70,37 +44,26 @@
   padding: 4px 12px;
   border-radius: 4px;
   font-size: 11px;
-  margin-left: 10px;
   cursor: pointer;
-  transition: 0.3s;
 }
 
 .logout-link:hover {
   background: #ff7675;
-  border-color: #ff7675;
 }
 
-/* ==============================
-   SOCIAL ICONS
-============================== */
 .social-icons a {
   color: rgba(255, 255, 255, 0.8);
-  margin: 0 8px;
-  font-size: 14px;
-  transition: 0.3s;
+  margin-left: 10px;
 }
 
 .social-icons a:hover {
   color: var(--accent-color);
 }
 
-/* ==============================
-   MAIN HEADER
-============================== */
+/* ================= MAIN HEADER ================= */
 .main-header {
   background: var(--glass-white);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   padding: 15px 60px;
   display: flex;
   align-items: center;
@@ -111,30 +74,24 @@
   z-index: 1000;
 }
 
-/* ==============================
-   LOGO
-============================== */
 .logo img {
   height: 55px;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
-/* ==============================
-   DESKTOP NAV
-============================== */
+/* ================= DESKTOP NAV ================= */
 .desktop-nav {
   display: flex;
 }
 
-.desktop-nav .menu {
+.menu {
   list-style: none;
   display: flex;
   gap: 30px;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
-.desktop-nav .menu li a {
+.menu li a {
   text-decoration: none;
   color: var(--text-dark);
   font-weight: 600;
@@ -145,8 +102,7 @@
   padding: 10px 0;
 }
 
-/* Elegant underline */
-.desktop-nav .menu li a::after {
+.menu li a::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -154,124 +110,89 @@
   width: 0;
   height: 2px;
   background: var(--primary-color);
-  transition: width 0.3s ease;
+  transition: 0.3s;
 }
 
-.desktop-nav .menu li a:hover::after,
-.desktop-nav .active-link::after {
+.menu li a:hover::after,
+.active-link::after {
   width: 100%;
 }
 
-.desktop-nav .active-link {
+.active-link {
   color: var(--primary-color) !important;
 }
 
-/* ==============================
-   BADGE
-============================== */
-.badge {
-  background: var(--primary-color);
-  color: white;
-  font-size: 10px;
-  padding: 2px 6px;
-  border-radius: 10px;
-  vertical-align: top;
-  margin-left: 2px;
-}
-
-/* ==============================
-   MOBILE NAV SYSTEM
-============================== */
-.mobile-nav {
+/* ================= HAMBURGER ================= */
+.hamburger {
   display: none;
-  position: relative;
-}
-
-/* Hamburger */
-.mobile-nav .hamburger {
-  display: flex;
-  flex-direction: column;
+  background: none;
+  border: none;
+  font-size: 22px;
   cursor: pointer;
-  z-index: 1100;
 }
 
-.mobile-nav .hamburger span {
-  width: 26px;
-  height: 3px;
-  background: var(--text-dark);
-  margin: 4px 0;
-  transition: 0.4s ease;
-  border-radius: 3px;
-}
+/* ================= MOBILE MENU ================= */
 
-/* Animate to X */
-.mobile-nav .hamburger span.open:nth-child(1) {
-  transform: rotate(45deg) translate(6px, 6px);
-}
 
-.mobile-nav .hamburger span.open:nth-child(2) {
-  opacity: 0;
-}
-
-.mobile-nav .hamburger span.open:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
-}
-
-/* Slide Panel */
 .mobile-menu {
   position: fixed;
   top: 0;
-  right: -100%;
-  width: 80%;
-  height: 100vh;
-  background: linear-gradient(
-    rgba(0, 0, 0, 0.9),
-    rgba(0, 40, 20, 0.95)
-  );
-  backdrop-filter: blur(14px);
+  left: 0;
+  /* height: 100vh; */
+  width: 60%;
+  /* background: #dcdcdc; */
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 28px;
-  transition: right 0.4s ease;
-  z-index: 1050;
+  padding: 80px 20px 20px;
+  transform: translateX(-100%);
+  transition: 0.3s ease;
+  z-index: 2000;
+
+
+   background-image: url("../../../../assets/images/banner/bg4.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; 
 }
 
 .mobile-menu.open {
-  right: 0;
+  transform: translateX(0);
 }
 
 .mobile-menu a {
   color: white;
-  font-size: 20px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
   text-decoration: none;
-  position: relative;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.mobile-menu a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 0;
-  height: 2px;
-  background: var(--accent-color);
-  transition: width 0.3s ease;
+.mobile-auth {
+  margin-top: auto;
 }
 
-.mobile-menu a:hover::after {
+.mobile-auth button {
   width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 4px;
 }
 
-/* ==============================
-   RESPONSIVE RULES
-============================== */
-@media (max-width: 900px) {
 
-  /* Top bar mobile layout */
+
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
   .top-bar {
     padding: 10px 20px;
     flex-direction: column;
@@ -283,22 +204,11 @@
     display: none;
   }
 
-  /* Header padding */
   .main-header {
     padding: 12px 20px;
   }
 
   .logo img {
     height: 45px;
-  }
-
-  /* Toggle menus */
-  .desktop-nav {
-    display: none;
-  }
-
-  .mobile-nav {
-    display: flex;
-    align-items: center;
   }
 }

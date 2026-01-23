@@ -1,3 +1,4 @@
+<!-- TOP BAR -->
 <div class="top-bar">
   <div class="top-left">
     <div class="nav-actions">
@@ -13,7 +14,8 @@
 
       <ng-container *ngIf="isLoggedIn">
         <span class="welcome-text">
-          <i class="fa-solid fa-book-open-reader"></i> Hello, <strong>{{ username }}</strong>
+          <i class="fa-solid fa-book-open-reader"></i> Hello,
+          <strong>{{ username }}</strong>
         </span>
         <button class="logout-link" (click)="logout()">
           <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
@@ -23,47 +25,61 @@
   </div>
 
   <div class="social-icons">
-    <a href="#" class="social-tip"><i class="fab fa-facebook-f"></i></a>
-    <a href="#" class="social-tip"><i class="fab fa-google"></i></a>
-    <a href="#" class="social-tip"><i class="fab fa-twitter"></i></a>
-    <a href="#" class="social-tip"><i class="fab fa-github"></i></a>
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-google"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-github"></i></a>
   </div>
 </div>
 
+<!-- MAIN HEADER -->
 <header class="main-header">
   <div class="logo">
-    <img src="../../../../assets/Logo/Logo.png" alt="Library Logo">
+    <img src="../../../../assets/Logo/Logo.png" alt="Library Logo" />
   </div>
 
+  <!-- DESKTOP NAV -->
+  <nav class="desktop-nav">
+    <ul class="menu">
+      <li><a routerLink="/home" routerLinkActive="active-link">Home</a></li>
+      <li><a routerLink="/aboutus" routerLinkActive="active-link">About Us</a></li>
+      <li><a routerLink="/shop" routerLinkActive="active-link">Shop</a></li>
+      <li><a routerLink="/cart" routerLinkActive="active-link">Cart</a></li>
+      <li><a routerLink="/orders" routerLinkActive="active-link">Orders</a></li>
+      <li><a routerLink="/wishlist" routerLinkActive="active-link">Wishlist</a></li>
+    </ul>
+  </nav>
 
-  <!-- DESKTOP MENU -->
-<nav class="desktop-nav">
-  <ul class="menu">
-    <li><a routerLink="/home" routerLinkActive="active-link">Home</a></li>
-    <li><a routerLink="/aboutus" routerLinkActive="active-link">About Us</a></li>
-    <li><a routerLink="/shop" routerLinkActive="active-link">Shop</a></li>
-    <li><a routerLink="/cart" routerLinkActive="active-link">Cart</a></li>
-    <li><a routerLink="/orders" routerLinkActive="active-link">Orders</a></li>
-    <li><a routerLink="/wishlist" routerLinkActive="active-link">Wishlist</a></li>
-  </ul>
-</nav>
+  <!-- MOBILE HAMBURGER -->
+  <button class="hamburger" (click)="toggleMobileMenu()">
+    <i class="fa-solid" [ngClass]="mobileMenuOpen ? 'fa-xmark' : 'fa-bars'"></i>
+  </button>
+</header>
 
-<!-- MOBILE MENU -->
-<div class="mobile-nav">
-  <div class="hamburger" (click)="toggleMobileMenu()">
-    <span [class.open]="mobileMenuOpen"></span>
-    <span [class.open]="mobileMenuOpen"></span>
-    <span [class.open]="mobileMenuOpen"></span>
-  </div>
-
+<!-- MOBILE SLIDE MENU -->
+<div class="mobile-menu-container">
   <div class="mobile-menu" [class.open]="mobileMenuOpen">
+    <!-- <span class="mobile-title">Admin Menu</span> -->
+    <!-- <button class="mobile-close" (click)="closeMobileMenu()">
+      <i class="fa-solid fa-xmark"></i>
+    </button> -->
     <a routerLink="/home" (click)="closeMobileMenu()">Home</a>
     <a routerLink="/aboutus" (click)="closeMobileMenu()">About Us</a>
     <a routerLink="/shop" (click)="closeMobileMenu()">Shop</a>
     <a routerLink="/cart" (click)="closeMobileMenu()">Cart</a>
     <a routerLink="/orders" (click)="closeMobileMenu()">Orders</a>
     <a routerLink="/wishlist" (click)="closeMobileMenu()">Wishlist</a>
+
+    <div class="mobile-auth">
+      <ng-container *ngIf="!isLoggedIn">
+        <button (click)="openLogin()">Login</button>
+        <button (click)="openRegister()">Join Now</button>
+      </ng-container>
+
+      <ng-container *ngIf="isLoggedIn">
+        <span>Hello, {{ username }}</span>
+        <button (click)="logout()">Logout</button>
+      </ng-container>
+    </div>
   </div>
 </div>
-
- </header>

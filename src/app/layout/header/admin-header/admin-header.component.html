@@ -1,3 +1,4 @@
+<!-- TOP BAR -->
 <div class="top-bar admin-theme">
   <div class="top-left">
     <span class="admin-badge">
@@ -19,31 +20,75 @@
       </ng-container>
 
       <div class="social-icons" *ngIf="!isLoggedIn">
-        <a href="#" class="social-tip"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="social-tip"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
       </div>
     </div>
   </div>
 </div>
 
+<!-- MAIN HEADER -->
 <header class="main-header admin-header">
   <div class="logo">
-    <img src="../../../../assets/Logo/Logo.png" alt="Library Logo">
-    <!-- <span class="logo-tag">Management</span> -->
+    <img src="../../../../assets/Logo/Logo.png" alt="Library Logo" />
   </div>
 
-  <nav class="main-nav" [class.active]="isMenuOpen">
+  <!-- DESKTOP NAV -->
+  <nav class="main-nav">
     <ul class="menu">
-      <li><a routerLink="/admin/dashboard" routerLinkActive="active-admin"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
-      <li><a routerLink="/admin/users" routerLinkActive="active-admin"><i class="fa-solid fa-users-gear"></i> Users</a></li>
-      <li><a routerLink="/admin/books" routerLinkActive="active-admin"><i class="fa-solid fa-book"></i> Inventory</a></li>
-      <li><a routerLink="/admin/orders" routerLinkActive="active-admin"><i class="fa-solid fa-truck-ramp-box"></i> Orders</a></li>
+      <li>
+        <a routerLink="/admin/dashboard" routerLinkActive="active-admin">
+          <i class="fa-solid fa-chart-line"></i> Dashboard
+        </a>
+      </li>
+      <li>
+        <a routerLink="/admin/users" routerLinkActive="active-admin">
+          <i class="fa-solid fa-users-gear"></i> Users
+        </a>
+      </li>
+      <li>
+        <a routerLink="/admin/books" routerLinkActive="active-admin">
+          <i class="fa-solid fa-book"></i> Inventory
+        </a>
+      </li>
+      <li>
+        <a routerLink="/admin/orders" routerLinkActive="active-admin">
+          <i class="fa-solid fa-truck-ramp-box"></i> Orders
+        </a>
+      </li>
     </ul>
   </nav>
 
-  <div class="header-right">
-    <button class="menu-toggle" (click)="isMenuOpen = !isMenuOpen">
-      <i class="fas" [ngClass]="isMenuOpen ? 'fa-times' : 'fa-bars-staggered'"></i>
+  <!-- MOBILE HAMBURGER -->
+  <button class="menu-toggle" (click)="toggleMobileMenu()">
+    <i class="fas" [ngClass]="isMenuOpen ? 'fa-times' : 'fa-bars-staggered'"></i>
+  </button>
+</header>
+
+<!-- MOBILE SLIDE MENU -->
+<div class="admin-mobile-menu" [class.open]="isMenuOpen">
+  <div class="mobile-menu-header">
+    <span class="mobile-title">Admin Menu</span>
+    <button class="mobile-close" (click)="closeMobileMenu()">
+      <i class="fa-solid fa-xmark"></i>
     </button>
   </div>
-</header>
+
+  <a routerLink="/admin/dashboard" (click)="closeMobileMenu()">
+    <i class="fa-solid fa-chart-line"></i> Dashboard
+  </a>
+  <a routerLink="/admin/users" (click)="closeMobileMenu()">
+    <i class="fa-solid fa-users-gear"></i> Users
+  </a>
+  <a routerLink="/admin/books" (click)="closeMobileMenu()">
+    <i class="fa-solid fa-book"></i> Inventory
+  </a>
+  <a routerLink="/admin/orders" (click)="closeMobileMenu()">
+    <i class="fa-solid fa-truck-ramp-box"></i> Orders
+  </a>
+
+  <div class="mobile-auth">
+    <span *ngIf="isLoggedIn">Hello, {{ username }}</span>
+    <button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
+  </div>
+</div>
