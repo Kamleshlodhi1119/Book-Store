@@ -8,7 +8,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'localhost:8082/api',
+  apiUrl: 'http://localhost:8082/api',
   apiBaseUrl:'http://localhost:8082/api',
   // bookImageBaseUrl: 'http://localhost:8082/api/books'
   bookImageBaseUrl: 'http://localhost:8082'

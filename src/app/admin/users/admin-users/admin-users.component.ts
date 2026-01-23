@@ -20,7 +20,7 @@ export class AdminUsersComponent implements OnInit {
   }
 
   load() {
-    this.http.get<any[]>(this.api)
+    this.http.get<any[]>(`${this.api}/getall`)
       .subscribe({
         next: (res) => this.users = res,
         error: () => this.alertService.show('Failed to load users', 'error')
