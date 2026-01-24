@@ -1,6 +1,4 @@
-<div class="scroll-top" 
-     (click)="scrollToTop()" 
-     [class.visible]="isVisible">
+<div class="scroll-top" (click)="scrollToTop()" [class.visible]="isVisible">
   <i class="fa fa-arrow-up"></i>
 </div>
 <footer class="footer">
@@ -9,7 +7,16 @@
       <div class="footer-column logo-section">
         <div class="logo">
           <div class="logo-img">
-            <img src="../../../../assets/Logo/Logo.png" alt="Logo">
+            <a routerLink="/home">
+              <img src="../../../../assets/Logo/Logo.png" alt="Logo"></a>
+          </div>
+          <div class="social-icons">
+            <!-- <h4>Social:-</h4> -->
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-google"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-github"></i>
+            <i class="fab fa-slack"></i>
           </div>
         </div>
       </div>
@@ -36,19 +43,14 @@
 
       <div class="footer-column newsletter">
         <h4>STAY UP TO DATE</h4>
-        <div class="subscribe-form">
-          <button>Subscribe</button>
-        </div>
-
-        <div class="social-icons">
-          <h4>Social:-</h4>
-          <i class="fab fa-facebook"></i>
-          <i class="fab fa-google"></i>
-          <i class="fab fa-twitter"></i>
-          <i class="fab fa-github"></i>
-          <i class="fab fa-slack"></i>
-        </div>
+       <p>Subscribe to our weekly newsletter.</p>
+        <form class="subscribe-form">
+          <input type="email" placeholder="Enter email" required>
+          <button type="submit">Subscribe</button>
+        </form>
       </div>
+
+
     </div>
   </section>
 
@@ -56,8 +58,8 @@
     <div class="footer-bottom">
       <div class="social-icons-right">
         <p class="copyright">
-          2025© BookStore | 
-          <a routerLink="/terms-conditions">Terms</a> | 
+          2025© BookStore |
+          <a routerLink="/terms-conditions">Terms</a> |
           <a routerLink="/privacy-policy">Policy</a>
         </p>
       </div>

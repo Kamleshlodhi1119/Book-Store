@@ -1,38 +1,47 @@
+/* =======================
+   FOOTER WRAPPER
+======================= */
 .footer {
   position: relative;
   background: linear-gradient(rgba(0, 0, 0, 0.485), #05360c98),
-              url("src/assets/images/banner/bg5.png") center/cover no-repeat;
+    url("src/assets/images/banner/bg5.png") center/cover no-repeat;
   z-index: 1;
   overflow: hidden;
   padding: 80px 60px;
   border-radius: 20px;
   margin: 30px;
-  height: auto; 
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
 }
 
+/* Overlay */
 .footer::before {
   content: "";
   position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
+  inset: 0;
   background-color: #354f52;
   opacity: 0.5;
   z-index: -1;
 }
 
+/* =======================
+   LAYOUT GRID
+======================= */
 .footer-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 30px;
   max-width: 1200px;
-  margin: auto;
+  margin: 0 auto;
   width: 100%;
 }
 
+/* =======================
+   TYPOGRAPHY
+======================= */
 .footer-column h4 {
-  font-weight: bold;
+  font-weight: 700;
   margin-bottom: 26px;
   color: white;
   font-size: 22px;
@@ -41,6 +50,7 @@
 .footer-column ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .footer-column li {
@@ -67,29 +77,71 @@
   margin-left: 5px;
 }
 
+/* =======================
+   LOGO
+======================= */
 .logo-img img {
-  height: 120px !important;
-  margin-bottom: 20px;
+  height: 160px;
+  max-width: 100%;
+  filter: drop-shadow(1px 1px 0px rgb(254, 254, 254));
 }
 
+/* =======================
+   SUBSCRIBE PILL FORM
+======================= */
+
+.newsletter p{
+  color: #f9fafb;
+}
 .subscribe-form {
   display: flex;
-  background-color: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  max-width: 300px;
+  align-items: center;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 50px;
+  padding: 5px;
+  max-width: 340px;
+  width: 100%;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.subscribe-form:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.subscribe-form input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 10px 20px;
+  outline: none;
+  font-size: 1rem;
+  color: #1f2937;
+  min-width: 0;
 }
 
 .subscribe-form button {
-  width: 100%;
-  padding: 12px 20px;
-  background-color: #4a6d6a;
-  border: none;
+  background: #111827;
   color: white;
-  font-weight: bold;
+  border: none;
+  margin-left: -80px;
+  padding: 10px 25px;
+  border-radius: 50px;
+  font-weight: 600;
   cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, transform 0.15s;
 }
 
+.subscribe-form button:hover {
+  background: var(--secondary-color);
+  transform: translateY(-1px);
+}
+
+/* =======================
+   FOOTER BOTTOM
+======================= */
 .footer-bottom {
   width: 100%;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -97,18 +149,22 @@
   text-align: center;
 }
 
-.footer-bottom p, .footer-bottom a {
+.footer-bottom p,
+.footer-bottom a {
   font-size: 14px;
   color: #fcfeff;
   text-decoration: none !important;
 }
 
+/* =======================
+   SOCIAL ICONS
+======================= */
 .social-icons i {
   font-size: 20px;
   margin: 0 10px;
   cursor: pointer;
   color: #fcfeff;
-  transition: transform 0.3s;
+  transition: transform 0.3s, color 0.3s;
 }
 
 .social-icons i:hover {
@@ -116,27 +172,58 @@
   color: #4a6d6a;
 }
 
+/* =======================
+   TABLET
+======================= */
 @media (max-width: 992px) {
   .footer {
     margin: 20px;
     padding: 60px 30px;
   }
+
   .footer-container {
     text-align: center;
   }
+
   .logo-img img {
     margin: 0 auto 20px;
   }
+
   .subscribe-form {
     margin: 0 auto;
   }
 }
 
+/* =======================
+   MOBILE
+======================= */
 @media (max-width: 576px) {
+  .footer {
+    margin: 15px;
+    padding: 40px 20px;
+    border-radius: 16px;
+  }
+
   .footer-container {
     grid-template-columns: 1fr;
+    gap: 25px;
   }
+
+  .footer-column h4 {
+    font-size: 20px;
+  }
+
   .footer-column a {
     font-size: 16px;
   }
+
+
+
+  .subscribe-form input {
+    width: 100%;
+    font-size: 0.8rem; /* Smaller font on mobile */
+    padding: 10px 14px;
+  }
+
+  
 }
