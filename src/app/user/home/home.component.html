@@ -13,7 +13,7 @@
       Explore thousands of hand-picked titles across all genres-curated for the true bibliophile.
     </p>
 
-    <button class="btn btn--primary">Buy Now</button>
+    <a class="btn btn--primary" routerLink="/shop" >Buy Now</a>
     <p class="hero-note">* Available in Premium Hardcover, EPUB & Kindle</p>
   </div>
 </section>
@@ -29,7 +29,8 @@
       <a routerLink="/shop">
         <img src="../../../assets/images/icon/Author.png"> </a>
       <pre> </pre>
-      <h3>{{ author.name }}</h3>
+       <a routerLink="/shop" ><h3>{{ author.name }}</h3>
+      </a>
 
     </div>
   </div>
@@ -121,13 +122,14 @@
     </div>
   </div>
   <div class="book-right">
-    <p class="hero-tag">EDITOR'S CHOICE</p>
+    <p class="hero-tag-book">EDITOR'S CHOICE</p>
     <h2 class="Famouse-book-title">The Artist’s Way</h2>
     <p class="hero-sub">
       The definitive guide to unlocking creativity and overcoming artistic blocks.<br />
       Used by millions to build a sustainable and inspired creative practice.
     </p>
-    <button class="btn">Read Preview</button>
+     <a class="btn btn--primary" routerLink="/shop" >Read Preview</a>
+    
   </div>
 </section>
 
@@ -145,8 +147,8 @@
     </div>
 
     <div class="cta-actions">
-      <button class="btn-cta-primary">Browse Collection</button>
-      <button class="btn-cta-outline">Join the Book Club</button>
+       <a routerLink="/shop" class="btn-cta-primary">Browse Collection</a>
+        <a routerLink="/shop"  class="btn-cta-outline">Join the Book Club</a>
     </div>
     <p class="cta-note">* Certified Authentic Prints & Digital Rights Management</p>
   </div>

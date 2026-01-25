@@ -54,6 +54,9 @@ h1, h2, h3 { color: var(--primary-color); }
   color: var(--secondary-font);
 }
 
+
+
+
 .hero-title {
   font-size: 56px;
   line-height: 1.1;
@@ -70,6 +73,17 @@ h1, h2, h3 { color: var(--primary-color); }
   margin-top: 14px;
   font-size: 13px;
   color: #999;
+}
+
+.hero-tag-book{
+   font-family: "Indie Flower", cursive;
+  font-weight: 800;
+  font-style: normal;
+  /* text-align: start; */
+  font-size: 12px;
+  letter-spacing: .08em;
+  color: var(--secondary-font);
+
 }
 
 /* ====================== BOOK HERO ====================== */
@@ -425,7 +439,7 @@ h1, h2, h3 { color: var(--primary-color); }
 /* ====================== ANNOUNCEMENT BAR ====================== */
 
 .announcement-bar {
-    margin: 0;
+    margin:  50px 0px;
     padding: 20px 0;
     background: var(--secondary-color);
     color: white;
