@@ -23,6 +23,7 @@ import { LegalComponent } from './privacy/legal/legal.component';
 import { ReturnsComponent } from './privacy/returns/returns.component';
 import { PrivacyComponent } from './privacy/privacy/privacy.component';
 import { AuthModalComponent } from './auth/auth-modal/auth-modal.component';
+import { BlogItemsComponent } from './blogs/blog-items/blog-items.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +42,7 @@ import { AuthModalComponent } from './auth/auth-modal/auth-modal.component';
     ReturnsComponent,
     PrivacyComponent,
     AuthModalComponent,
+    BlogItemsComponent,
   ],
   imports: [
     BrowserModule,

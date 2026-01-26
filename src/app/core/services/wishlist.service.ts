@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { WishlistItem } from '../models/wishlist-item';
 
 @Injectable({ providedIn: 'root' })
 export class WishlistService {
@@ -10,16 +11,15 @@ export class WishlistService {
 
   constructor(private http: HttpClient) {}
 
-get() {
-  return this.http.get<any[]>(this.api);
-}
-
-
-  add(bookId: number): Observable<string> {
-    return this.http.post<string>(`${this.api}/add/${bookId}`, {});
+  get(): Observable<WishlistItem[]> {
+    return this.http.get<WishlistItem[]>(this.api);
   }
 
-  remove(bookId: number): Observable<string> {
-    return this.http.delete<string>(`${this.api}/remove/${bookId}`);
+  add(bookId: number): Observable<WishlistItem> {
+    return this.http.post<WishlistItem>(`${this.api}/add/${bookId}`, {});
+  }
+
+  remove(bookId: number): Observable<any> {
+    return this.http.delete(`${this.api}/remove/${bookId}`);
   }
 }

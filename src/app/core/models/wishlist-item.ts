@@ -1,6 +1,8 @@
-import { Book } from './book';
-
 export interface WishlistItem {
   id: number;
-  book: Book;
+  bookId: number;
+  title: string;
+  imageUrl: string;
+  price: number;
+  isRemoving?: boolean;
 }

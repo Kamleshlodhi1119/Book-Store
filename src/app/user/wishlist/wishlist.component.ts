@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WishlistService } from 'src/app/core/services/wishlist.service';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { environment } from 'src/environments/environment';
+import { WishlistItem } from 'src/app/core/models/wishlist-item';
 
 @Component({
   selector: 'app-wishlist',
@@ -11,7 +12,7 @@ import { environment } from 'src/environments/environment';
 export class WishlistComponent implements OnInit {
 
   readonly imageApi = environment.bookImageBaseUrl;
-  list: any[] = [];
+  list: WishlistItem[] = [];
   loading = true;
 
   constructor(
@@ -27,7 +28,7 @@ export class WishlistComponent implements OnInit {
     this.loading = true;
     this.wishlist.get().subscribe({
       next: res => {
-        this.list = res as any[];
+        this.list = res;
         this.loading = false;
       },
       error: () => {
@@ -37,24 +38,21 @@ export class WishlistComponent implements OnInit {
     });
   }
 
-  // New method to handle the 2-second delay and animation
-  handleRemove(item: any) {
-    // 1. Start animation
+  handleRemove(item: WishlistItem) {
     item.isRemoving = true;
 
-    // 2. Wait 2 seconds then execute actual removal
     setTimeout(() => {
-      this.remove(item.book.id);
-    }, 2000);
+      this.remove(item.bookId);
+    }, 500); // 0.5s feels better UX than 2s
   }
 
   remove(bookId: number) {
     this.wishlist.remove(bookId).subscribe({
       next: () => {
         this.alertService.show('Item removed', 'success');
-        this.loadWishlist();
+        this.list = this.list.filter(i => i.bookId !== bookId);
       },
-      error: () => this.loadWishlist() 
+      error: () => this.loadWishlist()
     });
   }
 }

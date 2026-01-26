@@ -1,8 +1,8 @@
 <app-admin-header></app-admin-header>
 
 <div class="admin-page">
-<div class="admin-container">
-<!-- 
+  <div class="admin-container">
+    <!-- 
     <h2>All Orders</h2>
 
     <div class="admin-list">
@@ -44,27 +44,45 @@
         </div>
       </div>
     </div> -->
+    <h2>Manage Orders</h2>
 
-<h2>Manage Orders</h2>
-
-<div class="admin-list">
-  <div class="admin-item" *ngFor="let o of orders">
-    <div>
-      <strong>Order #{{ o.id }}</strong><br />
-      User: {{ o.userEmail }}<br />
-      Status: {{ o.status }}
+    <div *ngIf="loading" class="orders-loading">
+      Loading orders...
     </div>
 
-    <div class="admin-actions">
-      <button class="btn-secondary" (click)="updateStatus(o.id, 'SHIPPED')">
-        Ship
-      </button>
-      <button class="btn-secondary" (click)="updateStatus(o.id, 'DELIVERED')">
-        Deliver
-      </button>
-    </div>
-  </div>
-</div>
+    <div class="admin-list" *ngIf="!loading && orders.length">
 
-</div>
-</div>
+      <div class="admin-item" *ngFor="let o of orders">
+
+        <div class="admin-info">
+          <strong>Order #{{ o.id }}</strong><br />
+          User: {{ o.userEmail || 'N/A' }}<br />
+          Status: {{ o.status }}<br />
+          Total: ₹ {{ o.totalAmount }}
+
+        </div>
+
+        <div class="admin-items">
+          <div class="admin-order-item" *ngFor="let i of o.items">
+            <span>{{ i.title }}</span>
+            <span>x{{ i.quantity }}</span>
+            <span>₹ {{ i.price }}</span>
+          </div>
+
+        </div>
+
+        <div class="admin-actions">
+          <button class="btn-secondary" (click)="updateStatus(o.id, 'SHIPPED')">
+            Ship
+          </button>
+          <button class="btn-secondary" (click)="updateStatus(o.id, 'DELIVERED')">
+            Deliver
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <div *ngIf="!loading && orders.length === 0" class="empty-orders">
+      No orders found
+    </div>
