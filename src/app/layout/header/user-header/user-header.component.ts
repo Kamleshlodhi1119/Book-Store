@@ -23,6 +23,13 @@ export class UserHeaderComponent implements OnInit {
   ngOnInit() {
     if (this.auth.isLoggedIn()) {
       this.isLoggedIn = true;
+          if (this.isLoggedIn) {
+      this.auth.me().subscribe({
+        next: (user) => {
+          this.username = user.email || user.username;
+        }
+      });
+    }
       // this.username = this.auth.getUsername();
     }
   }
