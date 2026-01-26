@@ -24,14 +24,14 @@ import { PrivacyComponent } from './privacy/privacy/privacy.component';
 
 const routes: Routes = [
 
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  // { path: 'login', component: LoginComponent },
+  // { path: 'register', component: RegisterComponent },
   { path: 'home', component: UserHomeComponent},
   { path: 'aboutus', component: AboutusComponent},
-  { path: 'cart', component: CartComponent },
-  { path: 'wishlist', component: WishlistComponent },
+  { path: 'cart', component: CartComponent , canActivate: [AuthGuard] },
+  { path: 'wishlist', component: WishlistComponent , canActivate: [AuthGuard] },
   { path: 'shop', component: ShopComponent},
-  { path: 'orders', component: OrdersComponent},
+  { path: 'orders', component: OrdersComponent , canActivate: [AuthGuard] },
   { path: 'book-details/:id', component: BookDetailsComponent },
   { path: 'privacy-policy', component:PrivacyComponent  },
   { path: 'terms-conditions', component:TermsComponent  },
@@ -47,7 +47,7 @@ const routes: Routes = [
   // ADMIN
   {
     path: 'admin',
-    // canActivate: [AdminGuard],
+    canActivate: [AdminGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'users', component: AdminUsersComponent },      
