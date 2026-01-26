@@ -2,13 +2,12 @@
 
 <div class="details-page-wrapper">
   <section class="details-container" *ngIf="!loading && book">
-    
+
     <div class="media-column">
       <div class="sticky-wrapper">
-        <img class="main-book-img"
-              [src]="book.imageUrl ? imageApi + book.imageUrl : 'assets/book-placeholder.png'"
-             [alt]="book.title" />
-        
+        <img class="main-book-img" [src]="book.imageUrl ? imageApi + book.imageUrl : 'assets/book-placeholder.png'"
+          [alt]="book.title" />
+
         <div class="quick-meta">
           <div class="avg-badge">
             <span class="star-icon">⭐</span>
@@ -21,7 +20,7 @@
 
     <div class="content-column">
       <header class="book-header">
-         <div class="tag-row">
+        <div class="tag-row">
           <span class="stock-tag" [class.out]="book.stockQuantity === 0">
             {{ book.stockQuantity > 0 ? 'In Stock' : 'Out of Stock' }}
           </span>
@@ -54,21 +53,25 @@
         <div class="form-group">
           <label>How would you rate it?</label>
           <div class="star-rating-input">
-             <select [(ngModel)]="rating" class="modern-select">
-                <option [value]="0">Select Stars</option>
-                <option *ngFor="let r of [5,4,3,2,1]" [value]="r">{{r}} Stars</option>
-             </select>
+            <select [(ngModel)]="rating" class="modern-select">
+              <option [value]="0">Select Stars</option>
+              <option *ngFor="let r of [5,4,3,2,1]" [value]="r">{{r}} Stars</option>
+            </select>
           </div>
         </div>
         <div class="form-group">
           <textarea [(ngModel)]="comment" placeholder="Write your review here..."></textarea>
         </div>
-        <button class="submit-review-btn" (click)="submitRating()">Post Review</button>
+        <button class="submit-review-btn" (click)="submitRating()">
+          <i class="fa-solid fa-paper-plane"></i>
+          Submit Review
+        </button>
+
       </section>
 
       <section class="user-reviews-list">
         <h3>Community Reviews ({{ bookRatings.length }})</h3>
-        
+
         <div *ngIf="bookRatings.length === 0" class="no-reviews">
           Be the first to review this book!
         </div>
@@ -78,16 +81,14 @@
             <span class="user-avatar">{{ r.username.charAt(0).toUpperCase() }}</span>
             <div class="user-meta">
               <span class="user-name">
-                {{ r.username }} 
+                {{ r.username }}
                 <b *ngIf="isMyReview(r.username)" style="color: #27ae60;"> (You)</b>
               </span>
               <span class="review-stars">⭐ {{ r.rating }}/5</span>
             </div>
 
-            <button *ngIf="isMyReview(r.username)" 
-                    (click)="deleteMyReview()" 
-                    class="delete-review-btn" 
-                    title="Delete my review">
+            <button *ngIf="isMyReview(r.username)" (click)="deleteMyReview()" class="delete-review-btn"
+              title="Delete my review">
               🗑️
             </button>
           </div>

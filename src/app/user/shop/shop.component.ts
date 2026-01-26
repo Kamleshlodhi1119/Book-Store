@@ -12,15 +12,24 @@ import { environment } from 'src/environments/environment';
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.css']
 })
+
+
 export class ShopComponent implements OnInit {
   readonly imageApi = environment.bookImageBaseUrl;
 
   books: any[] = [];
   filtered: any[] = [];
+  paginated: any[] = [];
   authors: any[] = [];
 
   loading = true;
   maxBookPrice = 0;
+
+  // Pagination
+  currentPage = 1;
+  pageSize = 30;
+  totalPages = 0;
+  pages: number[] = [];
 
   filters = {
     name: '',
@@ -33,8 +42,7 @@ export class ShopComponent implements OnInit {
     private cartService: CartService,
     private wishlistService: WishlistService,
     private alertService: AlertService,
-    private router: Router,
-    private http: HttpClient
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -48,9 +56,12 @@ export class ShopComponent implements OnInit {
     this.bookService.getAll().subscribe({
       next: res => {
         this.books = res as any[];
-        this.filtered = res as any[];
+        this.filtered = [...this.books];
+
         this.maxBookPrice = Math.max(...this.books.map(b => b.price));
         this.filters.maxPrice = this.maxBookPrice;
+
+        this.setupPagination();
         this.loading = false;
       },
       error: () => {
@@ -60,39 +71,72 @@ export class ShopComponent implements OnInit {
     });
   }
 
-
-loadAuthors() {
-  this.bookService.getAuthors().subscribe({
-    next: res => this.authors = res,
-    error: () => this.alertService.show('Failed to load authors', 'error')
-  });
-}
-
-
-applyFilters() {
-
-  const params: any = {};
-
-  if (this.filters.name?.trim()) {
-    params.name = this.filters.name.trim();
+  loadAuthors() {
+    this.bookService.getAuthors().subscribe({
+      next: res => this.authors = res,
+      error: () => this.alertService.show('Failed to load authors', 'error')
+    });
   }
 
-  if (this.filters.author) {
-    params.author = this.filters.author;
+  applyFilters() {
+    const params: any = {};
+
+    if (this.filters.name?.trim()) {
+      params.name = this.filters.name.trim();
+    }
+
+    if (this.filters.author) {
+      params.author = this.filters.author;
+    }
+
+    if (this.filters.maxPrice > 0) {
+      params.maxPrice = this.filters.maxPrice;
+    }
+
+    this.bookService.filterBooks(params).subscribe({
+      next: res => {
+        this.filtered = res as any[];
+        this.currentPage = 1;
+        this.setupPagination();
+      },
+      error: err => console.error('Filter error', err)
+    });
   }
 
-  if (this.filters.maxPrice > 0) {
-    params.maxPrice = this.filters.maxPrice;
+  // ------------------------
+  // PAGINATION CORE
+  // ------------------------
+
+  setupPagination() {
+    this.totalPages = Math.ceil(this.filtered.length / this.pageSize);
+    this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+    this.updatePage();
   }
 
-  console.log('FILTER PARAMS 👉', params); // 🔥 IMPORTANT
+  updatePage() {
+    const start = (this.currentPage - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    this.paginated = this.filtered.slice(start, end);
+  }
 
-  this.bookService.filterBooks(params).subscribe({
-    next: res => this.filtered = res,
-    error: err => console.error('Filter error', err)
-  });
-}
+  goToPage(page: number) {
+    if (page < 1 || page > this.totalPages) return;
+    this.currentPage = page;
+    this.updatePage();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
+  nextPage() {
+    this.goToPage(this.currentPage + 1);
+  }
+
+  prevPage() {
+    this.goToPage(this.currentPage - 1);
+  }
+
+  // ------------------------
+  // ACTIONS
+  // ------------------------
 
   addToCart(bookId: number) {
     this.cartService.add({ bookId, quantity: 1 }).subscribe({

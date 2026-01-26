@@ -13,7 +13,6 @@
 </section>
 
 <section class="shop-container">
-
   <div class="shop-layout">
 
     <!-- FILTER SIDEBAR -->
@@ -63,21 +62,28 @@
     <!-- MAIN CONTENT -->
     <div class="shop-content">
 
-      <div *ngIf="loading" class="shop-loading">Loading books...</div>
+      <div *ngIf="loading" class="shop-loading">
+        Loading books...
+      </div>
 
+      <!-- EMPTY STATE -->
       <div *ngIf="!loading && filtered.length === 0" class="shop-empty">
-        No books found
+        <div class="empty-box">
+          <i class="fa-solid fa-book-open"></i>
+          <h3>No Books Found</h3>
+          <p>Try adjusting filters or explore other categories</p>
+        </div>
       </div>
 
       <!-- BOOK GRID -->
-      <div class="shop-grid" *ngIf="!loading && filtered.length">
+      <div class="shop-grid" *ngIf="!loading && paginated.length">
 
-        <div class="shop-card" *ngFor="let b of filtered">
+        <div class="shop-card" *ngFor="let b of paginated">
 
           <div class="image-box">
             <img
               [src]="b.imageUrl ? imageApi + b.imageUrl : 'assets/book-placeholder.png'"
-              alt="{{ b.title }}"
+              [alt]="b.title"
             />
 
             <div class="overlay">
@@ -100,13 +106,28 @@
         </div>
       </div>
 
-      <!-- PAGINATION (UI ONLY) -->
-      <div class="shop-pagination">
-        <button>&lt; Prev</button>
-        <span class="active">1</span>
-        <span>2</span>
-        <span>3</span>
-        <button>Next &gt;</button>
+      <!-- PAGINATION -->
+      <div class="shop-pagination" *ngIf="totalPages > 1">
+
+        <button
+          (click)="prevPage()"
+          [disabled]="currentPage === 1">
+          &lt; Prev
+        </button>
+
+        <span
+          *ngFor="let p of pages"
+          (click)="goToPage(p)"
+          [class.active]="p === currentPage">
+          {{ p }}
+        </span>
+
+        <button
+          (click)="nextPage()"
+          [disabled]="currentPage === totalPages">
+          Next &gt;
+        </button>
+
       </div>
 
     </div>
@@ -124,7 +145,6 @@
         <p>Master programming, AI, and modern technologies</p>
         <button>Explore Books →</button>
       </div>
-      <!-- <img src="assets/images/tech-books.jpg" alt="Technology Books"> -->
     </div>
 
     <div class="category-card">
@@ -133,7 +153,6 @@
         <p>Build habits, mindset, and personal growth</p>
         <button>Explore Books →</button>
       </div>
-      <!-- <img src="assets/images/self-help.jpg" alt="Self Help Books"> -->
     </div>
   </div>
 </section>

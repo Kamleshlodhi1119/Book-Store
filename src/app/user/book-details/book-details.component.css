@@ -197,3 +197,71 @@
   border-radius: 8px;
   margin-bottom: 15px;
 }
+
+.submit-review-btn {
+  background: var(--gradient-primary);
+  color: var(--text-light);
+  border: none;
+  border-radius: 999px;
+  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--card-hover-shadow);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Soft glow layer */
+.submit-review-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-soft);
+  opacity: 0;
+  transition: var(--transition);
+  z-index: 0;
+}
+
+/* Text stays on top */
+.submit-review-btn > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hover */
+.submit-review-btn:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 15px 35px rgba(47, 62, 70, 0.45);
+}
+
+.submit-review-btn:hover::before {
+  opacity: 0.25;
+}
+
+/* Click */
+.submit-review-btn:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: 0 6px 15px rgba(47, 62, 70, 0.25);
+}
+
+/* Focus ring */
+.submit-review-btn:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 4px rgba(132, 169, 140, 0.45),
+    0 10px 25px rgba(47, 62, 70, 0.35);
+}
+
+/* Disabled */
+.submit-review-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--color-border-light);
+  box-shadow: none;
+}
