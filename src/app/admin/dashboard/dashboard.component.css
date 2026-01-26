@@ -593,26 +593,44 @@ h1, h2, h3 { color: var(--primary-color); }
 
 /* ====================== ANNOUNCEMENT BAR ====================== */
 .announcement-bar {
-  margin: 40px 0;
-  padding: 15px;
-  background: var(--secondary-color);
-  color: white;
-  font-size: 1.5rem;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
+    margin:  50px 0px;
+    padding: 20px 0;
+    background: var(--secondary-color);
+    color: white;
+    font-size: 1.2rem;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
-.divider { opacity: 0.5; }
-.highlight { font-weight: 700; }
-.highlight2 { color: #bfff5f; font-weight: 700; }
+.announcement-content {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.announcement-bar .divider { 
+    opacity: 0.5; 
+}
+
+.announcement-bar .highlight { 
+    font-weight: 700; 
+}
+
+.announcement-bar .highlight2 { 
+    color: #bfff5f; 
+    font-weight: 700; 
+}
 
 /* ====================== BLOG ====================== */
 .blog-grid{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
     gap: 50px;
@@ -821,6 +839,179 @@ font-family: "Style Script", cursive;
   margin-bottom: 10px;
 }
 
+
+
+
+/* =========================================================
+   GLOBAL RESPONSIVE FIXES
+========================================================= */
+@media (max-width: 1200px) {
+  .product-grid {
+    padding: 20px 4em;
+  }
+}
+
+@media (max-width: 992px) {
+
+  /* SECTION TITLES */
+  .section-title {
+    font-size: 2rem;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 70px 20px 60px;
+  }
+
+  .hero-title {
+    font-size: 42px;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+  }
+
+  /* PRODUCT GRID */
+  .product-grid {
+    justify-content: center;
+    padding: 20px 2em;
+  }
+
+  /* BOOK SECTION (EDITOR'S CHOICE) */
+  .book-section {
+    flex-direction: column;
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .book-right {
+    align-items: center;
+  }
+
+  .Famouse-book-title {
+    font-size: 2rem;
+  }
+
+  /* BLOG */
+  .blog-grid {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  /* ANNOUNCEMENT BAR */
+ .announcement-bar {
+        justify-content: flex-start;
+        font-size: 1rem;
+        padding: 15px 0;
+    }
+
+    .announcement-content {
+        gap: 30px;
+        animation: scroll-left 25s linear infinite;
+        width: max-content;
+    }
+    @keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+}
+
+/* =========================================================
+   MOBILE (PHONES)
+========================================================= */
+@media (max-width: 576px) {
+
+  /* HERO */
+  .hero-title {
+    font-size: 32px;
+    line-height: 1.2;
+  }
+
+  .hero-sub {
+    font-size: 15px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+
+ 
+  /* CATEGORY GRID */
+  .category-card {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  /* PRODUCT GRID */
+  .product-grid {
+    padding: 15px;
+    gap: 15px;
+  }
+
+  .book-card {
+    width: 100%;
+    max-width: 220px;
+  }
+
+  /* BOOK SLIDER */
+  .book-slide {
+    width: 180px;
+  }
+
+  /* CTA */
+  .cta-title {
+    font-size: 30px;
+  }
+
+  .cta-sub {
+    font-size: 20px;
+  }
+
+  .cta-description {
+    font-size: 16px;
+  }
+
+  .cta-actions button {
+    width: 100%;
+  }
+
+  /* ANNOUNCEMENT BAR */
+  .announcement-bar {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  /* BLOG */
+  .blog-card {
+    width: 80%;
+    max-width: 320px;
+  }
+
+   .Book-product-placeholder img{
+    max-width: 80%;
+   }
+
+
+.blog-section,
+.category-section,
+.book-slider-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-direction: center
+  ;
+}
+
+
+
+
+
+}
 
 
 

@@ -185,3 +185,117 @@
   gap: 10px;
   margin-top: 15px;
 }
+
+
+/* ------------------ RESPONSIVE ADMIN PAGE ------------------ */
+
+/* Tablets (≤ 1024px) */
+@media (max-width: 1024px) {
+  .admin-container {
+    padding: 25px 20px;
+  }
+
+  .admin-item {
+    gap: 15px;
+  }
+
+  .admin-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .btn-edit,
+  .btn-delete,
+  .btn-secondary {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+
+/* Mobile (≤ 768px) */
+@media (max-width: 768px) {
+  .admin-page {
+    padding: 15px 8px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .page-header h2 {
+    text-align: center;
+  }
+
+  .btn-primary {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .admin-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .book-preview-section {
+    width: 100%;
+  }
+
+  .admin-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .admin-actions button {
+    flex: 1;
+  }
+
+  .modal-box {
+    width: 95%;
+    max-width: 360px;
+    padding: 25px 20px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .modal-actions button {
+    width: 100%;
+  }
+}
+
+/* Small Phones (≤ 480px) */
+@media (max-width: 480px) {
+  .logo-book-preview-img {
+    max-width: 50px !important;
+  }
+
+  .book-info strong {
+    font-size: 14px;
+  }
+
+  .book-info span {
+    font-size: 12px;
+  }
+
+  .btn-edit,
+  .btn-delete,
+  .btn-secondary {
+    font-size: 12px;
+    padding: 7px 10px;
+  }
+
+  .modal-box h3 {
+    font-size: 16px;
+  }
+}
