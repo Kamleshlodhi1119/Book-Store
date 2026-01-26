@@ -12,9 +12,10 @@
     <div class="admin-list">
       <div class="admin-item" *ngFor="let b of books">
         <div class="book-preview-section">
-        <img class="logo-book-preview-img"
-            [src]="b.imageUrl ? imageApi + b.imageUrl : 'assets/book-placeholder.png'"
-             [alt]="b.title" />
+       <img class="logo-book-preview-img"
+        [src]="b.imageUrl || 'assets/book-placeholder.png'"
+     [alt]="b.title" />
+
       
         <div class="book-info">
           <strong>{{ b.title }}</strong>

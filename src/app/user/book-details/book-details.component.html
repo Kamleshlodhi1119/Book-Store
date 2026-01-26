@@ -5,8 +5,9 @@
 
     <div class="media-column">
       <div class="sticky-wrapper">
-        <img class="main-book-img" [src]="book.imageUrl ? imageApi + book.imageUrl : 'assets/book-placeholder.png'"
-          [alt]="book.title" />
+        <img class="main-book-img" 
+           [src]="book.imageUrl || 'assets/book-placeholder.png'"
+     [alt]="book.title" />
 
         <div class="quick-meta">
           <div class="avg-badge">

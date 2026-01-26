@@ -64,9 +64,8 @@
     <div class="image-container">
       <img 
       
-       [src]="product.imageUrl ? imageApi + product.imageUrl : 'assets/book-placeholder.png'"
-        
-        alt="{{ product.title }}" />
+        [src]="product.imageUrl || 'assets/book-placeholder.png'"
+     [alt]="product.title" />
 
       <div class="overlay">
         <abbr title="View Book">
@@ -164,8 +163,8 @@
         <div class="image-container">
           <img 
           
-           [src]="product.imageUrl ? imageApi + product.imageUrl : 'assets/book-placeholder.png'"
-             alt="{{ product.title }}" />
+         [src]="product.imageUrl || 'assets/book-placeholder.png'"
+     [alt]="product.title" />
 
           <div class="overlay">
             <button class="icon-btn" (click)="viewBook(product.id)"><i class="fa fa-search"></i></button>

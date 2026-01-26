@@ -28,8 +28,8 @@
 
   <div class="book-preview-section">
     <img class="logo-book-preview-img"
-      [src]="w.imageUrl ? imageApi + w.imageUrl : 'assets/book-placeholder.png'"
-      [alt]="w.title" />
+        [src]="w.imageUrl || 'assets/book-placeholder.png'"
+     [alt]="w.title" />
 
     <div class="info">
       <h3>{{ w.title }}</h3>

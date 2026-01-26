@@ -32,9 +32,8 @@
           <div>
             <img
               class="logo-book-preview-img"
-              [src]="i.imageUrl ? imageApi + i.imageUrl : 'assets/book-placeholder.png'"
-              [alt]="i.title"
-            />
+                  [src]="i.imageUrl || 'assets/book-placeholder.png'"
+     [alt]="i.title" />
           </div>
 
           <div>

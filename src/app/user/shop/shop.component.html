@@ -82,9 +82,8 @@
 
           <div class="image-box">
             <img
-              [src]="b.imageUrl ? imageApi + b.imageUrl : 'assets/book-placeholder.png'"
-              [alt]="b.title"
-            />
+                  [src]="b.imageUrl || 'assets/book-placeholder.png'"
+     [alt]="b.title" />
 
             <div class="overlay">
               <button class="icon-btn" (click)="viewBook(b.id)">
