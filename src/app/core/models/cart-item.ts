@@ -1,7 +1,12 @@
-import { Book } from "./book";
-
-
 export interface CartItem {
-  book: Book;
+  bookId: number;
+  title: string;
+  price: number;
   quantity: number;
+  imageUrl?: string;
+}
+
+export interface CartResponse {
+  items: CartItem[];
+  totalAmount: number;
 }

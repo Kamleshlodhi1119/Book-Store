@@ -1,62 +1,75 @@
 <app-user-header></app-user-header>
 
-
 <!-- HERO (SAME AS SHOP PAGE – REUSED STYLE) -->
 <section class="cart-hero">
   <div class="hero-content">
-
     <span class="shop-heading">My Cart</span>
-
     <p>
       Track all your purchases, order status, and order history in one place.
     </p>
   </div>
 </section>
 
-
-
 <section class="cart-container">
 
+  <!-- LOADING -->
   <div *ngIf="loading" class="cart-loading">
     Loading your cart...
   </div>
 
+  <!-- EMPTY CART -->
   <div *ngIf="!loading && (!cart || cart.items?.length === 0)" class="empty-cart">
     Your cart is empty
   </div>
 
-  <div *ngIf="cart && cart.items?.length">
+  <!-- CART ITEMS -->
+  <div *ngIf="!loading && cart && cart.items?.length">
 
     <div class="cart-item" *ngFor="let i of cart.items">
       <div class="item-info">
 
         <div class="book-preview-section">
           <div>
-            <img class="logo-book-preview-img"
-               [src]="i.imageUrl ? imageApi + i.imageUrl : 'assets/book-placeholder.png'"
-              [alt]="i.title" />
+            <img
+              class="logo-book-preview-img"
+              [src]="i.imageUrl ? imageApi + i.imageUrl : 'assets/book-placeholder.png'"
+              [alt]="i.title"
+            />
           </div>
+
           <div>
-            <h3>{{ i.book.title }}</h3>
-            <p class="price">₹ {{ i.book.price }}</p>
+            <h3>{{ i.title }}</h3>
+            <p class="price">₹ {{ i.price }}</p>
+
             <div class="quantity-controls">
-              <button class="qty-btn" (click)="updateQuantity(i.book.id, i.quantity - 1)"
-                [disabled]="i.quantity <= 1">-</button>
+              <button
+                class="qty-btn"
+                (click)="updateQuantity(i.bookId, i.quantity - 1)"
+                [disabled]="i.quantity <= 1">
+                -
+              </button>
 
               <span class="qty-value">{{ i.quantity }}</span>
 
-              <button class="qty-btn" (click)="updateQuantity(i.book.id, i.quantity + 1)">+</button>
+              <button
+                class="qty-btn"
+                (click)="updateQuantity(i.bookId, i.quantity + 1)">
+                +
+              </button>
             </div>
           </div>
         </div>
       </div>
-      <button class="remove-btn" (click)="remove(i.book.id)">
+
+      <button class="remove-btn" (click)="remove(i.bookId)">
         Remove
       </button>
     </div>
+
+    <!-- CART FOOTER -->
     <div class="cart-footer">
       <div class="total">
-        Subtotal: ₹ {{ subtotal }}
+        Subtotal: ₹ {{ cart.totalAmount }}
       </div>
 
       <div class="actions">

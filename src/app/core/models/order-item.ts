@@ -1,7 +1,7 @@
-import { Book } from './book';
-
 export interface OrderItem {
-  book: Book;
+  bookId: number;
+  title: string;
+  imageUrl: string;
   quantity: number;
   price: number;
 }
