@@ -42,6 +42,8 @@ export class AdminBooksComponent implements OnInit {
   book: Partial<Book> = {};
   selectedFile: File | null = null;
   previewUrl: string | null = null;
+  selectedCsv: File | null = null;
+
 
   constructor(private http: HttpClient, private alertService: AlertService) {} // Added AlertService
 
@@ -207,4 +209,40 @@ export class AdminBooksComponent implements OnInit {
       error: () => this.alertService.show('Delete failed', 'error')
     });
   }
+
+// ======================
+// CSV BULK UPLOAD
+// ======================
+onCsvSelect(event: any): void {
+  this.selectedCsv = event.target.files?.[0];
+
+  if (!this.selectedCsv) return;
+
+  if (!this.selectedCsv.name.toLowerCase().endsWith('.csv')) {
+    this.alertService.show('Please upload a CSV file', 'error');
+    return;
+  }
+
+  this.uploadCsv();
+}
+
+uploadCsv(): void {
+  if (!this.selectedCsv) return;
+
+  const formData = new FormData();
+  formData.append('file', this.selectedCsv);
+
+  this.http.post(
+    `${environment.apiBaseUrl}/admin/books/bulk-upload`,
+    formData,
+    { responseType: 'text' }
+  ).subscribe({
+    next: (res) => {
+      this.alertService.show(res, 'success');
+      this.load(); // 🔥 reuse YOUR existing load() method
+    },
+    error: () => this.alertService.show('CSV upload failed', 'error')
+  });
+}
+
 }
