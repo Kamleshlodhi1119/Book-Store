@@ -25,6 +25,7 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password/
 import { ResetPasswordComponent } from './auth/reset-password/reset-password/reset-password.component';
 import { ProfileDetailsComponent } from './user/profile-details/profile-details.component';
 import { BlogItemsComponent } from './blogs/blog-items/blog-items.component';
+import { AllapisComponent } from './privacy/allapis/allapis.component';
 
 
 const routes: Routes = [
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: 'terms-conditions', component:TermsComponent  },
   { path: 'return-policy', component: ReturnsComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
+   { path: 'api-docs', component: AllapisComponent },
   
 { path: 'blog', component: BlogItemsComponent },
 { path: 'ng ', component: ResetPasswordComponent },

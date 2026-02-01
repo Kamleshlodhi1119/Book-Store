@@ -1,17 +1,21 @@
-<app-user-header></app-user-header>
-<section class="legal-hero">
-  <h1>Privacy Policy</h1>
+<!-- <app-user-header></app-user-header> -->
+<section class="blog-section">
+  <h2 class="section-title">Literary Insights</h2>
+  <p class="Famouse-book">LATEST FROM OUR BLOG</p>
+
+  <div *ngIf="loading">Loading real blogs...</div>
+
+  <div class="blog-grid" *ngIf="!loading">
+    <div
+      class="blog-card"
+      *ngFor="let blog of blogs"
+      (click)="openBlog(blog.url)"
+      style="cursor: pointer;"
+    >
+      <img [src]="blog.image" [alt]="blog.title">
+      <h3>{{ blog.title }}</h3>
+      <p>{{ blog.description }}</p>
+      <small>Published: {{ blog.published }}</small>
+    </div>
+  </div>
 </section>
-
-<div class="content-section">
-  <span class="last-updated">Last Updated: January 2024</span>
-  
-  <h2>1. Information We Collect</h2>
-  <p>We collect information you provide directly to us when you create an account, make a purchase, or communicate with us. This includes your name, email address, postal address, and payment information.</p>
-
-  <h2>2. How We Use Your Information</h2>
-  <p>We use the information we collect to process your orders, send you updates about your account, and improve our bookstore services. We do not sell your personal data to third parties.</p>
-
-  <h2>3. Data Security</h2>
-  <p>We implement industry-standard security measures to protect your personal information. However, no method of transmission over the internet is 100% secure.</p>
-</div>

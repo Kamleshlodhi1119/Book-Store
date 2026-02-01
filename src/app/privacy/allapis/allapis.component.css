@@ -1,0 +1,23 @@
+/* Hide global footer when on docs page */
+:host ::ng-deep app-footer {
+  display: none !important;
+}
+
+.docs-container {
+  height: 100vh;
+  width: 100%;
+}
+#redoc-container {
+  height: 100vh;
+  width: 100%;
+}
+
+body.hide-footer app-footer {
+  display: none !important;
+}
+
+
+/* This now works globally because encapsulation is OFF */
+app-footer {
+  display: none !important;
+}

@@ -27,6 +27,7 @@ import { BlogItemsComponent } from './blogs/blog-items/blog-items.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password/reset-password.component';
 import { ProfileDetailsComponent } from './user/profile-details/profile-details.component';
+import { AllapisComponent } from './privacy/allapis/allapis.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +50,7 @@ import { ProfileDetailsComponent } from './user/profile-details/profile-details.
     ForgotPasswordComponent,
     ResetPasswordComponent,
     ProfileDetailsComponent,
+    AllapisComponent,
   ],
   imports: [
     BrowserModule,
