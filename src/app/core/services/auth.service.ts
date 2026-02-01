@@ -51,4 +51,26 @@ export class AuthService {
   getUsername(): string | null{
     return localStorage.getItem('email');
   }
+
+
+  forgotPassword(email: string) {
+return this.http.post(
+`${this.api}/password/forgot`,
+{ email },
+{ responseType: 'text' }
+);
+}
+
+
+resetPassword(data: {
+token: string;
+newPassword: string;
+confirmPassword: string;
+}) {
+return this.http.post(
+`${this.api}/password/reset`,
+data,
+{ responseType: 'text' }
+);
+}
 }

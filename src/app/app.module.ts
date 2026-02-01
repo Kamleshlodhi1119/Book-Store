@@ -24,6 +24,9 @@ import { ReturnsComponent } from './privacy/returns/returns.component';
 import { PrivacyComponent } from './privacy/privacy/privacy.component';
 import { AuthModalComponent } from './auth/auth-modal/auth-modal.component';
 import { BlogItemsComponent } from './blogs/blog-items/blog-items.component';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password/reset-password.component';
+import { ProfileDetailsComponent } from './user/profile-details/profile-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +46,9 @@ import { BlogItemsComponent } from './blogs/blog-items/blog-items.component';
     PrivacyComponent,
     AuthModalComponent,
     BlogItemsComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
+    ProfileDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,4 +63,6 @@ import { BlogItemsComponent } from './blogs/blog-items/blog-items.component';
   ],
   bootstrap: [AppComponent]
 })
+
+
 export class AppModule {}

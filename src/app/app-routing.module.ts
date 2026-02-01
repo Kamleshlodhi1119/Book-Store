@@ -21,6 +21,11 @@ import { AboutusComponent } from './user/aboutus/aboutus.component';
 import { ReturnsComponent } from './privacy/returns/returns.component';
 import { TermsComponent } from './privacy/terms/terms.component';
 import { PrivacyComponent } from './privacy/privacy/privacy.component';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password/reset-password.component';
+import { ProfileDetailsComponent } from './user/profile-details/profile-details.component';
+import { BlogItemsComponent } from './blogs/blog-items/blog-items.component';
+
 
 const routes: Routes = [
 
@@ -36,6 +41,11 @@ const routes: Routes = [
   { path: 'privacy-policy', component:PrivacyComponent  },
   { path: 'terms-conditions', component:TermsComponent  },
   { path: 'return-policy', component: ReturnsComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  
+{ path: 'blog', component: BlogItemsComponent },
+{ path: 'ng ', component: ResetPasswordComponent },
+{ path: 'profile', component: ProfileDetailsComponent, canActivate: [AuthGuard] },
   // USER
   // { path: 'home', component: UserHomeComponent, canActivate: [AuthGuard] },
   // { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
