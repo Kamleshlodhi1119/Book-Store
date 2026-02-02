@@ -36,7 +36,7 @@ export class AllapisComponent implements AfterViewInit, OnDestroy {
 
   private renderDocs() {
     (window as any).Redoc.init(
-      'http://localhost:8082/v3/api-docs',
+      'https://bookstore-h5qp.onrender.com/v3/api-docs',
       {
         scrollYOffset: 60,
         theme: {
