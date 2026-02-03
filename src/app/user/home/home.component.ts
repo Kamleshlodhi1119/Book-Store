@@ -29,6 +29,8 @@ export class UserHomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    this.alertService.show('this application might be take time due to free tire of backend', 'warning');
     this.bookService.getAll().subscribe({
       next: res => this.books = res as any[],
       error: () => this.alertService.show('Failed to load books', 'error')
