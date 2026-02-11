@@ -43,6 +43,7 @@ const routes: Routes = [
   { path: 'terms-conditions', component:TermsComponent  },
   { path: 'return-policy', component: ReturnsComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
    { path: 'api-docs', component: AllapisComponent },
   
 { path: 'blog', component: BlogItemsComponent },

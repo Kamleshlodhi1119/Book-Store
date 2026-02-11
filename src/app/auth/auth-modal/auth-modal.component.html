@@ -20,7 +20,7 @@
 
         New user? <a (click)="mode = 'register'">Sign up here</a>
       </p>
-      <p class="forgot-link">
+      <p class="forgot-link" *ngIf="mode === 'login'">
         <a routerLink="/forgot-password" (click)="close()">
           Forgot password?
         </a>

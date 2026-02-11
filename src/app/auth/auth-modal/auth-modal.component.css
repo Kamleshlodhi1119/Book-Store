@@ -4,7 +4,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 3000; /* Above all site content */
+  z-index: 1030; /* Above all site content */
   display: flex;
   align-items: center;
   justify-content: center;
