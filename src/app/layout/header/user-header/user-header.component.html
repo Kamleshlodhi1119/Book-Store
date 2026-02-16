@@ -35,8 +35,8 @@
 <!-- MAIN HEADER -->
 <header class="main-header">
   <div class="logo">
-     <a routerLink="/home">
-    <img src="../../../../assets/Logo/Logo.png" alt="Logo" /></a>
+    <a routerLink="/home">
+      <img src="../../../../assets/Logo/Logo.png" alt="Logo" /></a>
   </div>
 
   <!-- DESKTOP NAV -->
@@ -45,10 +45,22 @@
       <li><a routerLink="/home" routerLinkActive="active-link">Home</a></li>
       <li><a routerLink="/aboutus" routerLinkActive="active-link">About Us</a></li>
       <li><a routerLink="/shop" routerLinkActive="active-link">Shop</a></li>
-      <li><a routerLink="/cart" routerLinkActive="active-link">Cart</a></li>
       <li><a routerLink="/orders" routerLinkActive="active-link">Orders</a></li>
       <li><a routerLink="/wishlist" routerLinkActive="active-link">Wishlist</a></li>
-      <li><a routerLink="/profile" routerLinkActive="active-link">profile</a></li>
+
+
+      <li>
+        <a routerLink="/cart" routerLinkActive="active-link icon-link" aria-label="Cart">
+          <i class="fa-solid fa-cart-shopping"></i>
+        </a>
+      </li>
+
+      <li>
+        <a routerLink="/profile" routerLinkActive="active-link icon-link" aria-label="Profile">
+          <i class="fa-solid fa-user"></i>
+        </a>
+      </li>
+
     </ul>
   </nav>
 
@@ -72,7 +84,7 @@
     <a routerLink="/orders" (click)="closeMobileMenu()">Orders</a>
     <a routerLink="/wishlist" (click)="closeMobileMenu()">Wishlist</a>
     <a routerLink="/profile" (click)="closeMobileMenu()">Wishlist</a>
-    
+
 
     <div class="mobile-auth">
       <ng-container *ngIf="!isLoggedIn">

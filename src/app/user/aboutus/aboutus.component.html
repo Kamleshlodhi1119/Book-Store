@@ -41,13 +41,70 @@
     <div class="pc-text">
       <span class="pc-sub">OUR SERVICES</span>
       <h2>About <span>Us</span></h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In mi orci, ultricies in tortor vitae, lacinia consectetur quam.</p>
-      <p>Proin a mi auctor, dapibus dui ac, euismod nulla. Nullam faucibus ultrices eros.</p>
+      <p>Our bookstore is built to make learning simple, modern, and accessible.
+        We combine technology with reading to create a smooth platform where
+        users can explore books, manage orders, and grow their personal library.</p>
+      <p> Focused on performance and user experience, this platform delivers a fast,
+        clean, and meaningful reading journey. Whether you want to gain knowledge,
+        improve yourself, or explore technology, we support your growth.</p>
+        <pre>
+          
+        </pre>
       <a routerLink="/shop" routerLinkActive="active-link" class="pc-btn">VIEW ALL</a>
       
     </div>
   </div>
 </section>
+
+<section class="cta-banner">
+  <div class="cta-container">
+    <span class="cta-tag">THE BIBLIOPHILE'S PROMISE</span>
+    <h1 class="cta-title">Discover Your Next Great Read</h1>
+
+    <div class="cta-content">
+      <p class="cta-sub">100% Genuine Editions & Curated Genres</p>
+      <p class="cta-description">
+        We believe in the soul of a physical book. From leather-bound classics to the latest
+        contemporary bestsellers, our library is hand-picked for the highest quality.
+      </p>
+    </div>
+
+    <div class="cta-actions">
+       <a routerLink="/shop" class="btn-cta-primary">Browse Collection</a>
+        <a routerLink="/shop"  class="btn-cta-outline">Join the Book Club</a>
+    </div>
+    <p class="cta-note">* Certified Authentic Prints & Digital Rights Management</p>
+  </div>
+</section>
+
+
+
+<section class="book-slider-section">
+  <h2 class="section-title">Trending Now</h2>
+  <span class="hero-tag">WHAT READERS AROUND THE WORLD ARE LOVING</span>
+
+  <div class="book-slider">
+    <div class="book-slider-track">
+      <div class="book-card" *ngFor="let product of books">
+        <div class="image-container">
+          <img 
+          
+         [src]="product.imageUrl || 'assets/book-placeholder.png'"
+     [alt]="product.title" />
+
+          <div class="overlay">
+            <button class="icon-btn" (click)="viewBook(product.id)"><i class="fa fa-search"></i></button>
+            <button class="icon-btn" (click)="addToCart(product.id)"><i class="fa fa-shopping-cart"></i></button>
+            <button class="icon-btn" (click)="addToWishlist(product.id)"><i class="fa fa-heart"></i></button>
+          </div>
+        </div>
+        <h3>{{ product.title }}</h3>
+        <p class="price">₹ {{ product.price }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 
 <!-- OTHER BOOK CATEGORY -->
