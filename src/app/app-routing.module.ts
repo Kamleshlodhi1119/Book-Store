@@ -26,6 +26,7 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password/res
 import { ProfileDetailsComponent } from './user/profile-details/profile-details.component';
 import { BlogItemsComponent } from './blogs/blog-items/blog-items.component';
 import { AllapisComponent } from './privacy/allapis/allapis.component';
+import { ProfileComponent } from './admin/profile/profile.component';
 
 
 const routes: Routes = [
@@ -65,7 +66,9 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'users', component: AdminUsersComponent },      
       { path: 'books', component: AdminBooksComponent },
-      { path: 'orders', component: AdminOrdersComponent }
+      { path: 'orders', component: AdminOrdersComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'settings', component: ProfileComponent }
     ]
   },
 

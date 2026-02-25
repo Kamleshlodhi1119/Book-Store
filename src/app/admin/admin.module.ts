@@ -7,13 +7,15 @@ import { AdminBooksComponent } from './books/admin-books/admin-books.component';
 import { AdminOrdersComponent } from './orders/admin-orders/admin-orders.component';
 import { AdminUsersComponent } from './users/admin-users/admin-users.component';
 import { LayoutModule } from '../layout/layout.module';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     AdminUsersComponent,
     AdminBooksComponent,
-    AdminOrdersComponent
+    AdminOrdersComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

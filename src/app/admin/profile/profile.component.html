@@ -1,0 +1,177 @@
+<app-admin-header></app-admin-header>
+
+<div class="profile-container">
+
+  <!-- ================= HEADER ================= -->
+  <div class="profile-header">
+
+   <div class="avatar-box">
+
+  <img
+    class="avatar"
+    [src]="profile.avatarUrl"
+  />
+
+  <label class="avatar-edit">
+    ✎
+    <input
+      type="file"
+      hidden
+      accept="image/png,image/jpeg,image/webp"
+      (change)="onAvatarSelected($event)">
+  </label>
+
+</div>
+
+<!-- Upload Progress -->
+<div *ngIf="uploadingAvatar" class="upload-bar">
+  <div class="upload-fill" [style.width.%]="uploadProgress"></div>
+</div>
+
+
+    <div class="header-info">
+      <h2>{{ profile?.fullName || 'Bookstore User' }}</h2>
+      <p class="role">Book Lover & Reader</p>
+
+      <p class="location">
+        📍 {{ profile?.city || 'City' }}, {{ profile?.country || 'Country' }}
+      </p>
+
+      <div class="stats">
+        <span><strong>{{ totalCartItems }}</strong> Cart</span>
+        <span><strong>{{ wishlist.length }}</strong> Wishlist</span>
+        <span><strong>{{ orders.length }}</strong> Orders</span>
+      </div>
+
+      <div class="header-actions">
+        <!-- <button class="pbtn pbtn-primary">Go to Cart</button>
+        <button class="pbtn pbtn-outline">My Orders</button> -->
+        <button
+          class="pbtn pbtn-accent"
+          *ngIf="!editMode && !passwordMode"
+          (click)="enableEdit()">
+          Edit Details
+        </button>
+        <button
+          class="pbtn pbtn-accent"
+          *ngIf="!passwordMode"
+          (click)="openPasswordMode()">
+          Update Password
+        </button>
+        <button
+          class="pbtn pbtn-outline"
+          *ngIf="passwordMode"
+          (click)="closePasswordMode()">
+          Back to Profile
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MAIN ================= -->
+  <div class="main-grid">
+
+    <!-- ================= PROFILE / PASSWORD PANEL ================= -->
+    <div class="panel">
+      <h3>{{ passwordMode ? 'Update Password' : 'Basic Details' }}</h3>
+
+      <!-- AVATAR URL -->
+      <div *ngIf="avatarEditMode && !passwordMode" class="avatar-edit-box">
+        <input
+          placeholder="Paste Avatar URL"
+          [(ngModel)]="profile.avatarUrl">
+        <button class="pbtn pbtn-accent" (click)="updateAvatar()">
+          Update Avatar
+        </button>
+      </div>
+
+      <!-- PROFILE FORM -->
+      <div *ngIf="!passwordMode">
+        <div class="form-grid">
+          <input placeholder="Full Name" [(ngModel)]="profile.fullName" [disabled]="!editMode">
+          <input placeholder="Phone" [(ngModel)]="profile.phone" [disabled]="!editMode">
+          <input placeholder="Address" [(ngModel)]="profile.address" [disabled]="!editMode">
+          <input placeholder="City" [(ngModel)]="profile.city" [disabled]="!editMode">
+          <input placeholder="Country" [(ngModel)]="profile.country" [disabled]="!editMode">
+        </div>
+
+        <div class="edit-actions" *ngIf="editMode">
+          <button class="pbtn pbtn-primary" (click)="saveProfile()">Update</button>
+          <button class="pbtn pbtn-outline" (click)="cancelEdit()">Cancel</button>
+        </div>
+      </div>
+
+      <!-- PASSWORD FORM -->
+      <div *ngIf="passwordMode">
+        <div class="form-grid">
+          <input
+            type="password"
+            placeholder="Current Password"
+            [(ngModel)]="passwordForm.currentPassword">
+
+          <input
+            type="password"
+            placeholder="New Password"
+            [(ngModel)]="passwordForm.newPassword">
+
+          <input
+            type="password"
+            placeholder="Confirm New Password"
+            [(ngModel)]="passwordForm.confirmPassword">
+        </div>
+
+        <div class="edit-actions">
+          <button
+            class="pbtn pbtn-primary"
+            (click)="updatePassword()"
+            [disabled]="loading">
+            {{ loading ? 'Updating...' : 'Update Password' }}
+          </button>
+        </div>
+      </div>
+
+      <p class="message">{{ message }}</p>
+    </div>
+
+    <!-- ================= AUTHORS PANEL ================= -->
+    <div class="panel">
+      <h3>Authors</h3>
+      <div class="list-item" *ngFor="let author of authors.slice(0,6)">
+        <strong>{{ author }}</strong>
+        <span>Popular Author</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= BOTTOM ================= -->
+  <div class="bottom-grid">
+
+    <!-- CART -->
+    <!-- <div class="panel">
+      <h3>Cart Items</h3>
+
+      <div class="row" *ngFor="let c of cart?.items">
+        <span>{{ c.title }}</span>
+      </div>
+
+      <strong *ngIf="cart">Total: ₹{{ cart.totalAmount }}</strong>
+    </div> -->
+
+    <!-- WISHLIST -->
+    <!-- <div class="panel">
+      <h3>Wishlist</h3>
+
+      <div class="row" *ngFor="let w of wishlist">
+        <span>{{ w.title }}</span>
+        <button class="pbtn pbtn-outline" (click)="removeWishlist(w.bookId)">
+          Remove
+        </button>
+      </div>
+
+      <p *ngIf="!wishlist.length">Wishlist is empty</p>
+    </div> -->
+
+  </div>
+
+</div>

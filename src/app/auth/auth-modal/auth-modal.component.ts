@@ -34,17 +34,38 @@ export class AuthModalComponent implements OnInit {
     this.authModalService.close();
   }
 
-  handleLogin() {
-    this.authService.login({ email: this.email, password: this.password }).subscribe({
-      next: (res) => {
-        this.authService.saveSession(res.token, res.role);
-        this.alertService.show('Welcome back!', 'success');
-        this.close(); // Closes the blur
-        this.router.navigate([res.role === 'ROLE_ADMIN' ? '/admin/dashboard' : '/home']);
-      },
-      error: () => this.alertService.show('Invalid Credentials', 'error')
-    });
-  }
+handleLogin() {
+  this.authService.login({ email: this.email, password: this.password }).subscribe({
+    next: (res) => {
+
+      // 1️⃣ Save token + role
+      this.authService.saveSession(res.token, res.role);
+
+      // 2️⃣ Fetch user info (important for header)
+      this.authService.me().subscribe({
+        next: () => {
+
+          this.alertService.show('Welcome back!', 'success');
+          this.close();
+
+          const target =
+            res.role === 'ROLE_ADMIN'
+              ? '/admin/dashboard'
+              : '/home';
+
+          this.router.navigate([target]).then(() => {
+
+            // 3️⃣ Force full reload (ensures header + guards update)
+            window.location.reload();
+
+          });
+        }
+      });
+
+    },
+    error: () => this.alertService.show('Invalid Credentials', 'error')
+  });
+}
 
   handleRegister() {
     this.authService.register({ username: this.username, email: this.email, password: this.password }).subscribe({
