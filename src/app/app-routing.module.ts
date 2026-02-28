@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
 import { CartComponent } from './user/cart/cart.component';
 import { WishlistComponent } from './user/wishlist/wishlist.component';
 import { UserHomeComponent } from './user/home/home.component';
@@ -30,9 +27,6 @@ import { ProfileComponent } from './admin/profile/profile.component';
 
 
 const routes: Routes = [
-
-  // { path: 'login', component: LoginComponent },
-  // { path: 'register', component: RegisterComponent },
   { path: 'home', component: UserHomeComponent},
   { path: 'aboutus', component: AboutusComponent},
   { path: 'cart', component: CartComponent , canActivate: [AuthGuard] },
@@ -50,13 +44,6 @@ const routes: Routes = [
 { path: 'blog', component: BlogItemsComponent },
 { path: 'ng ', component: ResetPasswordComponent },
 { path: 'profile', component: ProfileDetailsComponent, canActivate: [AuthGuard] },
-  // USER
-  // { path: 'home', component: UserHomeComponent, canActivate: [AuthGuard] },
-  // { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
-  // { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] },
-  // { path: 'shop', component: ShopComponent, canActivate: [AuthGuard] },
-  // { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
-  // { path: 'book-details/:id', component: BookDetailsComponent, canActivate: [AuthGuard] },
 
   // ADMIN
   {

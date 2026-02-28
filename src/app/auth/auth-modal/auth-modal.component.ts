@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertService } from 'src/app/core/services/alert.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { AuthMode, LoginRegisterService } from 'src/app/core/services/login-register.service';
 
@@ -10,23 +9,34 @@ import { AuthMode, LoginRegisterService } from 'src/app/core/services/login-regi
   styleUrls: ['./auth-modal.component.css']
 })
 export class AuthModalComponent implements OnInit {
-  mode: AuthMode = null; // 'login', 'register', or null
-  
-  // Form Fields
+
+  mode: AuthMode | null = null;
+
   username = '';
   email = '';
   password = '';
+  confirmPassword = '';
+
+  loading = false;
+
+  // errors (shown below fields)
+  usernameError = '';
+  emailError = '';
+  passwordError = '';
+  confirmPasswordError = '';
+
+  passwordStrength = '';
 
   constructor(
     private authModalService: LoginRegisterService,
     private authService: AuthService,
-    private alertService: AlertService,
     private router: Router
   ) {}
 
   ngOnInit() {
     this.authModalService.authStatus$.subscribe(state => {
       this.mode = state;
+      this.clearErrors();
     });
   }
 
@@ -34,46 +44,129 @@ export class AuthModalComponent implements OnInit {
     this.authModalService.close();
   }
 
-handleLogin() {
-  this.authService.login({ email: this.email, password: this.password }).subscribe({
-    next: (res) => {
+  clearErrors() {
+    this.usernameError = '';
+    this.emailError = '';
+    this.passwordError = '';
+    this.confirmPasswordError = '';
+    this.passwordStrength = '';
+  }
 
-      // 1️⃣ Save token + role
-      this.authService.saveSession(res.token, res.role);
+  /* ================= VALIDATION ================= */
 
-      // 2️⃣ Fetch user info (important for header)
-      this.authService.me().subscribe({
-        next: () => {
+  validateUsername() {
+    if (!this.username.trim()) {
+      this.usernameError = 'Username required';
+    } else if (!/^[a-zA-Z0-9_ ]{3,30}$/.test(this.username)) {
+      this.usernameError = '3-30 chars only';
+    } else {
+      this.usernameError = '';
+    }
+  }
 
-          this.alertService.show('Welcome back!', 'success');
-          this.close();
+  validateEmail() {
+    if (!this.email.trim()) {
+      this.emailError = 'Email required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)) {
+      this.emailError = 'Invalid email';
+    } else {
+      this.emailError = '';
+    }
+  }
 
-          const target =
-            res.role === 'ROLE_ADMIN'
-              ? '/admin/dashboard'
-              : '/home';
+  validatePassword() {
+    const p = this.password;
 
-          this.router.navigate([target]).then(() => {
+    if (!p) {
+      this.passwordError = 'Password required';
+      this.passwordStrength = '';
+      return;
+    }
 
-            // 3️⃣ Force full reload (ensures header + guards update)
-            window.location.reload();
+    if (p.length < 6) {
+      this.passwordError = 'Min 6 characters';
+    } else {
+      this.passwordError = '';
+    }
 
-          });
-        }
-      });
+    let score = 0;
+    if (p.length >= 6) score++;
+    if (/[A-Z]/.test(p)) score++;
+    if (/[0-9]/.test(p)) score++;
+    if (/[^A-Za-z0-9]/.test(p)) score++;
 
-    },
-    error: () => this.alertService.show('Invalid Credentials', 'error')
-  });
-}
+    if (score <= 1) this.passwordStrength = 'Weak';
+    else if (score <= 3) this.passwordStrength = 'Medium';
+    else this.passwordStrength = 'Strong';
+  }
+
+  validateConfirmPassword() {
+    if (!this.confirmPassword) {
+      this.confirmPasswordError = 'Confirm password';
+    } else if (this.confirmPassword !== this.password) {
+      this.confirmPasswordError = 'Passwords do not match';
+    } else {
+      this.confirmPasswordError = '';
+    }
+  }
+
+  /* ================= LOGIN ================= */
+
+  handleLogin() {
+    this.validateEmail();
+    this.validatePassword();
+
+    if (this.emailError || this.passwordError) return;
+
+    this.loading = true;
+
+    this.authService.login({
+      email: this.email.trim(),
+      password: this.password.trim()
+    }).subscribe({
+      next: (res) => {
+        this.authService.saveSession(res.token, res.role);
+
+        this.authService.me().subscribe(() => {
+          const target = res.role === 'ROLE_ADMIN'
+            ? '/admin/dashboard'
+            : '/home';
+
+          this.router.navigate([target]).then(() => window.location.reload());
+        });
+      },
+      error: () => {
+        this.passwordError = 'Invalid email or password';
+        this.loading = false;
+      }
+    });
+  }
+
+  /* ================= REGISTER ================= */
 
   handleRegister() {
-    this.authService.register({ username: this.username, email: this.email, password: this.password }).subscribe({
+    this.validateUsername();
+    this.validateEmail();
+    this.validatePassword();
+    this.validateConfirmPassword();
+
+    if (this.usernameError || this.emailError || this.passwordError || this.confirmPasswordError) return;
+
+    this.loading = true;
+
+    this.authService.register({
+      username: this.username.trim(),
+      email: this.email.trim(),
+      password: this.password.trim()
+    }).subscribe({
       next: () => {
-        this.alertService.show('Account created! Please login.', 'success');
-        this.mode = 'login'; // Switch to login view after success
+        this.mode = 'login';
+        this.loading = false;
       },
-      error: () => this.alertService.show('Registration failed', 'error')
+      error: () => {
+        this.emailError = 'Email already exists';
+        this.loading = false;
+      }
     });
   }
 }

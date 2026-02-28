@@ -4,8 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
 import { CartComponent } from './user/cart/cart.component';
 import { WishlistComponent } from './user/wishlist/wishlist.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -31,8 +29,6 @@ import { AllapisComponent } from './privacy/allapis/allapis.component';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
     CartComponent,
     WishlistComponent,
     UserHomeComponent,

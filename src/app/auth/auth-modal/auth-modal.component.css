@@ -17,9 +17,10 @@
 }
 
 .auth-card {
-  background: #ffffff;
+  background:#ffffff8c;
   width: 90%;
   max-width: 400px;
+  border: 2px solid var(--primary-color);
   padding: 40px;
   border-radius: 20px;
   box-shadow: 0 20px 60px rgba(0,0,0,0.15);
@@ -27,6 +28,20 @@
   text-align: center;
   animation: slideUp 0.4s ease;
 }
+.error {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.strength {
+  font-size: 11px;
+  margin-bottom: 5px;
+}
+
+.strength.weak { color: #e74c3c; }
+.strength.medium { color: #f39c12; }
+.strength.strong { color: #2ecc71; }
 
 .close-btn {
   position: absolute;
