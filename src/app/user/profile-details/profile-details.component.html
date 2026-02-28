@@ -30,11 +30,11 @@
 
 
     <div class="header-info">
-      <h2>{{ profile?.fullName || 'Bookstore User' }}</h2>
+      <h2>{{ profile.fullName || 'Bookstore User' }}</h2>
       <p class="role">Book Lover & Reader</p>
 
       <p class="location">
-        📍 {{ profile?.city || 'City' }}, {{ profile?.country || 'Country' }}
+        📍 {{ profile.city || 'City' }}, {{ profile.country || 'Country' }}
       </p>
 
       <div class="stats">
@@ -151,7 +151,7 @@
     <div class="panel">
       <h3>Cart Items</h3>
 
-      <div class="row" *ngFor="let c of cart?.items">
+      <div class="row" *ngFor="let c of cart.items">
         <span>{{ c.title }}</span>
         <!-- <span>x{{ c.quantity }}</span> -->
         <!-- <span>₹{{ c.price }}</span> -->

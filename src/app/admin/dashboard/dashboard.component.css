@@ -120,7 +120,8 @@ h1, h2, h3 { color: var(--primary-color); }
     display: flex;
     flex-direction: row;
     align-items: stretch;
-    justify-content: start;
+    justify-content: flex-start;
+    align-items: flex-start;
     overflow: hidden;
 
     /* Background Image Settings */
