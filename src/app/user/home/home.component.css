@@ -795,6 +795,19 @@ font-family: "Style Script", cursive;
     max-width: 300px;
   }
 
+  @media (max-width: 576px) {
+
+  .category-card {
+    max-width: 160px;
+  }
+
+  .category-card img {
+    height: 150px;
+    object-fit: contain;
+  }
+
+}
+
   /* PRODUCT GRID */
   .product-grid {
     padding: 15px;
