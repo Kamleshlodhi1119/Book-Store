@@ -9,29 +9,45 @@
     <p class="hero-sub">
       A masterpiece on self-belief and the power of human resilience.
     </p>
-    <p class="hero-sub">
-      Explore thousands of hand-picked titles across all genres-curated for the true bibliophile.
+    <p class="hero-sub secondary">
+      Explore thousands of hand-picked titles across all genres — curated for the true bibliophile.
     </p>
 
-    <a class="btn btn--primary" routerLink="/shop" >Buy Now</a>
+    <div class="hero-actions">
+      <a class="btn btn--primary" routerLink="/shop">Buy Now</a>
+      <a class="btn btn--secondary" routerLink="/shop">Explore Collection</a>
+    </div>
+
+    <div class="hero-meta">
+      <span><i class="fa fa-check-circle"></i> 10k+ happy readers</span>
+      <span><i class="fa fa-truck"></i> Free shipping above ₹999</span>
+      <span><i class="fa fa-shield-alt"></i> Secure checkout</span>
+    </div>
+
     <p class="hero-note">* Available in Premium Hardcover, EPUB & Kindle</p>
   </div>
 </section>
 
+<div class="trust-strip">
+  <div class="trust-item"><strong>10k+</strong><span>Readers</span></div>
+  <div class="trust-item"><strong>4.8/5</strong><span>Average rating</span></div>
+  <div class="trust-item"><strong>24h</strong><span>Quick dispatch</span></div>
+  <div class="trust-item"><strong>100%</strong><span>Authentic editions</span></div>
+</div>
+
 <section class="category-section">
-  <pre></pre>
   <h2 class="section-title">Meet the Authors</h2>
   <span class="hero-tag">THE BRILLIANT MINDS BEHIND THE STORIES</span>
-  <pre></pre>
 
   <div class="category-grid">
     <div class="category-card" *ngFor="let author of displayAuthors">
       <a routerLink="/shop">
-        <img src="../../../assets/images/icon/Author.png"> </a>
-      <pre> </pre>
-       <a routerLink="/shop" ><h3>{{ author.name }}</h3>
+        <img src="../../../assets/images/icon/Author.png" [alt]="author.name" />
       </a>
-
+      <div class="category-body">
+        <span class="category-pill">Featured Author</span>
+        <a routerLink="/shop"><h3>{{ author.name }}</h3></a>
+      </div>
     </div>
   </div>
 </section>
@@ -42,15 +58,11 @@
     <span class="divider">|</span>
     <span>Hassle-free Returns</span>
     <span class="divider">|</span>
-    <span class="highlight2">Member Discounts Available</span>
+    <span class="highlight2">Member Discounts</span>
     <span class="divider">|</span>
     <span class="highlight">Eco-friendly Prints</span>
     <span class="divider">|</span>
     <span class="highlight2">Verified Author Signed Stocks</span>
-    <span class="divider">|</span>
-    <span class="highlight">Secure Packaging</span>
-    <span class="divider">|</span>
-    <span>Hassle-free Returns</span>
   </div>
 </div>
 
@@ -62,24 +74,18 @@
 <div class="product-grid">
   <div class="book-card" *ngFor="let product of books | slice:0:8">
     <div class="image-container">
-      <img 
-      
-        [src]="product.imageUrl || 'assets/book-placeholder.png'"
-     [alt]="product.title" />
-
+      <img [src]="product.imageUrl || 'assets/book-placeholder.png'" [alt]="product.title" />
       <div class="overlay">
         <abbr title="View Book">
           <button class="icon-btn" (click)="viewBook(product.id)">
             <i class="fa fa-search"></i>
           </button>
         </abbr>
-
         <abbr title="Add To Cart">
           <button class="icon-btn" (click)="addToCart(product.id)">
             <i class="fa fa-shopping-cart"></i>
           </button>
         </abbr>
-
         <abbr title="Add To Wishlist">
           <button class="icon-btn" (click)="addToWishlist(product.id)">
             <i class="fa fa-heart"></i>
@@ -87,32 +93,44 @@
         </abbr>
       </div>
     </div>
-    <h3>{{ product.title }}</h3>
-    <p class="price">₹ {{ product.price }}</p>
+
+    <div class="book-card-body">
+      <span class="book-tag">{{ product.category || 'Best Seller' }}</span>
+      <h3>{{ product.title }}</h3>
+      <div class="book-meta">
+        <span>★ {{ product.rating || 4.8 }}</span>
+        <span>{{ product.reviews || '2.4k' }} reviews</span>
+      </div>
+      <div class="book-footer">
+        <p class="price">₹ {{ product.price }}</p>
+        <button class="mini-cart-btn" (click)="addToCart(product.id)">Add</button>
+      </div>
+    </div>
   </div>
 </div>
 
-
-<div class="announcement-bar">
-  <div class="announcement-content">
-    <span class="highlight">Secure Packaging</span>
-    <span class="divider">|</span>
-    <span>Hassle-free Returns</span>
-    <span class="divider">|</span>
-    <span class="highlight2">Member Discounts Available</span>
-    <span class="divider">|</span>
-    <span class="highlight">Eco-friendly Prints</span>
-    <span class="divider">|</span>
-    <span class="highlight2">Verified Author Signed Stocks</span>
-    <span class="divider">|</span>
-    <span class="highlight">Secure Packaging</span>
-    <span class="divider">|</span>
-    <span>Hassle-free Returns</span>
+<section class="benefits-section">
+  <div class="benefit-card">
+    <i class="fa fa-book-open"></i>
+    <h3>Curated Collection</h3>
+    <p>Thoughtfully selected books across fiction, non-fiction, and classics.</p>
   </div>
-</div>
-
-
-
+  <div class="benefit-card">
+    <i class="fa fa-truck"></i>
+    <h3>Fast Delivery</h3>
+    <p>Fast dispatch with safe packaging and easy doorstep tracking.</p>
+  </div>
+  <div class="benefit-card">
+    <i class="fa fa-shield-alt"></i>
+    <h3>Trusted Quality</h3>
+    <p>Authentic editions, verified publishers, and secure shopping experience.</p>
+  </div>
+  <div class="benefit-card">
+    <i class="fa fa-gift"></i>
+    <h3>Member Perks</h3>
+    <p>Enjoy exclusive deals, early access, and reader club benefits.</p>
+  </div>
+</section>
 
 <section class="book-section">
   <div class="Book-product-placeholder">
@@ -127,8 +145,7 @@
       The definitive guide to unlocking creativity and overcoming artistic blocks.<br />
       Used by millions to build a sustainable and inspired creative practice.
     </p>
-     <a class="btn btn--primary" routerLink="/shop" >Read Preview</a>
-    
+    <a class="btn btn--primary" routerLink="/shop">Read Preview</a>
   </div>
 </section>
 
@@ -146,8 +163,8 @@
     </div>
 
     <div class="cta-actions">
-       <a routerLink="/shop" class="btn-cta-primary">Browse Collection</a>
-        <a routerLink="/shop"  class="btn-cta-outline">Join the Book Club</a>
+      <a routerLink="/shop" class="btn-cta-primary">Browse Collection</a>
+      <a routerLink="/shop" class="btn-cta-outline">Join the Book Club</a>
     </div>
     <p class="cta-note">* Certified Authentic Prints & Digital Rights Management</p>
   </div>
@@ -161,10 +178,7 @@
     <div class="book-slider-track">
       <div class="book-card" *ngFor="let product of books">
         <div class="image-container">
-          <img 
-          
-         [src]="product.imageUrl || 'assets/book-placeholder.png'"
-     [alt]="product.title" />
+          <img [src]="product.imageUrl || 'assets/book-placeholder.png'" [alt]="product.title" />
 
           <div class="overlay">
             <button class="icon-btn" (click)="viewBook(product.id)"><i class="fa fa-search"></i></button>
@@ -178,5 +192,6 @@
     </div>
   </div>
 </section>
+
 <app-blog-items></app-blog-items>
 
