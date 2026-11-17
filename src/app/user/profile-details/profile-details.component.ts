@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { CartResponse } from 'src/app/core/models/cart-item';
 import { Order } from 'src/app/core/models/order';
 import { WishlistItem } from 'src/app/core/models/wishlist-item';
-import { Book, BookService } from 'src/app/core/services/book.service';
+import { BookService } from 'src/app/core/services/book.service';
 import { CartService } from 'src/app/core/services/cart.service';
 import { OrderService } from 'src/app/core/services/order.service';
 import { WishlistService } from 'src/app/core/services/wishlist.service';
@@ -27,8 +27,17 @@ interface UserProfile {
 export class ProfileDetailsComponent implements OnInit {
 
   // ================= PROFILE =================
-  profile!: UserProfile;
-  private profileBackup!: UserProfile;
+  profile: UserProfile = {
+    fullName: '',
+    phone: '',
+    address: '',
+    city: '',
+    country: '',
+    avatarUrl: ''
+  };
+  private profileBackup: UserProfile = { ...this.profile };
+  loadingProfile = true;
+  profileLoaded = false;
 
   editMode = false;
   avatarEditMode = false;
@@ -110,11 +119,10 @@ uploadAvatar(file: File) {
 }
 
   // ================= STORE DATA =================
-  cart!: CartResponse;
+  cart: CartResponse = { items: [], totalAmount: 0 };
   wishlist: WishlistItem[] = [];
   orders: Order[] = [];
   authors: string[] = [];
-  latestBooks: Book[] = [];
 
   constructor(
     private http: HttpClient,
@@ -130,7 +138,6 @@ uploadAvatar(file: File) {
     this.loadWishlist();
     this.loadOrders();
     this.loadAuthors();
-    this.loadLatestBooks();
   }
 
   // ================= PROFILE =================
@@ -138,9 +145,14 @@ uploadAvatar(file: File) {
     this.http.get<UserProfile>(`${this.api}/me`).subscribe({
       next: data => {
         this.profile = data;
-        this.profileBackup = structuredClone(data);
+        this.profileBackup = { ...data };
+        this.loadingProfile = false;
+        this.profileLoaded = true;
       },
-      error: () => this.message = 'Failed to load profile'
+      error: () => {
+        this.message = 'Failed to load profile';
+        this.loadingProfile = false;
+      }
     });
   }
 
@@ -151,7 +163,7 @@ uploadAvatar(file: File) {
   }
 
   cancelEdit() {
-    this.profile = structuredClone(this.profileBackup);
+    this.profile = { ...this.profileBackup };
     this.editMode = false;
     this.avatarEditMode = false;
   }
@@ -172,7 +184,7 @@ uploadAvatar(file: File) {
       .subscribe({
         next: data => {
           this.profile = data;
-          this.profileBackup = structuredClone(data);
+          this.profileBackup = { ...data };
           this.editMode = false;
           this.loading = false;
           this.message = 'Profile updated successfully';
@@ -198,6 +210,7 @@ uploadAvatar(file: File) {
     }).subscribe({
       next: () => {
         this.avatarEditMode = false;
+        this.profileBackup.avatarUrl = this.profile.avatarUrl;
         this.message = 'Avatar updated';
       },
       error: () => this.message = 'Avatar update failed'
@@ -253,42 +266,47 @@ uploadAvatar(file: File) {
   // ================= CART =================
   loadCart() {
     this.cartService.getCart().subscribe({
-      next: data => this.cart = data
+      next: data => this.cart = data,
+      error: () => this.message = 'Failed to load cart summary'
     });
   }
 
   // ================= WISHLIST =================
   loadWishlist() {
     this.wishlistService.get().subscribe({
-      next: data => this.wishlist = data
+      next: data => this.wishlist = data,
+      error: () => this.message = 'Failed to load wishlist summary'
     });
   }
 
   removeWishlist(bookId: number) {
-    this.wishlistService.remove(bookId).subscribe(() => {
-      this.wishlist = this.wishlist.filter(w => w.bookId !== bookId);
+    this.wishlistService.remove(bookId).subscribe({
+      next: () => {
+        this.wishlist = this.wishlist.filter(w => w.bookId !== bookId);
+      },
+      error: () => this.message = 'Could not remove this book from your wishlist'
     });
   }
 
   // ================= ORDERS =================
   loadOrders() {
     this.orderService.myOrders().subscribe({
-      next: data => this.orders = data
+      next: data => this.orders = data,
+      error: () => this.message = 'Failed to load order summary'
     });
   }
 
   // ================= AUTHORS =================
   loadAuthors() {
     this.bookService.getAuthors().subscribe({
-      next: data => this.authors = data.map(a => a.name || a)
+      next: data => this.authors = data.map(author => author.name || author),
+      error: () => this.message = 'Failed to load authors'
     });
   }
 
-  // ================= BOOKS =================
-  loadLatestBooks() {
-    this.bookService.latest().subscribe({
-      next: data => this.latestBooks = data.slice(0, 5)
-    });
+  get initials(): string {
+    const name = this.profile.fullName || '';
+    return name.split(/\s+/).filter(Boolean).slice(0, 2).map(part => part[0]).join('').toUpperCase() || 'B';
   }
 
   get totalCartItems(): number {

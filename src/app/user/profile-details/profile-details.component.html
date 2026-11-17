@@ -1,30 +1,37 @@
 <app-user-header></app-user-header>
 
 <div class="profile-container">
+  <p *ngIf="loadingProfile" class="profile-loading" role="status">Loading your profile…</p>
 
   <!-- ================= HEADER ================= -->
   <div class="profile-header">
 
    <div class="avatar-box">
 
-  <img
+  <img *ngIf="profile.avatarUrl; else avatarFallback"
     class="avatar"
     [src]="profile.avatarUrl"
-  />
+    [alt]="(profile.fullName || 'Your') + ' profile photo'"
+    decoding="async" />
+  <ng-template #avatarFallback>
+    <div class="avatar avatar-fallback" aria-hidden="true">{{ initials }}</div>
+  </ng-template>
 
-  <label class="avatar-edit">
+  <label class="avatar-edit" title="Upload profile photo">
     ✎
     <input
       type="file"
       hidden
       accept="image/png,image/jpeg,image/webp"
+      aria-label="Upload profile photo"
       (change)="onAvatarSelected($event)">
   </label>
 
 </div>
 
 <!-- Upload Progress -->
-<div *ngIf="uploadingAvatar" class="upload-bar">
+<div *ngIf="uploadingAvatar" class="upload-bar" role="progressbar"
+     [attr.aria-valuenow]="uploadProgress" aria-valuemin="0" aria-valuemax="100">
   <div class="upload-fill" [style.width.%]="uploadProgress"></div>
 </div>
 
@@ -48,6 +55,7 @@
         <button class="pbtn pbtn-outline">My Orders</button> -->
         <button
           class="pbtn pbtn-accent"
+          [disabled]="loadingProfile || !profileLoaded"
           *ngIf="!editMode && !passwordMode"
           (click)="enableEdit()">
           Edit Details
@@ -88,15 +96,17 @@
       <!-- PROFILE FORM -->
       <div *ngIf="!passwordMode">
         <div class="form-grid">
-          <input placeholder="Full Name" [(ngModel)]="profile.fullName" [disabled]="!editMode">
-          <input placeholder="Phone" [(ngModel)]="profile.phone" [disabled]="!editMode">
-          <input placeholder="Address" [(ngModel)]="profile.address" [disabled]="!editMode">
-          <input placeholder="City" [(ngModel)]="profile.city" [disabled]="!editMode">
-          <input placeholder="Country" [(ngModel)]="profile.country" [disabled]="!editMode">
+          <input aria-label="Full name" placeholder="Full Name" [(ngModel)]="profile.fullName" [disabled]="!editMode">
+          <input aria-label="Phone" type="tel" placeholder="Phone" [(ngModel)]="profile.phone" [disabled]="!editMode">
+          <input aria-label="Address" placeholder="Address" [(ngModel)]="profile.address" [disabled]="!editMode">
+          <input aria-label="City" placeholder="City" [(ngModel)]="profile.city" [disabled]="!editMode">
+          <input aria-label="Country" placeholder="Country" [(ngModel)]="profile.country" [disabled]="!editMode">
         </div>
 
         <div class="edit-actions" *ngIf="editMode">
-          <button class="pbtn pbtn-primary" (click)="saveProfile()">Update</button>
+          <button class="pbtn pbtn-primary" (click)="saveProfile()" [disabled]="loading">
+            {{ loading ? 'Saving…' : 'Save changes' }}
+          </button>
           <button class="pbtn pbtn-outline" (click)="cancelEdit()">Cancel</button>
         </div>
       </div>
@@ -106,16 +116,19 @@
         <div class="form-grid">
           <input
             type="password"
+            aria-label="Current password"
             placeholder="Current Password"
             [(ngModel)]="passwordForm.currentPassword">
 
           <input
             type="password"
+            aria-label="New password"
             placeholder="New Password"
             [(ngModel)]="passwordForm.newPassword">
 
           <input
             type="password"
+            aria-label="Confirm new password"
             placeholder="Confirm New Password"
             [(ngModel)]="passwordForm.confirmPassword">
         </div>

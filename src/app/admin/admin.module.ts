@@ -8,6 +8,7 @@ import { AdminOrdersComponent } from './orders/admin-orders/admin-orders.compone
 import { AdminUsersComponent } from './users/admin-users/admin-users.component';
 import { LayoutModule } from '../layout/layout.module';
 import { ProfileComponent } from './profile/profile.component';
+import { AdminRoutingModule } from './admin-routing.module';
 
 @NgModule({
   declarations: [
@@ -20,8 +21,8 @@ import { ProfileComponent } from './profile/profile.component';
   imports: [
     CommonModule,
     FormsModule,
-    LayoutModule   // ✅ THIS MAKES app-admin-header WORK
+    LayoutModule,
+    AdminRoutingModule
   ]
 })
 export class AdminModule {}
-

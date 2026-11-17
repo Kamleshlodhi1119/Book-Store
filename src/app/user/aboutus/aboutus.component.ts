@@ -4,7 +4,7 @@ import { AlertService } from 'src/app/core/services/alert.service';
 import { BookService } from 'src/app/core/services/book.service';
 import { CartService } from 'src/app/core/services/cart.service';
 import { WishlistService } from 'src/app/core/services/wishlist.service';
-import { environment } from 'src/environments/environment';
+import { Book } from 'src/app/core/services/book.service';
 
 @Component({
   selector: 'app-aboutus',
@@ -12,13 +12,9 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./aboutus.component.css']
 })
 export class AboutusComponent  implements OnInit {
-  readonly imageApi = environment.bookImageBaseUrl;
-
-  books: any[] = [];
- authors: any[] = [];
-  displayAuthors: any[] = [];
-  MAX_AUTHORS = 4;
-
+  books: Book[] = [];
+  loadingBooks = true;
+  booksFailed = false;
 
   constructor(
     private bookService: BookService,
@@ -29,32 +25,27 @@ export class AboutusComponent  implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
-    this.alertService.show('this application might be take time due to free tire of backend', 'warning');
-    this.bookService.getAll().subscribe({
-      next: res => this.books = res as any[],
-      error: () => this.alertService.show('Failed to load books', 'error')
-    });
-
-      this.loadAuthors();
+    this.loadFeaturedBooks();
   }
-loadAuthors() {
-    this.bookService.getAuthors().subscribe({
-      next: res => {
-        this.authors = res;
-        this.pickRandomAuthors();
+
+  loadFeaturedBooks(): void {
+    this.loadingBooks = true;
+    this.booksFailed = false;
+    this.bookService.topRated().subscribe({
+      next: books => {
+        this.books = books;
+        this.loadingBooks = false;
       },
-      error: err => {
-        console.error('Failed to load authors', err);
+      error: () => {
+        this.booksFailed = true;
+        this.loadingBooks = false;
+        this.alertService.show('Failed to load featured books', 'error');
       }
     });
   }
 
-  pickRandomAuthors() {
-    const shuffled = [...this.authors]
-      .sort(() => 0.5 - Math.random());
-
-    this.displayAuthors = shuffled.slice(0, this.MAX_AUTHORS);
+  trackBookById(_index: number, book: Book): number {
+    return book.id;
   }
 
   addToCart(bookId: number) {
@@ -76,4 +67,3 @@ loadAuthors() {
 }
 
 }
-

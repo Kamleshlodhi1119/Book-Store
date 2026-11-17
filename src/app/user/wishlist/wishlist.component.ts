@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WishlistService } from 'src/app/core/services/wishlist.service';
 import { AlertService } from 'src/app/core/services/alert.service';
-import { environment } from 'src/environments/environment';
 import { WishlistItem } from 'src/app/core/models/wishlist-item';
 
 @Component({
@@ -11,9 +10,9 @@ import { WishlistItem } from 'src/app/core/models/wishlist-item';
 })
 export class WishlistComponent implements OnInit {
 
-  readonly imageApi = environment.bookImageBaseUrl;
   list: WishlistItem[] = [];
   loading = true;
+  loadFailed = false;
 
   constructor(
     private wishlist: WishlistService,
@@ -26,16 +25,22 @@ export class WishlistComponent implements OnInit {
 
   loadWishlist() {
     this.loading = true;
+    this.loadFailed = false;
     this.wishlist.get().subscribe({
       next: res => {
         this.list = res;
         this.loading = false;
       },
       error: () => {
+        this.loadFailed = true;
         this.alertService.show('Failed to load wishlist', 'error');
         this.loading = false;
       }
     });
+  }
+
+  trackWishlistItem(_index: number, item: WishlistItem): number {
+    return item.bookId;
   }
 
   handleRemove(item: WishlistItem) {
@@ -52,7 +57,10 @@ export class WishlistComponent implements OnInit {
         this.alertService.show('Item removed', 'success');
         this.list = this.list.filter(i => i.bookId !== bookId);
       },
-      error: () => this.loadWishlist()
+      error: () => {
+        this.alertService.show('Could not remove this book from your wishlist', 'error');
+        this.loadWishlist();
+      }
     });
   }
 }

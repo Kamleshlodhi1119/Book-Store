@@ -1,23 +1,51 @@
+import { CommonModule } from '@angular/common';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { HomeComponent } from './home.component';
+import { Router } from '@angular/router';
+import { of } from 'rxjs';
+import { AlertService } from 'src/app/core/services/alert.service';
+import { BookService } from 'src/app/core/services/book.service';
+import { CartService } from 'src/app/core/services/cart.service';
+import { WishlistService } from 'src/app/core/services/wishlist.service';
+import { UserHomeComponent } from './home.component';
 
 describe('HomeComponent', () => {
-  let component: HomeComponent;
-  let fixture: ComponentFixture<HomeComponent>;
+  let component: UserHomeComponent;
+  let fixture: ComponentFixture<UserHomeComponent>;
+  let bookService: jasmine.SpyObj<BookService>;
 
   beforeEach(async () => {
+    bookService = jasmine.createSpyObj<BookService>('BookService', ['getAll', 'getAuthors']);
+    bookService.getAll.and.returnValue(of([]));
+    bookService.getAuthors.and.returnValue(of([]));
+
     await TestBed.configureTestingModule({
-      declarations: [ HomeComponent ]
+      declarations: [UserHomeComponent],
+      imports: [CommonModule],
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [
+        { provide: BookService, useValue: bookService },
+        { provide: CartService, useValue: jasmine.createSpyObj('CartService', ['add']) },
+        { provide: WishlistService, useValue: jasmine.createSpyObj('WishlistService', ['add']) },
+        { provide: Router, useValue: jasmine.createSpyObj('Router', ['navigate']) },
+        { provide: AlertService, useValue: jasmine.createSpyObj('AlertService', ['show']) }
+      ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(HomeComponent);
+    fixture = TestBed.createComponent(UserHomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('loads the book and author collections', () => {
+    expect(bookService.getAll).toHaveBeenCalled();
+    expect(bookService.getAuthors).toHaveBeenCalled();
+    expect(component.booksLoading).toBeFalse();
+    expect(component.authorsLoading).toBeFalse();
   });
 });

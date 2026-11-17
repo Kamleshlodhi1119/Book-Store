@@ -3,7 +3,6 @@ import { CartService } from 'src/app/core/services/cart.service';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { Router } from '@angular/router';
 import { OrderService } from 'src/app/core/services/order.service';
-import { environment } from 'src/environments/environment';
 import { CartResponse } from 'src/app/core/models/cart-item';
 
 
@@ -14,13 +13,13 @@ import { CartResponse } from 'src/app/core/models/cart-item';
 })
 export class CartComponent implements OnInit {
 
-  readonly imageApi = environment.bookImageBaseUrl;
-
   cart: CartResponse | null = null;
   loading = true;
+  loadFailed = false;
+  updatingBookId: number | null = null;
 
-  // payment popup
-  showPayment = false;
+  showOrderConfirmation = false;
+  ordering = false;
 
   constructor(
     private cartService: CartService,
@@ -37,6 +36,7 @@ export class CartComponent implements OnInit {
 
   loadCart(): void {
     this.loading = true;
+    this.loadFailed = false;
 
     this.cartService.getCart().subscribe({
       next: (res: CartResponse) => {
@@ -46,6 +46,7 @@ export class CartComponent implements OnInit {
       error: () => {
         this.alert.show('Failed to load cart', 'error');
         this.cart = null;
+        this.loadFailed = true;
         this.loading = false;
       }
     });
@@ -54,14 +55,32 @@ export class CartComponent implements OnInit {
   // ---------------- CART ACTIONS ----------------
 
   updateQuantity(bookId: number, newQuantity: number): void {
-    if (newQuantity < 1) return;
+    if (newQuantity < 1 || this.updatingBookId !== null) return;
+    const item = this.cart?.items.find(cartItem => cartItem.bookId === bookId);
+    if (!item) return;
 
+    this.updatingBookId = bookId;
     this.cartService.update({
       bookId,
       quantity: newQuantity
     }).subscribe({
-      next: () => this.loadCart(),
+      next: () => {
+        if (this.cart) {
+          const items = this.cart.items.map(cartItem =>
+            cartItem.bookId === bookId
+              ? { ...cartItem, quantity: newQuantity }
+              : cartItem
+          );
+          this.cart = {
+            ...this.cart,
+            items,
+            totalAmount: items.reduce((total, cartItem) => total + cartItem.price * cartItem.quantity, 0)
+          };
+        }
+        this.updatingBookId = null;
+      },
       error: () => {
+        this.updatingBookId = null;
         this.alert.show('Failed to update quantity', 'error');
       }
     });
@@ -71,7 +90,14 @@ export class CartComponent implements OnInit {
     this.cartService.remove(bookId).subscribe({
       next: () => {
         this.alert.show('Item removed from cart', 'success');
-        this.loadCart();
+        if (this.cart) {
+          const items = this.cart.items.filter(item => item.bookId !== bookId);
+          this.cart = {
+            ...this.cart,
+            items,
+            totalAmount: items.reduce((total, item) => total + item.price * item.quantity, 0)
+          };
+        }
       },
       error: () => {
         this.alert.show('Could not remove item', 'error');
@@ -83,7 +109,7 @@ export class CartComponent implements OnInit {
     this.cartService.clear().subscribe({
       next: () => {
         this.alert.show('Cart cleared successfully', 'success');
-        this.loadCart();
+        this.cart = { items: [], totalAmount: 0 };
       },
       error: () => {
         this.alert.show('Failed to clear cart', 'error');
@@ -93,32 +119,35 @@ export class CartComponent implements OnInit {
 
   // ---------------- PAYMENT ----------------
 
-  openPayment(): void {
+  openOrderConfirmation(): void {
     if (!this.cart || this.cart.items.length === 0) {
       this.alert.show('Your cart is empty', 'error');
       return;
     }
-    this.showPayment = true;
+    this.showOrderConfirmation = true;
   }
 
-  closePayment(): void {
-    this.showPayment = false;
+  closeOrderConfirmation(): void {
+    if (!this.ordering) {
+      this.showOrderConfirmation = false;
+    }
   }
 
-  confirmPayment(method: string): void {
-    this.loading = true;
-    this.showPayment = false;
+  confirmOrder(): void {
+    if (this.ordering) return;
+    this.ordering = true;
 
     this.orderService.place().subscribe({
       next: () => {
-        this.alert.show(`Payment successful via ${method}. Order placed!`, 'success');
+        this.alert.show('Your order was placed successfully', 'success');
         this.cart = null;
-        this.loading = false;
-        this.router.navigate(['/my-orders']);
+        this.ordering = false;
+        this.showOrderConfirmation = false;
+        this.router.navigate(['/orders']);
       },
       error: () => {
-        this.loading = false;
-        this.alert.show('Payment verified but failed to create order', 'error');
+        this.ordering = false;
+        this.alert.show('Could not place your order. Please try again.', 'error');
       }
     });
   }

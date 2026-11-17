@@ -25,24 +25,24 @@
 
   <div class="logo">
     <a routerLink="/home">
-      <img src="../../../../assets/Logo/Logo.webp" />
+      <img src="../../../../assets/Logo/Logo.webp" alt="BookStore home" />
     </a>
   </div>
 
-  <nav class="desktop-nav">
+  <nav class="desktop-nav" aria-label="Main navigation">
     <ul class="menu">
 
-      <li><a routerLink="/home">Home</a></li>
-      <li><a routerLink="/aboutus">About</a></li>
-      <li><a routerLink="/shop">Shop</a></li>
+      <li><a routerLink="/home" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
+      <li><a routerLink="/aboutus" routerLinkActive="active-link">About</a></li>
+      <li><a routerLink="/shop" routerLinkActive="active-link">Shop</a></li>
 
-      <li><a (click)="protectedNav('/orders')">Orders</a></li>
-      <li><a (click)="protectedNav('/wishlist')">Wishlist</a></li>
+      <li><button class="nav-link" (click)="protectedNav('/orders')">Orders</button></li>
+      <li><button class="nav-link" (click)="protectedNav('/wishlist')">Wishlist</button></li>
 
       <li>
-        <a (click)="protectedNav('/cart')" class="icon-link">
+        <button (click)="protectedNav('/cart')" class="icon-link" aria-label="Shopping cart">
           <i class="fa-solid fa-cart-shopping"></i>
-        </a>
+        </button>
       </li>
 
       <!-- PROFILE -->
@@ -51,9 +51,10 @@
     (mouseleave)="onHoverLeave()">
 
   <!-- PROFILE ICON -->
-  <div class="avatar" (click)="toggleProfile($event)">
+  <button type="button" class="avatar" (click)="toggleProfile($event)"
+          [attr.aria-expanded]="profileOpen" aria-haspopup="true" aria-label="Open profile menu">
     {{ initials }}
-  </div>
+  </button>
 
   <!-- DROPDOWN -->
   <div class="profile-dropdown" *ngIf="profileOpen">
@@ -86,7 +87,9 @@
   </nav>
 
   <!-- MOBILE -->
-  <button class="hamburger" (click)="toggleMobileMenu()">
+  <button class="hamburger" (click)="toggleMobileMenu()"
+          [attr.aria-expanded]="mobileMenuOpen" aria-controls="mobile-menu"
+          [attr.aria-label]="mobileMenuOpen ? 'Close menu' : 'Open menu'">
     <i class="fa-solid" [ngClass]="mobileMenuOpen ? 'fa-xmark' : 'fa-bars'"></i>
   </button>
 
@@ -94,7 +97,11 @@
 
 
 <!-- MOBILE MENU -->
-<div class="mobile-menu" [class.open]="mobileMenuOpen">
+<button class="mobile-menu-backdrop" *ngIf="mobileMenuOpen"
+        aria-label="Close navigation menu" (click)="closeMobileMenu()"></button>
+<nav id="mobile-menu" class="mobile-menu" [class.open]="mobileMenuOpen"
+     [attr.aria-hidden]="!mobileMenuOpen" [attr.inert]="mobileMenuOpen ? null : ''"
+     aria-label="Mobile navigation">
 
   <a routerLink="/home" (click)="closeMobileMenu()">Home</a>
   <a routerLink="/shop" (click)="closeMobileMenu()">Shop</a>
@@ -117,4 +124,4 @@
     </ng-container>
   </div>
 
-</div>
+</nav>

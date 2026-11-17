@@ -1,5 +1,6 @@
 import {
   Component,
+  OnDestroy,
   OnInit,
   ElementRef,
   HostListener
@@ -14,7 +15,7 @@ import { LoginRegisterService } from 'src/app/core/services/login-register.servi
   templateUrl: './user-header.component.html',
   styleUrls: ['./user-header.component.css']
 })
-export class UserHeaderComponent implements OnInit {
+export class UserHeaderComponent implements OnInit, OnDestroy {
 
   isLoggedIn = false;
   username = '';
@@ -47,9 +48,11 @@ export class UserHeaderComponent implements OnInit {
       });
     }
 
-    window.addEventListener('scroll', () => {
-      this.isScrolled = window.scrollY > 40;
-    });
+    this.updateScrollState();
+  }
+
+  ngOnDestroy(): void {
+    document.body.style.overflow = '';
   }
 
   /* ================= PROFILE ================= */
@@ -66,6 +69,18 @@ export class UserHeaderComponent implements OnInit {
       this.profilePinned = false;
       this.profileOpen = false;
     }
+  }
+
+  @HostListener('window:scroll')
+  updateScrollState(): void {
+    this.isScrolled = window.scrollY > 40;
+  }
+
+  @HostListener('document:keydown.escape')
+  closeMenus(): void {
+    this.profilePinned = false;
+    this.profileOpen = false;
+    this.closeMobileMenu();
   }
 
   onHoverEnter() {
@@ -116,7 +131,7 @@ export class UserHeaderComponent implements OnInit {
 
   closeMobileMenu() {
     this.mobileMenuOpen = false;
-    document.body.style.overflow = 'auto';
+    document.body.style.overflow = '';
   }
 
   get initials(): string {

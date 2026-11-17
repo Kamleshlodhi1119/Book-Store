@@ -3,10 +3,10 @@
 <!-- HERO BANNER -->
 <section class="shop-hero">
   <div class="hero-content">
-    <span class="shop-heading">Wishlists</span>
+    <span class="shop-heading">Saved Books</span>
 
     <p>
-      Elevate your wardrobe now!
+      Keep the books you are interested in together for later.
     </p>
   </div>
 </section>
@@ -14,32 +14,46 @@
 
 <section class="wishlist-container">
 
-  <div *ngIf="loading" class="wishlist-loading">
+  <div *ngIf="loading" class="wishlist-loading" role="status">
     Loading wishlist...
   </div>
 
-  <div *ngIf="!loading && list.length === 0" class="empty-wishlist">
-    Your wishlist is empty
+  <div *ngIf="!loading && loadFailed" class="empty-wishlist" role="alert">
+    <h2>We could not load your wishlist</h2>
+    <p>Please check your connection and try again.</p>
+    <button type="button" class="wishlist-shop-link" (click)="loadWishlist()">Try again</button>
   </div>
 
-  <div class="wishlist-grid" *ngIf="!loading && list.length">
+  <div *ngIf="!loading && !loadFailed && list.length === 0" class="empty-wishlist">
+    <i class="fa-regular fa-heart" aria-hidden="true"></i>
+    <h2>Your wishlist is empty</h2>
+    <p>Save a book from the shop and it will appear here.</p>
+    <a class="wishlist-shop-link" routerLink="/shop">Browse books</a>
+  </div>
 
-    <div class="wishlist-card" *ngFor="let w of list">
+  <div class="wishlist-grid" *ngIf="!loading && !loadFailed && list.length">
+
+    <div class="wishlist-card" *ngFor="let w of list; trackBy: trackWishlistItem">
 
   <div class="book-preview-section">
-    <img class="logo-book-preview-img"
-        [src]="w.imageUrl || 'assets/book-placeholder.png'"
-     [alt]="w.title" />
+    <a [routerLink]="['/book-details', w.bookId]">
+      <img class="logo-book-preview-img"
+          [src]="w.imageUrl || 'assets/book-placeholder.png'"
+          [alt]="w.title"
+          loading="lazy"
+          decoding="async" />
+    </a>
 
     <div class="info">
-      <h3>{{ w.title }}</h3>
+      <h3><a [routerLink]="['/book-details', w.bookId]">{{ w.title }}</a></h3>
       <p class="price">₹ {{ w.price }}</p>
     </div>
   </div>
 
   <abbr title="Remove from wishlist">
-    <button class="heart-btn"
+    <button type="button" class="heart-btn"
             [class.removing]="w.isRemoving"
+            [attr.aria-label]="'Remove ' + w.title + ' from wishlist'"
             (click)="handleRemove(w)">
       <svg viewBox="0 0 24 24" class="heart-icon">
         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5

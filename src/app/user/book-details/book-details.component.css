@@ -4,6 +4,32 @@
   padding: 40px 10px;
 }
 
+.details-state {
+  max-width: 720px;
+  margin: 48px auto;
+  padding: 32px 20px;
+  color: #4b5563;
+  text-align: center;
+}
+
+.details-state h1 {
+  color: var(--primary-color);
+}
+
+.details-state a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+  padding: 0 20px;
+  border-radius: 999px;
+  background: var(--secondary-color);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
 .details-container {
   max-width: 1200px;
   margin: 0 auto;

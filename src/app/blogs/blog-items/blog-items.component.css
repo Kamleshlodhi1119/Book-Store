@@ -1,72 +1,32 @@
-/* ====================== BLOG ====================== */
-
 .blog-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 24px;
 }
 
 .section-title {
-  font-size: 2.5rem;
-  margin-bottom: 15px;
+  margin: 0 0 8px;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
   text-align: center;
-  font-weight: bold;
 }
 
-.Famouse-book {
+.blog-eyebrow {
   font-family: "Indie Flower", cursive;
   font-weight: 800;
-  font-style: normal;
-  font-size: 12px;
+  font-size: 0.8rem;
   letter-spacing: .08em;
   color: var(--secondary-font);
-  margin-bottom: 20px;
-}
-
-.blog-grid {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 50px;
-}
-
-.blog-card {
-  width: 300px;
-  padding: 10px;
-  margin-bottom: 20px;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: var(--shadow);
-  transition: transform 0.3s ease;
-  display: flex;
-  flex-direction: column;
-}
-
-.blog-card:hover {
-  transform: translateY(-5px);
-}
-
-.blog-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 10px;
-}
-
-/* ====================== BLOG RESPONSIVE ====================== */
-
-@media (max-width: 992px) {
-  .blog-grid {
-    flex-direction: column;
-    gap: 30px;
-  }
+  margin: 0 0 24px;
+  text-align: center;
 }
 
 @media (max-width: 576px) {
-  .blog-card {
-    width: 80%;
-    max-width: 320px;
+  .blog-section {
+    padding: 32px 16px;
+  }
+
+  .section-title {
+    font-size: 2rem;
   }
 }

@@ -5,7 +5,11 @@ import { CartService } from 'src/app/core/services/cart.service';
 import { WishlistService } from 'src/app/core/services/wishlist.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { AlertService } from 'src/app/core/services/alert.service';
-import { environment } from 'src/environments/environment';
+import { Book as CatalogBook } from 'src/app/core/services/book.service';
+
+interface BookDetails extends CatalogBook {
+  description: string;
+}
 
 @Component({
   selector: 'app-book-details',
@@ -14,10 +18,13 @@ import { environment } from 'src/environments/environment';
 })
 export class BookDetailsComponent implements OnInit {
 
-  readonly imageApi = environment.bookImageBaseUrl;
-  book: any = null;
+  book: BookDetails | null = null;
   bookRatings: any[] = []; // Direct list from the Ratings entity
   loading = true;
+  bookNotFound = false;
+  reviewsLoading = false;
+  reviewsFailed = false;
+  submittingReview = false;
 
   rating = 0;
   comment = '';
@@ -34,7 +41,6 @@ export class BookDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
     this.isLoggedIn = this.authService.isLoggedIn();
 
     // 1. If logged in, find out who "I am" to enable the Delete button
@@ -46,35 +52,49 @@ export class BookDetailsComponent implements OnInit {
       });
     }
 
-    // 2. Load Book and its specific reviews
-    if (id) {
-      this.loadBook(id);
-    } else {
-      this.loading = false;
-    }
+    this.route.paramMap.subscribe(params => {
+      const id = Number(params.get('id'));
+      this.book = null;
+      this.bookRatings = [];
+      this.bookNotFound = false;
+      if (Number.isInteger(id) && id > 0) {
+        this.loadBook(id);
+      } else {
+        this.loading = false;
+        this.bookNotFound = true;
+      }
+    });
   }
 
-  loadBook(id: number) {
+  loadBook(id: number): void {
     this.loading = true;
     this.bookService.getById(id).subscribe({
       next: (res) => {
-        this.book = res;
+        this.book = { ...res, description: res.description || '' };
         this.loadReviews(id); // Separate call to fix Lazy Loading issue
         this.loading = false;
       },
       error: () => {
         this.loading = false;
+        this.bookNotFound = true;
         this.alertService.show('Failed to load book details', 'error');
       }
     });
   }
 
-  loadReviews(bookId: number) {
+  loadReviews(bookId: number): void {
+    this.reviewsLoading = true;
     this.bookService.getRatingsForBook(bookId).subscribe({
       next: (res) => {
         this.bookRatings = res;
+        this.reviewsLoading = false;
+        this.reviewsFailed = false;
       },
-      error: (err) => console.error('Could not load reviews', err)
+      error: () => {
+        this.reviewsLoading = false;
+        this.reviewsFailed = true;
+        this.alertService.show('Could not load book reviews', 'error');
+      }
     });
   }
 
@@ -83,51 +103,54 @@ export class BookDetailsComponent implements OnInit {
     return this.currentUserEmail === reviewUsername;
   }
 
-  submitRating() {
+  submitRating(): void {
+    if (!this.book || this.submittingReview) return;
+    const bookId = this.book.id;
     if (this.rating === 0) {
       this.alertService.show('Please select stars', 'error');
       return;
     }
 
-    this.bookService.addRating(this.book.id, this.rating, this.comment, "user")
+    this.submittingReview = true;
+    this.bookService.addRating(bookId, this.rating, this.comment, 'user')
       .subscribe({
         next: () => {
           this.alertService.show('Review saved!', 'success');
           this.rating = 0;
           this.comment = '';
-          this.loadReviews(this.book.id); // Refresh only the review list
+          this.submittingReview = false;
+          this.loadReviews(bookId);
         },
-        error: () => this.alertService.show('Failed to save review', 'error')
+        error: () => {
+          this.submittingReview = false;
+          this.alertService.show('Failed to save review', 'error');
+        }
       });
   }
 
-  deleteMyReview() {
+  deleteMyReview(): void {
+    if (!this.book) return;
+    const bookId = this.book.id;
     if (confirm('Are you sure you want to delete your review?')) {
-      this.bookService.deleteRating(this.book.id).subscribe({
+      this.bookService.deleteRating(bookId).subscribe({
         next: () => {
           this.alertService.show('Review deleted', 'success');
-          this.loadReviews(this.book.id); // Instantly remove from UI
+          this.loadReviews(bookId);
         },
         error: () => this.alertService.show('Failed to delete review', 'error')
       });
     }
   }
 
-  addToCart() {
+  addToCart(): void {
     if (!this.book) return;
     this.cartService.add({ bookId: this.book.id, quantity: 1 }).subscribe({
       next: () => this.alertService.show('Added to cart', 'success'),
-      error: (err) => {
-        if (err.status === 200) {
-          this.alertService.show('Added to cart', 'success');
-        } else {
-          this.alertService.show('Failed to add to cart', 'error');
-        }
-      }
+      error: () => this.alertService.show('Failed to add to cart', 'error')
     });
   }
 
-  addToWishlist() {
+  addToWishlist(): void {
     if (!this.book) return;
     this.wishlistService.add(this.book.id).subscribe({
       next: () => this.alertService.show('Added to wishlist', 'success'),

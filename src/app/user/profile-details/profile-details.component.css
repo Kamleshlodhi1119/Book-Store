@@ -5,6 +5,11 @@
   font-family: var(--font);
 }
 
+.profile-loading {
+  color: #59636e;
+  text-align: center;
+}
+
 /* ================= HEADER ================= */
 .profile-header {
   display: flex;
@@ -17,7 +22,7 @@
   align-items: center;
   color: var(--text-light);
    background: linear-gradient(rgba(0, 0, 0, 0.485), #05360c98),
-              url('src/assets/images/banner/bg4.png') center/cover no-repeat;
+              url('../../../assets/images/banner/bg4.png') center/cover no-repeat;
  
 }
 
@@ -34,6 +39,16 @@
   border-radius: 50%;
   border: 3px solid var(--color-surface);
   box-shadow: var(--shadow);
+}
+
+.avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-dark);
+  color: var(--text-light);
+  font-size: 2rem;
+  font-weight: 700;
 }
 
 .avatar-edit {

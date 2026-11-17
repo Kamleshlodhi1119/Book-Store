@@ -21,7 +21,7 @@ h1, h2, h3 {
 /* ================= ABOUT HERO ================= */
 .about-hero {
   background: linear-gradient(rgba(0, 0, 0, 0.485), #05360c98),
-    url('src/assets/images/banner/bg4.png') center/cover no-repeat;
+    url('../../../assets/images/banner/bg4.png') center/cover no-repeat;
   padding: 80px 60px;
   border-radius: 20px;
   margin: 30px;
@@ -63,7 +63,7 @@ h1, h2, h3 {
   width: 240px;
   min-height: 250px;
   background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-    url('src/assets/images/banner/bg4.png') center/cover no-repeat;
+    url('../../../assets/images/banner/bg4.png') center/cover no-repeat;
   border-radius: 18px;
   padding: 32px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -124,18 +124,24 @@ h1, h2, h3 {
 }
 
 .pc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: #4a6d6a;
   color: #fff;
   padding: 14px 40px;
   border-radius: 30px;
   font-weight: 600;
+  text-decoration: none;
+  border: 0;
+  cursor: pointer;
 }
 
 /* ================= CTA BANNER ================= */
 .cta-banner {
   position: relative;
   padding: 10em 2em;
-  background: url("../../../assets/images/banner/bg4.png") center/cover fixed;
+  background: url("../../../assets/images/banner/bg4.png") center/cover no-repeat;
   text-align: center;
 }
 
@@ -207,26 +213,26 @@ h1, h2, h3 {
 
 .book-slider {
   width: 100%;
-  overflow: hidden;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
 }
 
 .book-slider-track {
   display: flex;
   gap: 10px;
-  animation: scrollBooks 40s linear infinite;
-}
-
-@keyframes scrollBooks {
-  to { transform: translateX(-50%); }
+  width: max-content;
+  gap: 16px;
 }
 
 .book-card {
-  width: 180px;
+  width: 220px;
+  flex: 0 0 auto;
   padding: 20px;
   border-radius: 10px;
   text-align: center;
   box-shadow: var(--shadow);
   position: relative;
+  scroll-snap-align: start;
 }
 
 .image-container img {
@@ -293,4 +299,20 @@ h1, h2, h3 {
   .cta-actions {
     flex-direction: column;
   }
+
+  .pc-cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pc-card {
+    width: auto;
+    min-height: 0;
+    padding: 22px;
+  }
+}
+
+.featured-state {
+  margin: 24px auto;
+  color: #4b5563;
+  text-align: center;
 }

@@ -2,7 +2,7 @@
 .shop-hero {
   background:
     linear-gradient(rgba(0, 0, 0, 0.485), #05360c98),
-     url('src\assets\images\banner\bg4.png') center/cover no-repeat;
+     url('../../../assets/images/banner/bg4.png') center/cover no-repeat;
   padding: 80px 60px;
   border-radius: 20px;
   margin: 30px;
@@ -206,15 +206,85 @@
   cursor: pointer;
 }
 
+.shop-card:focus-within .overlay {
+  opacity: 1;
+}
+
+.shop-card .image-box img {
+  object-fit: contain;
+  background: #f8fafc;
+}
+
+.shop-card .icon-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 /* TEXT */
 .shop-card h3 {
   font-size: 15px;
   margin: 12px 0 4px;
 }
 
+.shop-card h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.shop-card h3 a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
 .author {
   font-size: 13px;
   color: #777;
+}
+
+.stock-label {
+  color: var(--primary-color);
+  font-size: 0.82rem;
+}
+
+.stock-label.out-of-stock {
+  color: #b42318;
+}
+
+.filter-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.filter-heading h2 {
+  margin: 0;
+  color: #354f52;
+  font-size: 1.1rem;
+}
+
+.reset-filters {
+  border: 0;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #edf3f1;
+  color: #354f52;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.reset-filters:hover {
+  background: #dce8e4;
+}
+
+.result-count {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: #59636e;
+  font-size: 0.9rem;
 }
 
 .price {
@@ -302,7 +372,7 @@
   margin: 60px;  
    background:
     linear-gradient(rgba(0, 0, 0, 0.485), #05360c98),
-     url('src\assets\images\banner\bg5.png') center/cover no-repeat;
+     url('../../../assets/images/banner/bg5.png') center/cover no-repeat;
   padding: 80px 60px;
   border-radius: 20px;
   margin: 30px;
@@ -517,16 +587,29 @@
   }
 
   .shop-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .image-box img {
-    height: 240px;
+    height: 190px;
   }
 
   .icon-btn {
     width: 34px;
     height: 34px;
   }
-}
 
+  @media (max-width: 768px) {
+    .shop-card .overlay {
+      opacity: 1;
+    }
+
+    .shop-card {
+      padding: 10px;
+    }
+
+    .shop-card h3 {
+      line-height: 1.4;
+    }
+  }
+}

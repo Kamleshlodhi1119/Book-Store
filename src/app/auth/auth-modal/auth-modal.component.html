@@ -1,34 +1,44 @@
 <div class="auth-overlay" *ngIf="mode" (click)="close()">
-  <div class="auth-card" (click)="$event.stopPropagation()">
-    <button class="close-btn" (click)="close()">×</button>
+  <div class="auth-card" role="dialog" aria-modal="true" aria-labelledby="auth-title"
+       (click)="$event.stopPropagation()">
+    <button type="button" class="close-btn" aria-label="Close sign in" (click)="close()">×</button>
 
-    <h2 class="auth-title">{{ mode === 'login' ? 'Welcome Back' : 'Create Account' }}</h2>
+    <h2 id="auth-title" class="auth-title">{{ mode === 'login' ? 'Welcome Back' : 'Create Account' }}</h2>
 
-    <div class="auth-form">
+    <form class="auth-form" (ngSubmit)="mode === 'login' ? handleLogin() : handleRegister()">
 
       <!-- USERNAME -->
       <input *ngIf="mode === 'register'"
              [(ngModel)]="username"
+             name="username"
              (input)="validateUsername()"
              placeholder="Username"
+             aria-label="Username"
+             [attr.aria-invalid]="!!usernameError"
              type="text">
-      <div class="error" *ngIf="usernameError">{{ usernameError }}</div>
+      <div class="error" *ngIf="usernameError" aria-live="polite">{{ usernameError }}</div>
 
 
       <!-- EMAIL -->
       <input [(ngModel)]="email"
+             name="email"
              (input)="validateEmail()"
              placeholder="Email Address"
+             aria-label="Email address"
+             [attr.aria-invalid]="!!emailError"
              type="email">
-      <div class="error" *ngIf="emailError">{{ emailError }}</div>
+      <div class="error" *ngIf="emailError" aria-live="polite">{{ emailError }}</div>
 
 
       <!-- PASSWORD -->
       <input [(ngModel)]="password"
+             name="password"
              (input)="validatePassword()"
              placeholder="Password"
+             aria-label="Password"
+             [attr.aria-invalid]="!!passwordError"
              type="password">
-      <div class="error" *ngIf="passwordError">{{ passwordError }}</div>
+      <div class="error" *ngIf="passwordError" aria-live="polite">{{ passwordError }}</div>
 
       <!-- PASSWORD STRENGTH -->
       <div class="strength"
@@ -41,32 +51,37 @@
       <!-- CONFIRM PASSWORD (REGISTER ONLY) -->
       <input *ngIf="mode === 'register'"
              [(ngModel)]="confirmPassword"
+             name="confirmPassword"
              (input)="validateConfirmPassword()"
              placeholder="Confirm Password"
+             aria-label="Confirm password"
+             [attr.aria-invalid]="!!confirmPasswordError"
              type="password">
-      <div class="error" *ngIf="confirmPasswordError">
+      <div class="error" *ngIf="confirmPasswordError" aria-live="polite">
         {{ confirmPasswordError }}
       </div>
 
 
       <!-- BUTTONS -->
       <button *ngIf="mode === 'login'"
+              type="submit"
               class="main-btn"
-              (click)="handleLogin()">
-        Login
+              [disabled]="loading">
+        {{ loading ? 'Signing in...' : 'Login' }}
       </button>
 
       <button *ngIf="mode === 'register'"
+              type="submit"
               class="main-btn"
-              (click)="handleRegister()">
-        Register
+              [disabled]="loading">
+        {{ loading ? 'Creating account...' : 'Register' }}
       </button>
 
-    </div>
+    </form>
 
     <div class="auth-footer">
       <p *ngIf="mode === 'login'">
-        New user? <a (click)="mode = 'register'">Sign up here</a>
+        New user? <a href="" (click)="$event.preventDefault(); mode = 'register'; clearErrors()">Sign up here</a>
       </p>
 
       <p class="forgot-link" *ngIf="mode === 'login'">
@@ -76,7 +91,7 @@
       </p>
 
       <p *ngIf="mode === 'register'">
-        Already have an account? <a (click)="mode = 'login'">Log in here</a>
+        Already have an account? <a href="" (click)="$event.preventDefault(); mode = 'login'; clearErrors()">Log in here</a>
       </p>
     </div>
 

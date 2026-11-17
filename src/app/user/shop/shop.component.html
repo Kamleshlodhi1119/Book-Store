@@ -12,32 +12,38 @@
   </div>
 </section>
 
-<section class="shop-container">
+<section class="shop-container" aria-label="Book catalog">
   <div class="shop-layout">
 
     <!-- FILTER SIDEBAR -->
     <aside class="shop-filter">
-      <h3>Filter Books</h3>
+      <div class="filter-heading">
+        <h2>Filter books</h2>
+        <button type="button" class="reset-filters" (click)="resetFilters()">Clear</button>
+      </div>
 
       <!-- BOOK NAME -->
       <div class="filter-block">
-        <label>Book Name</label>
+        <label for="book-search">Book name</label>
         <input
+          id="book-search"
           type="text"
           class="filter-input"
           placeholder="Search by title"
           [(ngModel)]="filters.name"
-          (input)="applyFilters()"
+          (ngModelChange)="applyFilters()"
+          autocomplete="off"
         />
       </div>
 
       <!-- AUTHOR -->
       <div class="filter-block">
-        <label>Author</label>
+        <label for="author-filter">Author</label>
         <select
+          id="author-filter"
           class="filter-select"
           [(ngModel)]="filters.author"
-          (change)="applyFilters()"
+          (ngModelChange)="applyFilters()"
         >
           <option value="">All Authors</option>
           <option *ngFor="let a of authors" [value]="a.name">
@@ -48,13 +54,14 @@
 
       <!-- PRICE -->
       <div class="filter-block">
-        <label>Max Price: ₹ {{ filters.maxPrice }}</label>
+        <label for="price-filter">Maximum price: ₹{{ filters.maxPrice }}</label>
         <input
+          id="price-filter"
           type="range"
           min="0"
           [max]="maxBookPrice"
           [(ngModel)]="filters.maxPrice"
-          (input)="applyFilters()"
+          (ngModelChange)="applyFilters()"
         />
       </div>
     </aside>
@@ -62,45 +69,62 @@
     <!-- MAIN CONTENT -->
     <div class="shop-content">
 
-      <div *ngIf="loading" class="shop-loading">
+      <div *ngIf="loading" class="shop-loading" role="status">
         Loading books...
       </div>
 
+      <div *ngIf="!loading && loadFailed" class="shop-empty" role="alert">
+        <div class="empty-box">
+          <h3>Books could not be loaded</h3>
+          <p>Please check your connection and try again.</p>
+          <button type="button" class="reset-filters" (click)="loadBooks()">Try again</button>
+        </div>
+      </div>
+
       <!-- EMPTY STATE -->
-      <div *ngIf="!loading && filtered.length === 0" class="shop-empty">
+      <div *ngIf="!loading && !loadFailed && filtered.length === 0" class="shop-empty">
         <div class="empty-box">
           <i class="fa-solid fa-book-open"></i>
-          <h3>No Books Found</h3>
-          <p>Try adjusting filters or explore other categories</p>
+          <h3>No books found</h3>
+          <p>Try changing your search or clearing the filters.</p>
+          <button type="button" class="reset-filters" (click)="resetFilters()">Clear filters</button>
         </div>
       </div>
 
       <!-- BOOK GRID -->
-      <div class="shop-grid" *ngIf="!loading && paginated.length">
+      <div class="shop-grid" *ngIf="!loading && !loadFailed && paginated.length">
+        <p class="result-count" aria-live="polite">
+          {{ filtered.length }} books found
+        </p>
 
-        <div class="shop-card" *ngFor="let b of paginated">
+        <div class="shop-card" *ngFor="let b of paginated; trackBy: trackBookById">
 
           <div class="image-box">
             <img
-                  [src]="b.imageUrl || 'assets/book-placeholder.png'"
-     [alt]="b.title" />
+              [src]="b.imageUrl || 'assets/book-placeholder.png'"
+              [alt]="b.title"
+              loading="lazy"
+              decoding="async" />
 
             <div class="overlay">
-              <button class="icon-btn" (click)="viewBook(b.id)">
+              <button class="icon-btn" type="button" aria-label="View book details" (click)="viewBook(b.id)">
                 <i class="fa fa-search"></i>
               </button>
-              <button class="icon-btn" (click)="addToCart(b.id)">
+              <button class="icon-btn" type="button" aria-label="Add book to cart" [disabled]="b.stockQuantity <= 0" (click)="addToCart(b.id)">
                 <i class="fa fa-shopping-cart"></i>
               </button>
-              <button class="icon-btn" (click)="addToWishlist(b.id)">
+              <button class="icon-btn" type="button" aria-label="Add book to wishlist" (click)="addToWishlist(b.id)">
                 <i class="fa fa-heart"></i>
               </button>
             </div>
           </div>
 
-          <h3>{{ b.title }}</h3>
+          <h3><a [routerLink]="['/book-details', b.id]">{{ b.title }}</a></h3>
           <p class="author">{{ b.authorName }}</p>
           <p class="price">₹ {{ b.price }}</p>
+          <p class="stock-label" [class.out-of-stock]="b.stockQuantity <= 0">
+            {{ b.stockQuantity > 0 ? 'In stock' : 'Out of stock' }}
+          </p>
 
         </div>
       </div>
@@ -114,12 +138,15 @@
           &lt; Prev
         </button>
 
-        <span
+        <button type="button"
+          class="page-number"
           *ngFor="let p of pages"
           (click)="goToPage(p)"
-          [class.active]="p === currentPage">
+          [class.active]="p === currentPage"
+          [attr.aria-current]="p === currentPage ? 'page' : null"
+          [attr.aria-label]="'Page ' + p">
           {{ p }}
-        </span>
+        </button>
 
         <button
           (click)="nextPage()"
@@ -130,41 +157,5 @@
       </div>
 
     </div>
-  </div>
-</section>
-
-<!-- OTHER BOOK CATEGORY -->
-<section class="other-category">
-  <h2>OTHER BOOK CATEGORIES</h2>
-
-  <div class="category-cards">
-    <div class="category-card">
-      <div class="text">
-        <h3>Technology Books</h3>
-        <p>Master programming, AI, and modern technologies</p>
-    <a routerLink="#" routerLinkActive="active-link" class="pc-btn">Explore Books →</a>
-      </div>
-    </div>
-
-    <div class="category-card">
-      <div class="text">
-        <h3>Self Improvement</h3>
-        <p>Build habits, mindset, and personal growth</p>
-        <a routerLink="#" routerLinkActive="active-link" class="pc-btn">Explore Books →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPLORE CATALOG CTA -->
-<section class="explore-catalog">
-  <div class="overlay"></div>
-  <div class="content">
-    <h2>EXPLORE OUR BOOK CATALOG</h2>
-    <p>
-      From bestsellers to hidden gems, find books that inspire,
-      educate, and entertain.
-    </p>
- <a routerLink="#" routerLinkActive="active-link" class="pc-btn">VIEW ALL BOOKS</a>
   </div>
 </section>

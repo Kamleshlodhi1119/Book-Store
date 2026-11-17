@@ -105,6 +105,32 @@
   transition: 0.2s ease;
 }
 
+.menu li .nav-link {
+  border: 0;
+  padding: 10px 0;
+  background: transparent;
+  color: var(--text-dark);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.menu li .nav-link:hover {
+  color: var(--primary-color);
+}
+
+.icon-link {
+  border: 0;
+  background: transparent;
+  color: var(--text-dark);
+  font-size: 16px;
+  cursor: pointer;
+}
+
 .menu li a::after {
   content: "";
   position: absolute;
@@ -136,6 +162,9 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  border: 0;
+  padding: 0;
+  font: inherit;
   transition: transform 0.15s ease;
 }
 
@@ -192,7 +221,9 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 60%;
+  width: min(86vw, 360px);
+  height: 100dvh;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   padding: 80px 20px 20px; /* ✅ kept exactly */
@@ -202,7 +233,15 @@
   background-image: url("../../../../assets/images/banner/bg4.png");
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  box-shadow: 12px 0 32px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1999;
+  border: 0;
+  background: rgba(15, 23, 42, 0.48);
 }
 
 .mobile-menu.open {
@@ -252,6 +291,15 @@
     flex-direction: column;
     gap: 8px;
     text-align: center;
+  }
+
+  .main-header,
+  .main-header.shrink {
+    padding: 10px 20px;
+  }
+
+  .logo img {
+    height: 65px;
   }
 
   .social-icons {

@@ -181,6 +181,8 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    border: 0;
+    font-size: 1rem;
     box-shadow: var(--shadow);
     z-index: 9999;
     

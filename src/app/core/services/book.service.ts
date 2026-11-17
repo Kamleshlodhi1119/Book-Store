@@ -7,12 +7,14 @@ export interface Book {
   id: number;
   title: string;
   authorName: string;
+  description?: string;
   price: number;
   isbn: string;
   imageUrl: string;
   stockQuantity: number;
   ratings?: any[];
   averageRating?: number;
+  active?: boolean;
 }
 
 @Injectable({ providedIn: 'root' })

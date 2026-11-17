@@ -1,7 +1,7 @@
 /* HERO SECTION */
 .cart-hero {
   background: linear-gradient(rgba(0, 0, 0, 0.485), #05360c98),
-              url('src/assets/images/banner/bg4.png') center/cover no-repeat;
+              url('../../../assets/images/banner/bg4.png') center/cover no-repeat;
   padding: 80px 60px;
   border-radius: 20px;
   margin: 30px;
@@ -37,6 +37,35 @@
   font-size: 1.2rem;
   color: #636e72;
   margin-top: 40px;
+}
+
+.empty-cart > i {
+  display: block;
+  margin-bottom: 16px;
+  color: var(--primary-color);
+  font-size: 2rem;
+}
+
+.empty-cart h2 {
+  margin: 0 0 8px;
+  color: var(--primary-color);
+}
+
+.empty-cart p {
+  margin: 0 0 20px;
+}
+
+.continue-shopping {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  border-radius: 999px;
+  background: var(--secondary-color);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
 }
 
 /* CART ITEM CARD */
@@ -213,6 +242,11 @@
   animation: fadeIn 0.3s ease-out;
 }
 
+.payment-modal p {
+  color: #59636e;
+  line-height: 1.6;
+}
+
 .payment-modal h3 {
   margin-bottom: 25px;
   color: #2d3436;
@@ -236,6 +270,11 @@
   background: #e1f5fe;
   border-color: #2980b9;
   color: #2980b9;
+}
+
+.payment-modal button:disabled {
+  cursor: wait;
+  opacity: 0.65;
 }
 
 .payment-modal .close-btn {
@@ -263,6 +302,58 @@
   font-size: 36px;
   font-weight: 800;
   display: block;
+}
+
+@media (max-width: 640px) {
+  .cart-hero {
+    margin: 16px;
+    padding: 44px 24px;
+    border-radius: 16px;
+  }
+
+  .cart-container {
+    min-height: auto;
+    padding: 24px 16px 48px;
+  }
+
+  .cart-item {
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .book-preview-section {
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .logo-book-preview-img {
+    width: 68px;
+    height: 96px;
+  }
+
+  .remove-btn {
+    flex-shrink: 0;
+  }
+
+  .cart-footer {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 18px;
+    padding: 20px;
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+  }
+
+  .actions button {
+    min-height: 46px;
+  }
+
+  .payment-modal {
+    padding: 28px 20px;
+  }
 }
 
   .cart-container{

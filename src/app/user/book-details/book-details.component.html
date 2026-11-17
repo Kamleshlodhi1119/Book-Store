@@ -1,5 +1,12 @@
 <app-user-header></app-user-header>
 
+<div *ngIf="loading" class="details-state" role="status">Loading book details…</div>
+<div *ngIf="!loading && bookNotFound" class="details-state" role="alert">
+  <h1>Book details are unavailable</h1>
+  <p>We could not find this book. Browse the catalog to discover other titles.</p>
+  <a routerLink="/shop">Browse books</a>
+</div>
+
 <div class="details-page-wrapper">
   <section class="details-container" *ngIf="!loading && book">
 
@@ -7,13 +14,15 @@
       <div class="sticky-wrapper">
         <img class="main-book-img" 
            [src]="book.imageUrl || 'assets/book-placeholder.png'"
-     [alt]="book.title" />
+           [alt]="book.title"
+           fetchpriority="high"
+           decoding="async" />
 
         <div class="quick-meta">
           <div class="avg-badge">
             <span class="star-icon">⭐</span>
             <span class="rating-val">{{ book.averageRating || 0 }}</span>
-            <span class="total-reviews" *ngFor="let r of bookRatings">({{ r?.length || 0 }} reviews)</span>
+            <span class="total-reviews">({{ bookRatings.length }} reviews)</span>
           </div>
         </div>
       </div>
@@ -25,7 +34,7 @@
           <span class="stock-tag" [class.out]="book.stockQuantity === 0">
             {{ book.stockQuantity > 0 ? 'In Stock' : 'Out of Stock' }}
           </span>
-          <span class="isbn-tag">ISBN: {{book.isbn}}</span>
+          <span class="isbn-tag" *ngIf="book.isbn">ISBN: {{book.isbn}}</span>
         </div>
         <h1 class="book-title">{{ book.title }}</h1>
         <p class="book-author">By <span>{{ book.authorName }}</span></p>
@@ -39,7 +48,7 @@
       <p class="description-text">{{ book.description }}</p>
 
       <div class="action-buttons">
-        <button class="buy-btn" (click)="addToCart()" [disabled]="book.stockQuantity === 0">
+        <button class="buy-btn" (click)="addToCart()" [disabled]="book.stockQuantity <= 0">
           <i class="shopping-cart-icon"></i> Add to Cart
         </button>
         <button class="wish-btn" (click)="addToWishlist()">
@@ -73,13 +82,19 @@
       <section class="user-reviews-list">
         <h3>Community Reviews ({{ bookRatings.length }})</h3>
 
-        <div *ngIf="bookRatings.length === 0" class="no-reviews">
+        <div *ngIf="reviewsLoading" class="no-reviews" role="status">Loading reviews…</div>
+
+        <div *ngIf="reviewsFailed" class="no-reviews" role="alert">
+          Reviews could not be loaded. Please try again later.
+        </div>
+
+        <div *ngIf="!reviewsLoading && !reviewsFailed && bookRatings.length === 0" class="no-reviews">
           Be the first to review this book!
         </div>
 
         <div class="review-card" *ngFor="let r of bookRatings">
           <div class="review-header">
-            <span class="user-avatar">{{ r.username.charAt(0).toUpperCase() }}</span>
+            <span class="user-avatar">{{ r.username?.charAt(0)?.toUpperCase() || 'R' }}</span>
             <div class="user-meta">
               <span class="user-name">
                 {{ r.username }}
@@ -89,7 +104,7 @@
             </div>
 
             <button *ngIf="isMyReview(r.username)" (click)="deleteMyReview()" class="delete-review-btn"
-              title="Delete my review">
+              type="button" aria-label="Delete my review" title="Delete my review">
               🗑️
             </button>
           </div>

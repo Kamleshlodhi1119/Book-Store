@@ -19,17 +19,26 @@
     <!-- MAIN CONTENT -->
     <div class="orders-content">
 
-      <div *ngIf="loading" class="orders-loading">
+      <div *ngIf="loading" class="orders-loading" role="status">
         Loading orders...
       </div>
 
-      <div *ngIf="!loading && orders.length === 0" class="empty-orders">
-        You have not placed any orders yet
+      <div *ngIf="!loading && loadFailed" class="empty-orders" role="alert">
+        <h2>We could not load your orders</h2>
+        <p>Please check your connection and try again.</p>
+        <button type="button" class="orders-shop-link" (click)="loadOrders()">Try again</button>
       </div>
 
-      <div *ngIf="!loading && orders.length">
+      <div *ngIf="!loading && !loadFailed && orders.length === 0" class="empty-orders">
+        <i class="fa-solid fa-box-open" aria-hidden="true"></i>
+        <h2>No orders yet</h2>
+        <p>When you place an order, its status and details will appear here.</p>
+        <a class="orders-shop-link" routerLink="/shop">Browse books</a>
+      </div>
 
-        <div class="order-card" *ngFor="let o of orders">
+      <div *ngIf="!loading && !loadFailed && orders.length">
+
+        <div class="order-card" *ngFor="let o of orders; trackBy: trackOrderById">
 
           <div class="order-header">
             <span>Order #{{ o.id }}</span>
@@ -46,7 +55,7 @@
 
           <div class="order-footer">
             <span class="total">Total: ₹ {{ o.totalAmount }}</span>
-            <span class="date">{{ o.createdAt }}</span>
+            <time class="date" [attr.datetime]="o.createdAt">{{ o.createdAt | date:'mediumDate' }}</time>
           </div>
 
         </div>

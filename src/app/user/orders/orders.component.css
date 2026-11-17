@@ -2,7 +2,7 @@
 .order-hero {
   background:
     linear-gradient(rgba(0, 0, 0, 0.485), #05360c98),
-    url('src/assets/images/banner/bg4.png') center/cover no-repeat;
+    url('../../../assets/images/banner/bg4.png') center/cover no-repeat;
   padding: 80px 60px;
   border-radius: 20px;
   margin: 30px;
@@ -54,6 +54,31 @@
   font-size: 1.1rem;
   color: var(--text-color);
   margin-top: 60px;
+}
+
+.empty-orders > i {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--primary-color);
+  font-size: 2rem;
+}
+
+.empty-orders h2 {
+  margin: 0 0 8px;
+}
+
+.orders-shop-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+  padding: 0 20px;
+  border-radius: 999px;
+  background: var(--secondary-color);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
 }
 
 /* ORDER CARD – SHOP STYLE FEEL */
@@ -126,6 +151,33 @@
   font-size: 36px;
   font-weight: 800;
   display: block;
+}
+
+@media (max-width: 640px) {
+  .order-hero {
+    margin: 16px;
+    padding: 44px 24px;
+  }
+
+  .orders-container {
+    min-height: auto;
+    padding: 24px 16px 48px;
+  }
+
+  .order-card {
+    padding: 16px;
+  }
+
+  .order-item {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .order-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
 }
 
   .orders-container{

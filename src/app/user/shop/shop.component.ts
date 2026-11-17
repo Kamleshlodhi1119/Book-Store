@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { BookService } from 'src/app/core/services/book.service';
+import { Book, BookService } from 'src/app/core/services/book.service';
 import { CartService } from 'src/app/core/services/cart.service';
 import { WishlistService } from 'src/app/core/services/wishlist.service';
 import { AlertService } from 'src/app/core/services/alert.service';
-import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-shop',
@@ -15,19 +13,18 @@ import { environment } from 'src/environments/environment';
 
 
 export class ShopComponent implements OnInit {
-  readonly imageApi = environment.bookImageBaseUrl;
-
-  books: any[] = [];
-  filtered: any[] = [];
-  paginated: any[] = [];
-  authors: any[] = [];
+  books: Book[] = [];
+  filtered: Book[] = [];
+  paginated: Book[] = [];
+  authors: Array<{ name: string }> = [];
 
   loading = true;
+  loadFailed = false;
   maxBookPrice = 0;
 
   // Pagination
   currentPage = 1;
-  pageSize = 30;
+  pageSize = 12;
   totalPages = 0;
   pages: number[] = [];
 
@@ -42,30 +39,39 @@ export class ShopComponent implements OnInit {
     private cartService: CartService,
     private wishlistService: WishlistService,
     private alertService: AlertService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.loadBooks();
     this.loadAuthors();
+    this.route.queryParamMap.subscribe(params => {
+      this.filters.author = params.get('author') || '';
+      if (!this.loading) {
+        this.applyFilters();
+      }
+    });
   }
 
   loadBooks() {
     this.loading = true;
+    this.loadFailed = false;
 
     this.bookService.getAll().subscribe({
       next: res => {
-        this.books = res as any[];
+        this.books = res;
         this.filtered = [...this.books];
 
-        this.maxBookPrice = Math.max(...this.books.map(b => b.price));
+        this.maxBookPrice = this.books.reduce((max, book) => Math.max(max, book.price || 0), 0);
         this.filters.maxPrice = this.maxBookPrice;
 
-        this.setupPagination();
+        this.applyFilters();
         this.loading = false;
       },
       error: () => {
         this.alertService.show('Failed to load books', 'error');
+        this.loadFailed = true;
         this.loading = false;
       }
     });
@@ -73,34 +79,43 @@ export class ShopComponent implements OnInit {
 
   loadAuthors() {
     this.bookService.getAuthors().subscribe({
-      next: res => this.authors = res,
+      next: res => {
+        this.authors = res
+          .map(author => typeof author === 'string' ? author : author?.name)
+          .filter((name): name is string => typeof name === 'string' && name.trim().length > 0)
+          .map(name => ({ name }));
+      },
       error: () => this.alertService.show('Failed to load authors', 'error')
     });
   }
 
   applyFilters() {
-    const params: any = {};
+    const name = this.filters.name.trim().toLocaleLowerCase();
+    const author = this.filters.author.toLocaleLowerCase();
+    this.filtered = this.books.filter(book =>
+      (!name || book.title.toLocaleLowerCase().includes(name)) &&
+      (!author || book.authorName.toLocaleLowerCase() === author) &&
+      book.price <= this.filters.maxPrice
+    );
+    this.currentPage = 1;
+    this.setupPagination();
+  }
 
-    if (this.filters.name?.trim()) {
-      params.name = this.filters.name.trim();
+  resetFilters(): void {
+    this.filters = {
+      name: '',
+      author: '',
+      maxPrice: this.maxBookPrice
+    };
+    this.applyFilters();
+    if (this.route.snapshot.queryParamMap.has('author')) {
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: { author: null },
+        queryParamsHandling: 'merge',
+        replaceUrl: true
+      });
     }
-
-    if (this.filters.author) {
-      params.author = this.filters.author;
-    }
-
-    if (this.filters.maxPrice > 0) {
-      params.maxPrice = this.filters.maxPrice;
-    }
-
-    this.bookService.filterBooks(params).subscribe({
-      next: res => {
-        this.filtered = res as any[];
-        this.currentPage = 1;
-        this.setupPagination();
-      },
-      error: err => console.error('Filter error', err)
-    });
   }
 
   // ------------------------
@@ -154,5 +169,9 @@ export class ShopComponent implements OnInit {
 
   viewBook(id: number) {
     this.router.navigate(['/book-details', id]);
+  }
+
+  trackBookById(_index: number, book: Book): number {
+    return book.id;
   }
 }

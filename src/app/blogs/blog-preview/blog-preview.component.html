@@ -1,0 +1,25 @@
+<div *ngIf="loading" class="blog-message" role="status">Loading articles...</div>
+
+<div *ngIf="!loading && loadFailed" class="blog-message" role="alert">
+  <p>Articles are temporarily unavailable.</p>
+  <button type="button" (click)="retry()">Try again</button>
+</div>
+
+<div *ngIf="!loading && !loadFailed && blogs.length === 0" class="blog-message">
+  No articles are available right now.
+</div>
+
+<div class="blog-grid" *ngIf="!loading && !loadFailed && blogs.length">
+  <a class="blog-card" *ngFor="let blog of blogs; trackBy: trackByUrl"
+     [href]="blog.url" target="_blank" rel="noopener noreferrer">
+    <div class="blog-image">
+      <img [src]="blog.image" [alt]="blog.title" loading="lazy" decoding="async">
+    </div>
+    <div class="blog-card-content">
+      <small class="blog-date">{{ blog.published }}</small>
+      <h3>{{ blog.title }}</h3>
+      <p>{{ blog.description }}</p>
+      <span class="blog-read-more">Read article <span aria-hidden="true">→</span></span>
+    </div>
+  </a>
+</div>

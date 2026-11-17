@@ -10,18 +10,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { UserHomeComponent } from './user/home/home.component';
 import { LayoutModule } from './layout/layout.module';
-import { AdminModule } from './admin/admin.module';
 import { AlertComponent } from './alert/alert.component';
 import { OrdersComponent } from './user/orders/orders.component';
 import { ShopComponent } from './user/shop/shop.component';
 import { BookDetailsComponent } from './user/book-details/book-details.component';
-import { AboutusComponent } from './user/aboutus/aboutus.component';
 import { TermsComponent } from './privacy/terms/terms.component';
 import { LegalComponent } from './privacy/legal/legal.component';
 import { ReturnsComponent } from './privacy/returns/returns.component';
 import { PrivacyComponent } from './privacy/privacy/privacy.component';
 import { AuthModalComponent } from './auth/auth-modal/auth-modal.component';
-import { BlogItemsComponent } from './blogs/blog-items/blog-items.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password/reset-password.component';
 import { ProfileDetailsComponent } from './user/profile-details/profile-details.component';
@@ -36,13 +33,11 @@ import { AllapisComponent } from './privacy/allapis/allapis.component';
     OrdersComponent,
     ShopComponent,
     BookDetailsComponent,
-    AboutusComponent,
     LegalComponent,
     TermsComponent,
     ReturnsComponent,
     PrivacyComponent,
     AuthModalComponent,
-    BlogItemsComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
     ProfileDetailsComponent,
@@ -53,7 +48,6 @@ import { AllapisComponent } from './privacy/allapis/allapis.component';
     FormsModule,
     HttpClientModule,    
     AppRoutingModule,
-    AdminModule,     
     LayoutModule 
 ],
   providers: [

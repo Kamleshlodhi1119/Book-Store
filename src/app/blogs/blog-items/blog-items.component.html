@@ -1,21 +1,5 @@
-<!-- <app-user-header></app-user-header> -->
 <section class="blog-section">
-  <h2 class="section-title">Literary Insights</h2>
-  <p class="Famouse-book">LATEST FROM OUR BLOG</p>
-
-  <div *ngIf="loading">Loading real blogs...</div>
-
-  <div class="blog-grid" *ngIf="!loading">
-    <div
-      class="blog-card"
-      *ngFor="let blog of blogs"
-      (click)="openBlog(blog.url)"
-      style="cursor: pointer;"
-    >
-      <img [src]="blog.image" [alt]="blog.title">
-      <h3>{{ blog.title }}</h3>
-      <p>{{ blog.description }}</p>
-      <small>Published: {{ blog.published }}</small>
-    </div>
-  </div>
+  <h1 class="section-title">Literary Insights</h1>
+  <p class="blog-eyebrow">LATEST FROM OUR BLOG</p>
+  <app-blog-preview></app-blog-preview>
 </section>

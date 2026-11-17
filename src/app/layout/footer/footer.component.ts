@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AlertService } from 'src/app/core/services/alert.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-footer',
@@ -8,6 +9,7 @@ import { AlertService } from 'src/app/core/services/alert.service';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent {
+  readonly currentYear = new Date().getFullYear();
 
   // Scroll-to-top visibility
   isVisible = false;
@@ -16,7 +18,7 @@ export class FooterComponent {
   subscriberEmail = '';
   isSubmitting = false;
 
-  private API_URL = 'http://localhost:8080/api/subscribers';
+  private API_URL = `${environment.apiBaseUrl}/subscribers`;
 
   constructor(
     private http: HttpClient,

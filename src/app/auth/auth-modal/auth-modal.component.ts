@@ -122,18 +122,16 @@ export class AuthModalComponent implements OnInit {
 
     this.authService.login({
       email: this.email.trim(),
-      password: this.password.trim()
+      password: this.password
     }).subscribe({
       next: (res) => {
         this.authService.saveSession(res.token, res.role);
+        const target = res.role === 'ROLE_ADMIN'
+          ? '/admin/dashboard'
+          : '/home';
 
-        this.authService.me().subscribe(() => {
-          const target = res.role === 'ROLE_ADMIN'
-            ? '/admin/dashboard'
-            : '/home';
-
-          this.router.navigate([target]).then(() => window.location.reload());
-        });
+        this.authModalService.close();
+        this.router.navigate([target]).then(() => window.location.reload());
       },
       error: () => {
         this.passwordError = 'Invalid email or password';
@@ -157,14 +155,14 @@ export class AuthModalComponent implements OnInit {
     this.authService.register({
       username: this.username.trim(),
       email: this.email.trim(),
-      password: this.password.trim()
+      password: this.password
     }).subscribe({
       next: () => {
         this.mode = 'login';
         this.loading = false;
       },
       error: () => {
-        this.emailError = 'Email already exists';
+        this.emailError = 'Could not create account. Please check your details and try again.';
         this.loading = false;
       }
     });
