@@ -528,13 +528,21 @@ h3 {
   font-size: 0.78rem;
 }
 
-.offers-section,
+.offers-section {
+  max-width: 1200px;
+  margin: 0 auto 48px;
+  padding: 0 24px;
+}
+
+
 .reader-choice,
 .reviews-section {
   max-width: 1200px;
   margin: 0 auto 48px;
   padding: 0 24px;
+  text-align: center;
 }
+
 
 .offer-heading {
   display: flex;
@@ -661,6 +669,7 @@ h3 {
   border-radius: 18px;
   background: #fff;
   box-shadow: var(--shadow);
+  text-align: start;
 }
 
 .choice-card img {
