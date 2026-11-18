@@ -48,4 +48,34 @@ describe('HomeComponent', () => {
     expect(component.booksLoading).toBeFalse();
     expect(component.authorsLoading).toBeFalse();
   });
+
+  it('uses a readable fallback when the book description contains a raw template expression', () => {
+    component.bookOfTheDay = {
+      id: 1,
+      title: 'Test Book',
+      authorName: 'Test Author',
+      price: 10,
+      isbn: 'test-isbn',
+      imageUrl: '',
+      stockQuantity: 1,
+      description: "{{ bookOfTheDay.description || 'A compelling read chosen for today.' }}"
+    };
+
+    expect(component.bookOfTheDayDescription).toBe('A compelling read chosen for today’s reading list.');
+  });
+
+  it('shows a valid book description', () => {
+    component.bookOfTheDay = {
+      id: 1,
+      title: 'Test Book',
+      authorName: 'Test Author',
+      price: 10,
+      isbn: 'test-isbn',
+      imageUrl: '',
+      stockQuantity: 1,
+      description: '  A story worth reading.  '
+    };
+
+    expect(component.bookOfTheDayDescription).toBe('A story worth reading.');
+  });
 });

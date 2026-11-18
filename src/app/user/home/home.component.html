@@ -15,122 +15,139 @@
 
     <div class="hero-actions">
       <a class="btn btn--primary" routerLink="/shop">Browse Books</a>
-      <a class="btn btn--secondary" href="#authors">Meet the Authors</a>
+      <a class="btn btn--secondary" href="#categories">Shop by Category</a>
     </div>
 
   </div>
 </section>
 
-<div class="trust-strip">
-  <a class="trust-item" routerLink="/shop">
-    <strong>Browse the collection</strong><span>Explore books across genres</span>
-  </a>
-  <a class="trust-item" href="#authors">
-    <strong>Meet the authors</strong><span>Discover the people behind the stories</span>
-  </a>
-  <a class="trust-item" routerLink="/shop">
-    <strong>Find your next read</strong><span>Search by title or author</span>
-  </a>
-</div>
-
-<section class="category-section" id="authors">
-  <h2 class="section-title">Meet the Authors</h2>
-  <span class="hero-tag">THE BRILLIANT MINDS BEHIND THE STORIES</span>
-
-  <p *ngIf="authorsLoading" class="home-state" role="status">Loading authors…</p>
-  <div *ngIf="authorsFailed" class="home-state" role="alert">
-    <p>Authors could not be loaded.</p>
-    <button class="mini-cart-btn" (click)="loadAuthors()">Try again</button>
-  </div>
-  <p *ngIf="!authorsLoading && !authorsFailed && displayAuthors.length === 0" class="home-state">
-    No authors are available right now.
-  </p>
-
-  <div class="category-grid">
-    <div class="category-card" *ngFor="let author of displayAuthors; trackBy: trackAuthorByName">
-      <a routerLink="/shop" [queryParams]="{ author: author.name }">
-        <img src="../../../assets/images/icon/Author.png" [alt]="author.name" loading="lazy" decoding="async" />
-      </a>
-      <div class="category-body">
-        <span class="category-pill">Featured Author</span>
-        <a routerLink="/shop" [queryParams]="{ author: author.name }"><h3>{{ author.name }}</h3></a>
-      </div>
-    </div>
+<section class="category-section" id="categories">
+  <span class="hero-tag">EXPLORE YOUR FAVORITE GENRES</span>
+  <h2 class="section-title">Shop by Categories</h2>
+  <div class="category-grid category-grid--genres">
+    <a class="genre-card" routerLink="/shop">
+      <i class="fa fa-feather-pointed"></i>
+      <h3>Fiction</h3>
+      <span>Explore stories</span>
+    </a>
+    <a class="genre-card" routerLink="/shop">
+      <i class="fa fa-globe"></i>
+      <h3>Non-Fiction</h3>
+      <span>Learn something new</span>
+    </a>
+    <a class="genre-card" routerLink="/shop">
+      <i class="fa fa-user-pen"></i>
+      <h3>Biographies</h3>
+      <span>Lives that inspire</span>
+    </a>
+    <a class="genre-card" routerLink="/shop">
+      <i class="fa fa-landmark"></i>
+      <h3>Classics</h3>
+      <span>Timeless reads</span>
+    </a>
+    <a class="genre-card" routerLink="/shop">
+      <i class="fa fa-child-reaching"></i>
+      <h3>Children</h3>
+      <span>Read together</span>
+    </a>
+    <a class="genre-card" routerLink="/shop">
+      <i class="fa fa-graduation-cap"></i>
+      <h3>Academic</h3>
+      <span>Study and grow</span>
+    </a>
   </div>
 </section>
-
-<div class="announcement-bar">
-  <div class="announcement-content">
-    <span class="highlight">Browse the catalog</span>
-    <span class="divider">|</span>
-    <span>Explore book details</span>
-    <span class="divider">|</span>
-    <span class="highlight2">Read community reviews</span>
-    <span class="divider">|</span>
-    <span class="highlight">Save books to your wishlist</span>
-    <span class="divider">|</span>
-    <span class="highlight2">Manage your orders</span>
-  </div>
-</div>
 
 <section class="book-slider-section">
-  <h2 class="section-title">Our Collection</h2>
-  <span class="hero-tag">EXPLORE BOOKS AND FIND DETAILS, AUTHORS, AND AVAILABILITY</span>
+  <span class="hero-tag">READERS' FAVORITES</span>
+  <h2 class="section-title">Bestselling Books</h2>
 </section>
 
 <div *ngIf="booksLoading" class="home-state" role="status">Loading books…</div>
 <div *ngIf="!booksLoading && booksFailed" class="home-state" role="alert">
-<p>Books could not be loaded right now.</p>
-<button class="mini-cart-btn" (click)="loadBooks()">Try again</button>
+  <p>Books could not be loaded right now.</p>
+  <button class="mini-cart-btn" (click)="loadBooks()">Try again</button>
 </div>
 <div *ngIf="!booksLoading && !booksFailed && books.length === 0" class="home-state">
-<p>No books are available right now.</p>
-<a routerLink="/shop">Visit the shop</a>
+  <p>No books are available right now.</p>
+  <a routerLink="/shop">Visit the shop</a>
 </div>
 
 <div class="product-grid" *ngIf="!booksLoading && !booksFailed && books.length">
-<div class="book-card" *ngFor="let product of books | slice:0:8; trackBy: trackBookById">
-  <div class="image-container">
-    <img [src]="product.imageUrl || 'assets/book-placeholder.png'" [alt]="product.title" loading="lazy" decoding="async" />
-    <div class="overlay">
-      <abbr title="View Book">
-        <button class="icon-btn" aria-label="View book details" (click)="viewBook(product.id)">
-            <i class="fa fa-search"></i>
-          </button>
-        </abbr>
-        <abbr title="Add To Cart">
-          <button class="icon-btn" aria-label="Add book to cart" [disabled]="product.stockQuantity <= 0" (click)="addToCart(product.id)">
-            <i class="fa fa-shopping-cart"></i>
-          </button>
-        </abbr>
-        <abbr title="Add To Wishlist">
-          <button class="icon-btn" aria-label="Add book to wishlist" (click)="addToWishlist(product.id)">
-            <i class="fa fa-heart"></i>
-          </button>
-        </abbr>
-      </div>
-    </div>
-
-    <div class="book-card-body">
-      <span class="book-tag">{{ product.stockQuantity > 0 ? 'In stock' : 'Currently unavailable' }}</span>
-      <a [routerLink]="['/book-details', product.id]"><h3>{{ product.title }}</h3></a>
-      <div class="book-meta">
-        <span *ngIf="product.averageRating != null && product.averageRating > 0">
-          ★ {{ product.averageRating | number:'1.1-1' }} / 5
-        </span>
-        <span *ngIf="product.stockQuantity > 0">Available to order</span>
-      </div>
-      <div class="book-footer">
-        <p class="price">₹ {{ product.price }}</p>
-        <button class="mini-cart-btn" [disabled]="product.stockQuantity <= 0" (click)="addToCart(product.id)">
-          {{ product.stockQuantity > 0 ? 'Add to cart' : 'Unavailable' }}
-        </button>
-      </div>
-    </div>
-  </div>
+  <ng-container *ngTemplateOutlet="bookCardGrid; context: { $implicit: bestsellingBooks }"></ng-container>
 </div>
 
+<section class="offers-section">
+  <div class="offer-heading">
+    <div>
+      <span class="hero-tag">LIMITED-TIME OFFERS</span>
+      <h2 class="section-title">Special Offers</h2>
+    </div>
+    <a routerLink="/shop" class="home-blog-link">View all offers <span aria-hidden="true">→</span></a>
+  </div>
+  <div class="offers-grid">
+    <article class="offer-card offer-card--green">
+      <span class="offer-badge">SAVE 20%</span>
+      <p>Reader's Favorites</p>
+      <h3>Fiction for Every Mood</h3>
+      <a routerLink="/shop">Shop fiction</a>
+    </article>
+    <article class="offer-card offer-card--gold">
+      <span class="offer-badge">SPECIAL PRICE</span>
+      <p>Curated Collection</p>
+      <h3>Build Your Home Library</h3>
+      <a routerLink="/shop">Explore books</a>
+    </article>
+  </div>
+</section>
+
+<section class="book-slider-section">
+  <span class="hero-tag">JUST ADDED</span>
+  <h2 class="section-title">New Arrivals</h2>
+</section>
+<div class="product-grid" *ngIf="!booksLoading && !booksFailed && newArrivals.length">
+  <ng-container *ngTemplateOutlet="bookCardGrid; context: { $implicit: newArrivals }"></ng-container>
+</div>
+
+<section class="book-of-day" *ngIf="bookOfTheDay">
+  <div class="book-of-day-image">
+    <img [src]="bookOfTheDay.imageUrl || 'assets/book-placeholder.png'" [alt]="bookOfTheDay.title" loading="lazy" />
+  </div>
+  <div class="book-of-day-copy">
+    <span class="hero-tag">TODAY'S PICK</span>
+    <h2 class="section-title">Book of the Day</h2>
+    <h3>{{ bookOfTheDay.title }}</h3>
+    <p class="book-author">by {{ bookOfTheDay.authorName }}</p>
+    <p class="book-description">{{ bookOfTheDayDescription }}</p>
+    <div class="cta-actions">
+      <a [routerLink]="['/book-details', bookOfTheDay.id]" class="btn-cta-primary">View Book</a>
+      <button class="btn-cta-outline" [disabled]="bookOfTheDay.stockQuantity <= 0" (click)="addToCart(bookOfTheDay.id)">
+        {{ bookOfTheDay.stockQuantity > 0 ? 'Add to Cart' : 'Unavailable' }}
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="reader-choice">
+  <span class="hero-tag">COMMUNITY PICKS</span>
+  <h2 class="section-title">Reader's Choice</h2>
+  <div class="choice-grid" *ngIf="readersChoice.length">
+    <article class="choice-card" *ngFor="let book of readersChoice; trackBy: trackBookById">
+      <img [src]="book.imageUrl || 'assets/book-placeholder.png'" [alt]="book.title" loading="lazy" />
+      <div>
+        <span class="choice-rating" *ngIf="book.averageRating != null && book.averageRating > 0">★ {{ book.averageRating | number:'1.1-1' }}</span>
+        <a [routerLink]="['/book-details', book.id]"><h3>{{ book.title }}</h3></a>
+        <p>{{ book.authorName }}</p>
+      </div>
+    </article>
+  </div>
+</section>
+
 <section class="benefits-section">
+  <div class="benefits-heading">
+    <span class="hero-tag">MADE FOR READERS</span>
+    <h2 class="section-title">Why Choose Us?</h2>
+  </div>
   <div class="benefit-card">
     <i class="fa fa-book-open"></i>
     <h3>Curated Collection</h3>
@@ -153,41 +170,71 @@
   </div>
 </section>
 
-<section class="home-blog-section" #blogSection aria-labelledby="home-blog-title">
-  <div class="home-blog-heading">
-    <div>
-      <span class="hero-tag">THE READING ROOM</span>
-      <h2 id="home-blog-title" class="section-title">Stories for Book Lovers</h2>
-      <p>Fresh ideas and reading inspiration from around the literary world.</p>
-    </div>
-    <a routerLink="/blog" class="home-blog-link">View all articles <span aria-hidden="true">→</span></a>
-  </div>
-
-  <p *ngIf="blogPreviewLoading" class="home-state" role="status">Preparing the latest articles...</p>
-  <div *ngIf="blogPreviewFailed" class="home-state" role="alert">
-    <p>Articles are temporarily unavailable.</p>
-    <button type="button" (click)="loadBlogPreview()">Try again</button>
-  </div>
-  <ng-container #blogPreviewHost></ng-container>
-</section>
-
-<section class="cta-banner">
-  <div class="cta-container">
-    <span class="cta-tag">THE BIBLIOPHILE'S PROMISE</span>
-    <h1 class="cta-title">Discover Your Next Great Read</h1>
-
-    <div class="cta-content">
-      <p class="cta-sub">Stories, ideas, and new worlds to explore</p>
-      <p class="cta-description">
-        Browse the catalog, explore book details and reader reviews, and keep track of the books
-        you want to read next.
-      </p>
-    </div>
-
-    <div class="cta-actions">
-      <a routerLink="/shop" class="btn-cta-primary">Browse Collection</a>
-      <a routerLink="/aboutus" class="btn-cta-outline">About BookStore</a>
-    </div>
-    <p class="cta-note">Find your next read in the BookStore catalog.</p>
+<section class="reviews-section">
+  <span class="hero-tag">LOVED BY READERS</span>
+  <h2 class="section-title">Customer Reviews</h2>
+  <div class="reviews-grid">
+    <article class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p>"A beautiful, easy-to-browse store with thoughtful recommendations and a great selection."</p>
+      <strong>Priya S.</strong>
+    </article>
+    <article class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p>"Finding books and saving favorites is simple. The collection is updated and easy to explore."</p>
+      <strong>Rahul M.</strong>
+    </article>
+    <article class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p>"I love the clear book details and reviews. It makes choosing my next read much easier."</p>
+      <strong>Ananya K.</strong>
+    </article>
   </div>
 </section>
+
+<section class="newsletter-section">
+  <div>
+    <span class="hero-tag">READING NOTES, DELIVERED</span>
+    <h2>Join Our Newsletter</h2>
+    <p>Get new arrivals, reading recommendations, and special offers.</p>
+  </div>
+  <form class="newsletter-form" (ngSubmit)="subscribeNewsletter()">
+    <label class="sr-only" for="newsletter-email">Email address</label>
+    <input id="newsletter-email" type="email" name="newsletterEmail" [(ngModel)]="newsletterEmail"
+           placeholder="Enter your email address" required>
+    <button type="submit">Subscribe</button>
+  </form>
+</section>
+
+<ng-template #bookCardGrid let-products>
+  <div class="book-card" *ngFor="let product of products; trackBy: trackBookById">
+    <div class="image-container">
+      <img [src]="product.imageUrl || 'assets/book-placeholder.png'" [alt]="product.title" loading="lazy" decoding="async" />
+      <div class="overlay">
+        <button class="icon-btn" aria-label="View book details" (click)="viewBook(product.id)">
+          <i class="fa fa-search"></i>
+        </button>
+        <button class="icon-btn" aria-label="Add book to cart" [disabled]="product.stockQuantity <= 0" (click)="addToCart(product.id)">
+          <i class="fa fa-shopping-cart"></i>
+        </button>
+        <button class="icon-btn" aria-label="Add book to wishlist" (click)="addToWishlist(product.id)">
+          <i class="fa fa-heart"></i>
+        </button>
+      </div>
+    </div>
+    <div class="book-card-body">
+      <span class="book-tag">{{ product.stockQuantity > 0 ? 'In stock' : 'Currently unavailable' }}</span>
+      <a [routerLink]="['/book-details', product.id]"><h3>{{ product.title }}</h3></a>
+      <div class="book-meta">
+        <span *ngIf="product.averageRating != null && product.averageRating > 0">★ {{ product.averageRating | number:'1.1-1' }} / 5</span>
+        <span *ngIf="product.stockQuantity > 0">Available to order</span>
+      </div>
+      <div class="book-footer">
+        <p class="price">₹ {{ product.price }}</p>
+        <button class="mini-cart-btn" [disabled]="product.stockQuantity <= 0" (click)="addToCart(product.id)">
+          {{ product.stockQuantity > 0 ? 'Add to cart' : 'Unavailable' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>

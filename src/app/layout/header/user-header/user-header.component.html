@@ -33,11 +33,10 @@
     <ul class="menu">
 
       <li><a routerLink="/home" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
-      <li><a routerLink="/aboutus" routerLinkActive="active-link">About</a></li>
       <li><a routerLink="/shop" routerLinkActive="active-link">Shop</a></li>
-
-      <li><button class="nav-link" (click)="protectedNav('/orders')">Orders</button></li>
-      <li><button class="nav-link" (click)="protectedNav('/wishlist')">Wishlist</button></li>
+      <li><a routerLink="/home" fragment="categories">Categories</a></li>
+      <li><a routerLink="/shop" [queryParams]="{ name: '' }">Search</a></li>
+      <li><a routerLink="/aboutus" routerLinkActive="active-link">About</a></li>
 
       <li>
         <button (click)="protectedNav('/cart')" class="icon-link" aria-label="Shopping cart">
@@ -55,6 +54,7 @@
           [attr.aria-expanded]="profileOpen" aria-haspopup="true" aria-label="Open profile menu">
     {{ initials }}
   </button>
+  <span class="account-label">Account</span>
 
   <!-- DROPDOWN -->
   <div class="profile-dropdown" *ngIf="profileOpen">
@@ -105,6 +105,8 @@
 
   <a routerLink="/home" (click)="closeMobileMenu()">Home</a>
   <a routerLink="/shop" (click)="closeMobileMenu()">Shop</a>
+  <a routerLink="/home" fragment="categories" (click)="closeMobileMenu()">Categories</a>
+  <a routerLink="/shop" (click)="closeMobileMenu()">Search</a>
 
   <a (click)="protectedNav('/orders')">Orders</a>
   <a (click)="protectedNav('/wishlist')">Wishlist</a>

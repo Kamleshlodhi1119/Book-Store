@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BookService } from 'src/app/core/services/book.service';
 import { CartService } from 'src/app/core/services/cart.service';
 import { WishlistService } from 'src/app/core/services/wishlist.service';
@@ -11,23 +11,20 @@ import { Book } from 'src/app/core/services/book.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class UserHomeComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('blogSection', { static: true }) blogSection!: ElementRef<HTMLElement>;
-  @ViewChild('blogPreviewHost', { read: ViewContainerRef, static: true })
-  blogPreviewHost!: ViewContainerRef;
-
+export class UserHomeComponent implements OnInit {
   books: Book[] = [];
   authors: { name: string }[] = [];
   displayAuthors: { name: string }[] = [];
+  bestsellingBooks: Book[] = [];
+  newArrivals: Book[] = [];
+  readersChoice: Book[] = [];
+  bookOfTheDay?: Book;
+  newsletterEmail = '';
   readonly maxAuthors = 4;
   booksLoading = true;
   booksFailed = false;
   authorsLoading = true;
   authorsFailed = false;
-  blogPreviewLoading = true;
-  blogPreviewFailed = false;
-  private blogPreviewObserver?: IntersectionObserver;
-
   constructor(
     private bookService: BookService,
     private cartService: CartService,
@@ -41,37 +38,11 @@ export class UserHomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.loadAuthors();
   }
 
-  ngAfterViewInit(): void {
-    if (typeof IntersectionObserver === 'undefined') {
-      this.loadBlogPreview();
-      return;
-    }
-
-    this.blogPreviewObserver = new IntersectionObserver(entries => {
-      if (entries.some(entry => entry.isIntersecting)) {
-        this.blogPreviewObserver?.disconnect();
-        this.loadBlogPreview();
-      }
-    }, { rootMargin: '240px 0px' });
-    this.blogPreviewObserver.observe(this.blogSection.nativeElement);
-  }
-
-  ngOnDestroy(): void {
-    this.blogPreviewObserver?.disconnect();
-  }
-
-  async loadBlogPreview(): Promise<void> {
-    this.blogPreviewLoading = true;
-    this.blogPreviewFailed = false;
-    try {
-      const { BlogPreviewComponent } = await import('../../blogs/blog-preview/blog-preview.component');
-      this.blogPreviewHost.clear();
-      this.blogPreviewHost.createComponent(BlogPreviewComponent);
-    } catch {
-      this.blogPreviewFailed = true;
-    } finally {
-      this.blogPreviewLoading = false;
-    }
+  get bookOfTheDayDescription(): string {
+    const description = this.bookOfTheDay?.description?.trim();
+    return description && !/{{[\s\S]*}}/.test(description)
+      ? description
+      : 'A compelling read chosen for today’s reading list.';
   }
 
   loadBooks(): void {
@@ -80,6 +51,16 @@ export class UserHomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.bookService.getAll().subscribe({
       next: books => {
         this.books = books;
+        this.bestsellingBooks = [...books]
+          .sort((a, b) => (b.averageRating || 0) - (a.averageRating || 0))
+          .slice(0, 8);
+        this.newArrivals = [...books].reverse().slice(0, 4);
+        this.readersChoice = [...books]
+          .filter(book => (book.averageRating || 0) > 0)
+          .sort((a, b) => (b.averageRating || 0) - (a.averageRating || 0))
+          .slice(0, 4);
+        this.bookOfTheDay = [...books]
+          .sort((a, b) => (b.averageRating || 0) - (a.averageRating || 0))[0];
         this.booksLoading = false;
       },
       error: () => {
@@ -144,5 +125,16 @@ export class UserHomeComponent implements OnInit, AfterViewInit, OnDestroy {
  viewBook(id: number) {
   this.router.navigate(['/book-details', id]);
 }
+
+ subscribeNewsletter(): void {
+  const email = this.newsletterEmail.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    this.alertService.show('Please enter a valid email address', 'error');
+    return;
+  }
+
+  this.alertService.show('You are subscribed to the BookStore newsletter', 'success');
+  this.newsletterEmail = '';
+ }
 
 }
